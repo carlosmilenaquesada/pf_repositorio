@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">prueba_pf_mysqlite</string>
+    <string name="hint_nombre">Nombre:</string>
+</resources>
