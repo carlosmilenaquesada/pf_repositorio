@@ -1,9 +1,13 @@
 package com.example.tfg_carlosmilenaquesada;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,12 +17,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
-    AutoCompleteTextView actvUsuario;
-    EditText etPassword;
-    CheckBox cbRecordarUsuario;
-    CheckBox cbRecordarPassword;
+import com.example.tfg_carlosmilenaquesada.database.DbHelper;
 
+public class MainActivity extends AppCompatActivity {
+    AutoCompleteTextView actvUser;
+    EditText etPassword;
+    CheckBox cbRememberUser;
+    CheckBox cbRememberPassword;
+
+    Button btLogOn;
+
+    DbHelper dbHelper;
+    SQLiteDatabase sqLiteDatabase;
+    ContentValues values;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,24 +41,40 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        actvUsuario = findViewById(R.id.actvUsuario);
+        actvUser = findViewById(R.id.actvUser);
         etPassword = findViewById(R.id.etPassword);
-        cbRecordarUsuario = findViewById(R.id.cbRecordarUsuario);
+        cbRememberUser = findViewById(R.id.cbRememberUser);
+        cbRememberPassword = findViewById(R.id.cbRememberPassword);
+        btLogOn = findViewById(R.id.btLogOn);
 
-        cbRecordarPassword = findViewById(R.id.cbRecordarPassword);
-        cbRecordarPassword.setEnabled(false);
-        cbRecordarUsuario.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                cbRecordarPassword.setEnabled(isChecked);
-                if(!isChecked) {
-                    cbRecordarPassword.setChecked(false);
-                }
+
+
+        cbRememberPassword.setEnabled(false);
+        cbRememberUser.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            cbRememberPassword.setEnabled(isChecked);
+            if (!isChecked) {
+                cbRememberPassword.setChecked(false);
             }
         });
 
 
+
+
+        dbHelper = new DbHelper(this);
+        btLogOn.setOnClickListener(v -> {
+            try{
+                if(dbHelper.isValidUser(actvUser.getText().toString(), etPassword.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Usuario encontrado", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(MainActivity.this, "Usuario No encontrado", Toast.LENGTH_LONG).show();
+                }
+            }catch (Exception ex){
+                Toast.makeText(MainActivity.this, ex.toString(), Toast.LENGTH_LONG).show();
+            }
+
+        });
+
+
+
     }
-
-
 }

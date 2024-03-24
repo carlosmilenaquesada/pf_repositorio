@@ -10,7 +10,7 @@
     tools:context=".MainActivity">
 
     <AutoCompleteTextView
-        android:id="@+id/actvUsuario"
+        android:id="@+id/actvUser"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
@@ -31,7 +31,7 @@
         android:minHeight="48dp" />
 
     <CheckBox
-        android:id="@+id/cbRecordarUsuario"
+        android:id="@+id/cbRememberUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
@@ -40,7 +40,7 @@
         android:text="Recordar usuario" />
 
     <CheckBox
-        android:id="@+id/cbRecordarPassword"
+        android:id="@+id/cbRememberPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
@@ -48,7 +48,7 @@
         android:text="Recordar password" />
 
     <Button
-        android:id="@+id/btAuntenticar"
+        android:id="@+id/btLogOn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Acceder" />
