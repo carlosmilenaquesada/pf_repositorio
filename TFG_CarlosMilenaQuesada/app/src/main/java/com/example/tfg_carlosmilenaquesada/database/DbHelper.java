@@ -32,15 +32,17 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean isValidUser(String idUsuario, String passwordUsuario) {
+    public boolean isValidUser(String idUser, String passwordUser) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] selectionArgs = {idUsuario, passwordUsuario};
+        String[] selectionArgs = {idUser, passwordUser};
         Cursor cursor = db.rawQuery("SELECT * FROM " +  TABLE_USERS + " where id = ? AND password = ?", selectionArgs);
         int count = cursor.getCount();
         cursor.close();
         return count > 0;
     }
 
-
+    public void insertUser(String idUser, String passwordUser){
+        hay que hacer el insert
+    }
 
 }
