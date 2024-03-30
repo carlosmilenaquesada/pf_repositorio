@@ -14,12 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MyHttpClient {
+public class UsersHttpClient {
 
     private static final String TAG = "errores";
     private Context context;
 
-    public MyHttpClient(Context context) {
+    public UsersHttpClient(Context context) {
         this.context = context;
     }
 
@@ -35,6 +35,8 @@ public class MyHttpClient {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            DbHelper dbHelper = new DbHelper(context);
+                            dbHelper.wipeTable();
                             // Procesar la respuesta JSON
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject userJson = response.getJSONObject(i);
@@ -44,8 +46,7 @@ public class MyHttpClient {
                                 // Aquí puedes guardar los datos en tu base de datos SQLite
                                 // Por ejemplo:
                                 // myDbHelper.insertUser(id, password);
-                                DbHelper dbHelper = new DbHelper(context);
-                                dbHelper.insertUser(id, password);
+                                showToast("insertado " + dbHelper.insertUser(id, password));
                             }
                         } catch (JSONException e) {
                             Log.e(TAG, "Error al procesar la respuesta JSON", e);

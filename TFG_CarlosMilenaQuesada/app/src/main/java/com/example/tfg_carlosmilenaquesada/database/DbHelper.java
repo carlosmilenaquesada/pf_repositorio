@@ -35,14 +35,30 @@ public class DbHelper extends SQLiteOpenHelper {
     public boolean isValidUser(String idUser, String passwordUser) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] selectionArgs = {idUser, passwordUser};
-        Cursor cursor = db.rawQuery("SELECT * FROM " +  TABLE_USERS + " where id = ? AND password = ?", selectionArgs);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERS + " where id = ? AND password = ?", selectionArgs);
         int count = cursor.getCount();
         cursor.close();
         return count > 0;
     }
 
-    public void insertUser(String idUser, String passwordUser){
-        hay que hacer el insert
+    public Cursor getUsersIds() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT  id FROM " + TABLE_USERS, null);
+        return cursor;
+    }
+
+    public long insertUser(String idUser, String passwordUser) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", idUser);
+        contentValues.put("password", passwordUser);
+        return db.insert(TABLE_USERS, null, contentValues);
+
+    }
+
+    public void wipeTable() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_USERS, null, null);
     }
 
 }
