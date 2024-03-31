@@ -9,43 +9,42 @@ node app.js//o bien el nombre de la aplicación
 --------------------------------------------------------------------------------------------
 
 --instalar compatibilidad con mysql 
- npm install mysql//si instalamos este módulo, al ejecutar node app.js también se levanta el servidor mysql, con lo que no es necesario ejecutar
-xampp (aunque solo se levanta el servidor, no el phpmyadmin).
+ npm install mysql
+IMPORTANTE: para que mysql funcione, debe estar levantado con xampp o como servicio de windows
 --------------------------------------------------------------------------------------------
 PARA EJECUTAR NODE APP.JS EN SEGUNDO PLANO
 Para ejecutar tu servidor Node.js en segundo plano en Windows, puedes utilizar el administrador de tareas o una utilidad de terceros como PM2. Te mostraré cómo hacerlo con PM2, que es una herramienta popular para administrar procesos Node.js.
 
 Primero, necesitarás instalar PM2 globalmente en tu sistema. Puedes hacerlo ejecutando el siguiente comando en tu símbolo del sistema (cmd):
 
-Copy code
 npm install -g pm2
 Una vez que PM2 esté instalado, puedes iniciar tu servidor Node.js utilizando el siguiente comando:
 
-sql
-Copy code
 pm2 start app.js --name "nombre_de_tu_aplicacion"
 Reemplaza "app.js" con el nombre de tu archivo de aplicación si es diferente, y "nombre_de_tu_aplicacion" con el nombre que desees darle a tu aplicación en PM2.
 
-PM2 iniciará tu servidor Node.js en segundo plano y te proporcionará un identificador único para administrar el proceso. Además, puedes ver los registros de tu aplicación ejecutando:
-
-Copy code
-pm2 logs nombre_de_tu_aplicacion
-Para detener tu aplicación en segundo plano, puedes ejecutar:
-
-arduino
-Copy code
-pm2 stop nombre_de_tu_aplicacion
-O para detener y eliminar el proceso de PM2:
-
-arduino
-Copy code
-pm2 delete nombre_de_tu_aplicacion
-PM2 también ofrece otras características útiles, como la capacidad de administrar múltiples aplicaciones, monitorear el estado de la aplicación y reiniciar automáticamente en caso de fallo. Puedes consultar la documentación de PM2 para obtener más información sobre cómo utilizar esta herramienta.
--------------------------------------------------------------------------------------------
-node no aplica los cambios directamente hechos en el archivo app.js, para que sí esté a la escucha de estos cambios,
+node pm2 no aplica los cambios directamente hechos en el archivo app.js, para que sí esté a la escucha de estos cambios,
 debe ejecutarse como el comando: pm2 start app.js --name "nombre_de_tu_aplicacion" --watch
 
 
+PM2 iniciará tu servidor Node.js en segundo plano y te proporcionará un identificador único para administrar el proceso. Además, puedes ver los registros de tu aplicación ejecutando:
+
+pm2 logs nombre_de_tu_aplicacion
+Para detener tu aplicación en segundo plano, puedes ejecutar:
+
+pm2 stop nombre_de_tu_aplicacion
+O para detener y eliminar el proceso de PM2:
+
+
+pm2 delete nombre_de_tu_aplicacion
+PM2 también ofrece otras características útiles, como la capacidad de administrar múltiples aplicaciones, monitorear el estado de la aplicación y reiniciar automáticamente en caso de fallo. Puedes consultar la documentación de PM2 para obtener más información sobre cómo utilizar esta herramienta.
+---RESUMEN DE COMO USAR EL SERVICIO---
+1º La app de node tiene que tener instalado el npm install mysql
+2º Levantar el servidor MySql (de momento con xampp). De momento, con MySql es suficiente (phpMyAdmin no es necesario, a no ser que queramos ver la base de datos, crear tablas etc, igualmente no pasa nada si se levanta también).
+3º Desde cmd ubicados en el directorio raíz de la app.js, ejecutar -> pm2 start app.js --name "nombre_de_mi_aplicacion_lanzada" --watch (esto también acutalizará el programa en caso de hacer cambios en el código app.js. app.js es el nombre que suelo dar, pero si lo he llamado de otra manera, poner ese nombre en la instrucción). Podemos cerrar el cmd y todo, que el proceso pm2 se sigue ejecutando en segundo plano.
+4º Para detener el proceso -> pm2 stop nombre_de_mi_aplicacion_lanzada
+
+-----------------------------------------------------------------------------------------
 --VIDEO MUY BUENO DE NODE JS EXPRESS CRUD
 https://www.youtube.com/watch?v=BImKbdy-ubM
 

@@ -1,5 +1,5 @@
 POR HACER-----------------------------------------------------------------
-
+--quitar el sujerencia de contraseña o usuario del miniteclado del teléfono (ese que es como un portapapeles)
 
 HACIENDO------------------------------------------------------------------
 
