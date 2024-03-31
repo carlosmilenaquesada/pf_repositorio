@@ -3139,7 +3139,6 @@ id action_mode_close_button
 id action_text
 id actions
 id activity_chooser_view_content
-id actvUser
 id add
 id alertTitle
 id aligned
@@ -3174,8 +3173,6 @@ id cache_measures
 id callMeasure
 id cancel_button
 id carryVelocity
-id cbRememberPassword
-id cbRememberUser
 id center
 id centerCrop
 id centerInside
@@ -3252,6 +3249,7 @@ id endToStart
 id enterAlways
 id enterAlwaysCollapsed
 id etPassword
+id etUser
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu

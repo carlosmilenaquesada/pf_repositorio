@@ -23,16 +23,11 @@ import com.example.tfg_carlosmilenaquesada.database.UsersHttpClient;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    AutoCompleteTextView actvUser;
+    EditText etUser;
     EditText etPassword;
-    CheckBox cbRememberUser;
-    CheckBox cbRememberPassword;
-
     Button btLogOn;
 
     DbHelper dbHelper;
-    SQLiteDatabase sqLiteDatabase;
-    ContentValues values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,39 +42,25 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        actvUser = findViewById(R.id.actvUser);
+        etUser = findViewById(R.id.etUser);
         etPassword = findViewById(R.id.etPassword);
-        cbRememberUser = findViewById(R.id.cbRememberUser);
-        cbRememberPassword = findViewById(R.id.cbRememberPassword);
         btLogOn = findViewById(R.id.btLogOn);
-
-
-        cbRememberPassword.setEnabled(false);
-        cbRememberUser.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            cbRememberPassword.setEnabled(isChecked);
-            if (!isChecked) {
-                cbRememberPassword.setChecked(false);
-            }
-        });
 
 
         dbHelper = new DbHelper(this);
 
-        ArrayList<String> ids = new ArrayList<>();
-        Cursor cursor = dbHelper.getUsersIds();
-        while (cursor.moveToNext()) {
-            ids.add(cursor.getString(0));
-        }
-        actvUser.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ids));
-
 
         btLogOn.setOnClickListener(v -> {
+            if (etUser.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
+                Toast.makeText(MainActivity.this, "Debe introducir usuario y password", Toast.LENGTH_LONG).show();
+                return;
+            }
             try {
-                if (dbHelper.isValidUser(actvUser.getText().toString(), etPassword.getText().toString())) {
-                    Toast.makeText(MainActivity.this, "Usuario encontrado", Toast.LENGTH_LONG).show();
-                } else {
+                if (!dbHelper.isValidUser(etUser.getText().toString(), etPassword.getText().toString())) {
                     Toast.makeText(MainActivity.this, "Usuario No encontrado", Toast.LENGTH_LONG).show();
+                    return;
                 }
+                Toast.makeText(MainActivity.this, "Usuario encontrado", Toast.LENGTH_LONG).show();
             } catch (Exception ex) {
                 Toast.makeText(MainActivity.this, ex.toString(), Toast.LENGTH_LONG).show();
             }

@@ -3138,7 +3138,6 @@ int id action_mode_close_button 0x7f080042
 int id action_text 0x7f080043
 int id actions 0x7f080044
 int id activity_chooser_view_content 0x7f080045
-int id actvUser 0x7f080046
 int id add 0x7f080047
 int id alertTitle 0x7f080048
 int id aligned 0x7f080049
@@ -3173,8 +3172,6 @@ int id cache_measures 0x7f080065
 int id callMeasure 0x7f080066
 int id cancel_button 0x7f080067
 int id carryVelocity 0x7f080068
-int id cbRememberPassword 0x7f080069
-int id cbRememberUser 0x7f08006a
 int id center 0x7f08006b
 int id centerCrop 0x7f08006c
 int id centerInside 0x7f08006d
@@ -3251,6 +3248,7 @@ int id endToStart 0x7f0800b3
 int id enterAlways 0x7f0800b4
 int id enterAlwaysCollapsed 0x7f0800b5
 int id etPassword 0x7f0800b6
+int id etUser 0x7f0801f4
 int id exitUntilCollapsed 0x7f0800b7
 int id expand_activities_button 0x7f0800b8
 int id expanded_menu 0x7f0800b9
