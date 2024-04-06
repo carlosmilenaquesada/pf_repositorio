@@ -29,11 +29,26 @@ connection.connect((err) => {
 // Ruta para obtener la información de usuarios
 app.get('/sync/users', (req, res) => {
     // Consultar la base de datos MySQL para obtener la información de usuarios
-    const sql = 'SELECT id, password FROM users';
+    const sql = 'SELECT * FROM users';
     connection.query(sql, (err, result) => {
         if (err) {
             console.error('Error al ejecutar la consulta:', err);
             res.status(500).json({ error: 'Error al obtener la información de usuarios' });
+        } else {
+            // Enviar la información de usuarios al cliente en formato JSON
+            res.json(result);
+        }
+    });
+});
+
+// Ruta para obtener la información de artículos
+app.get('/sync/articles', (req, res) => {
+    // Consultar la base de datos MySQL para obtener la información de usuarios
+    const sql = 'SELECT * FROM articles';
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            res.status(500).json({ error: 'Error al obtener la información de artículos' });
         } else {
             // Enviar la información de usuarios al cliente en formato JSON
             res.json(result);

@@ -9,7 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.tfg_carlosmilenaquesada.database.DbHelper;
+import com.example.tfg_carlosmilenaquesada.models.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +17,6 @@ import org.json.JSONObject;
 
 public class UsersHttpClient {
 
-    private static final String TAG = "errores";
     private Context context;
 
     public UsersHttpClient(Context context) {
@@ -26,49 +25,21 @@ public class UsersHttpClient {
 
     public void getUsersFromServer() {
         String url = "http://192.168.0.3:3000/sync/users";
-        //he añadido android:usesCleartextTraffic="true" al manifest para eludir la seguridd de http
-        // Inicializar la cola de solicitudes de Volley
         RequestQueue queue = Volley.newRequestQueue(context);
-
-        // Crear la solicitud GET para obtener los usuarios
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            DbHelper dbHelper = new DbHelper(context);
-                            dbHelper.wipeTable();
-                            // Procesar la respuesta JSON
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject userJson = response.getJSONObject(i);
-                                String id = userJson.getString("id");
-                                String password = userJson.getString("password");
-
-                                // Aquí puedes guardar los datos en tu base de datos SQLite
-                                // Por ejemplo:
-                                // myDbHelper.insertUser(id, password);
-                                showToast("insertado " + dbHelper.insertUser(id, password));
-                            }
-                        } catch (JSONException e) {
-                            Log.e(TAG, "Error al procesar la respuesta JSON", e);
-                            showToast("Error al procesar la respuesta JSON");
+                response -> {
+                    try {
+                        DbHelper dbHelper = new DbHelper(context);
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject userJson = response.getJSONObject(i);
+                            dbHelper.insertUser(new User(userJson.getString("id"), userJson.getString("password"), userJson.getString("privileges")));
                         }
+                    } catch (JSONException e) {
+                        Toast.makeText(context,"Error al procesar la respuesta JSON", Toast.LENGTH_SHORT).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, error.getMessage());
-                        showToast("Error en la solicitud HTTP");
-                    }
-                });
-
-        // Añadir la solicitud a la cola
+                error -> Toast.makeText(context,"Error en la solicitud HTTP", Toast.LENGTH_SHORT).show());
         queue.add(jsonArrayRequest);
-    }
-
-    private void showToast(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }
 

@@ -31,7 +31,10 @@
         android:theme="@style/Theme.TFG_CarlosMilenaQuesada"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.tfg_carlosmilenaquesada.MainActivity"
+            android:name="com.example.tfg_carlosmilenaquesada.activities.SecondActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tfg_carlosmilenaquesada.activities.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

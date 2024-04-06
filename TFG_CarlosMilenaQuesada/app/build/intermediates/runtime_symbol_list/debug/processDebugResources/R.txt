@@ -3166,7 +3166,12 @@ int id bounce 0x7f08005f
 int id bounceBoth 0x7f080060
 int id bounceEnd 0x7f080061
 int id bounceStart 0x7f080062
+int id btCashDeskManagement 0x7f0801f9
+int id btCustomersManagement 0x7f0801fa
 int id btLogOn 0x7f080063
+int id btLogOut 0x7f0801f5
+int id btNewSale 0x7f0801f6
+int id btSalesManagement 0x7f0801fb
 int id buttonPanel 0x7f080064
 int id cache_measures 0x7f080065
 int id callMeasure 0x7f080066
@@ -3543,6 +3548,7 @@ int id transition_position 0x7f0801d9
 int id transition_scene_layoutid_cache 0x7f0801da
 int id transition_transform 0x7f0801db
 int id triangle 0x7f0801dc
+int id tvGreetingUser 0x7f0801f7
 int id unchecked 0x7f0801dd
 int id uniform 0x7f0801de
 int id unlabeled 0x7f0801df
@@ -3681,6 +3687,7 @@ int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
 int layout activity_main 0x7f0b001c
+int layout activity_second 0x7f0b006b
 int layout custom_dialog 0x7f0b001d
 int layout design_bottom_navigation_item 0x7f0b001e
 int layout design_bottom_sheet_dialog 0x7f0b001f

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.SecondActivity">
+
+    <TextView
+        android:id="@+id/tvGreetingUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Hola, usuario!" />
+
+    <Button
+        android:id="@+id/btNewSale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nueva venta" />
+
+    <Button
+        android:id="@+id/btSalesManagement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestión de ventas" />
+
+    <Button
+        android:id="@+id/btCashDeskManagement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestión de caja" />
+
+    <Button
+        android:id="@+id/btCustomersManagement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestión de clientes" />
+
+    <Button
+        android:id="@+id/btLogOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desconectar" />
+</LinearLayout>
