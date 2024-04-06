@@ -30,7 +30,7 @@ debe ejecutarse como el comando: pm2 start app.js --name "nombre_de_tu_aplicacio
 PM2 iniciará tu servidor Node.js en segundo plano y te proporcionará un identificador único para administrar el proceso. Además, puedes ver los registros de tu aplicación ejecutando:
 
 pm2 logs nombre_de_tu_aplicacion
-Para detener tu aplicación en segundo plano, puedes ejecutar:
+Para detener la aplicación en segundo plano, puedes ejecutar:
 
 pm2 stop nombre_de_tu_aplicacion
 O para detener y eliminar el proceso de PM2:
