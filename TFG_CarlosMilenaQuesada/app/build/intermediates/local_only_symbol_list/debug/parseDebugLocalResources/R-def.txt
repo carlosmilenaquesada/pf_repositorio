@@ -13,6 +13,7 @@ id btSalesManagement
 id etPassword
 id etUser
 id main
+id spCustomersTypes
 id tvGreetingUser
 layout activity_main
 layout activity_sale

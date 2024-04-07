@@ -1,5 +1,7 @@
 package com.example.tfg_carlosmilenaquesada.database;
 
+import static com.example.tfg_carlosmilenaquesada.database.DbHelper.NODE_SERVER;
+
 import android.content.Context;
 import android.os.Build;
 import android.widget.Toast;
@@ -10,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.tfg_carlosmilenaquesada.activities.MainActivity;
 import com.example.tfg_carlosmilenaquesada.models.Article;
 
 
@@ -32,13 +35,12 @@ public class ArticlesHttpClient {
     }
 
     public void getArticlesFromServer() {
-        String url = "http://192.168.0.3:3000/sync/articles";
+        String url = NODE_SERVER + "articles";
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        DbHelper dbHelper = new DbHelper(context);
-                        dbHelper.wipeTable(DbHelper.TABLE_ARTICLES);
+                        MainActivity.getDbHelper().wipeTable(DbHelper.TABLE_ARTICLES);
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject userJson = response.getJSONObject(i);
                             Article article = new Article(
@@ -48,11 +50,11 @@ public class ArticlesHttpClient {
                                     userJson.getString("vat_fraction"),
                                     userJson.getString("offer_start_date").equalsIgnoreCase("null") ? null : LocalDateTime.parse(userJson.getString("offer_start_date"), formatter),
                                     userJson.getString("offer_end_date").equalsIgnoreCase("null") ? null : LocalDateTime.parse(userJson.getString("offer_end_date"), formatter),
-                                    userJson.getString("offer_sale_base_price").equalsIgnoreCase("null")? null: Double.parseDouble(userJson.getString("offer_sale_base_price")));
-                            dbHelper.insertArticle(article);
+                                    userJson.getString("offer_sale_base_price").equalsIgnoreCase("null") ? null : Double.parseDouble(userJson.getString("offer_sale_base_price"))
+                            );
+                            MainActivity.getDbHelper().insertArticle(article);
                         }
                     } catch (Exception e) {
-                        System.out.println(e);
                         Toast.makeText(context, "Error al procesar la respuesta JSON de artículos", Toast.LENGTH_LONG).show();
                     }
                 },

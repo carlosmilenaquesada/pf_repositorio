@@ -3479,6 +3479,7 @@ int id snackbar_text 0x7f080197
 int id snap 0x7f080198
 int id snapMargins 0x7f080199
 int id south 0x7f08019a
+int id spCustomersTypes 0x7f0801f8
 int id spacer 0x7f08019b
 int id special_effects_controller_view_tag 0x7f08019c
 int id spline 0x7f08019d

@@ -1,5 +1,7 @@
 package com.example.tfg_carlosmilenaquesada.database;
 
+import static com.example.tfg_carlosmilenaquesada.database.DbHelper.NODE_SERVER;
+
 import android.content.Context;
 import android.widget.Toast;
 
@@ -7,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.tfg_carlosmilenaquesada.activities.MainActivity;
 import com.example.tfg_carlosmilenaquesada.models.Article;
 import com.example.tfg_carlosmilenaquesada.models.Barcode;
 
@@ -22,24 +25,22 @@ public class BarcodesHttpClient {
         this.context = context;
     }
 
-    public void getArticlesFromServer() {
-        String url = "http://192.168.0.3:3000/sync/barcodes";
+    public void getBarcodesFromServer() {
+        String url = NODE_SERVER + "barcodes";
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        DbHelper dbHelper = new DbHelper(context);
-                        dbHelper.wipeTable(DbHelper.TABLE_BARCODES);
+                        MainActivity.getDbHelper().wipeTable(DbHelper.TABLE_BARCODES);
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject userJson = response.getJSONObject(i);
                             Barcode barcode = new Barcode(
                                     userJson.getString("internal_code"),
                                     userJson.getString("barcode")
                             );
-                            dbHelper.insertBarcode(barcode);
+                            MainActivity.getDbHelper().insertBarcode(barcode);
                         }
                     } catch (Exception e) {
-                        System.out.println(e);
                         Toast.makeText(context, "Error al procesar la respuesta JSON de códigos de barras", Toast.LENGTH_LONG).show();
                     }
                 },

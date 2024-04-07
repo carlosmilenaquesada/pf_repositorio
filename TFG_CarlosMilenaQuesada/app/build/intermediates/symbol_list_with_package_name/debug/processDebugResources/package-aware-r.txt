@@ -3480,6 +3480,7 @@ id snackbar_text
 id snap
 id snapMargins
 id south
+id spCustomersTypes
 id spacer
 id special_effects_controller_view_tag
 id spline

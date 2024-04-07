@@ -14,6 +14,8 @@ import com.example.tfg_carlosmilenaquesada.models.CustomerType;
 import com.example.tfg_carlosmilenaquesada.models.User;
 
 public class DbHelper extends SQLiteOpenHelper {
+
+    public static final String NODE_SERVER = "http://192.168.0.3:3000/sync/";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "tpv.db";
     public static final String TABLE_USERS = "users";

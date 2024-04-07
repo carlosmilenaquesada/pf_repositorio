@@ -16,15 +16,16 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.database.ArticlesHttpClient;
+import com.example.tfg_carlosmilenaquesada.database.CustomersTypesHttpClient;
 import com.example.tfg_carlosmilenaquesada.database.DbHelper;
 import com.example.tfg_carlosmilenaquesada.database.UsersHttpClient;
 import com.example.tfg_carlosmilenaquesada.models.User;
 
 public class MainActivity extends AppCompatActivity {
-    EditText etUser;
-    EditText etPassword;
-    Button btLogOn;
-    DbHelper dbHelper;
+
+
+    public static final String USER = "com.example.tfg_carlosmilenaquesada.mainactivity.user";
+    private static DbHelper dbHelper;
     //he añadido android:usesCleartextTraffic="true" al manifest para eludir la seguridad de http
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -37,20 +38,15 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        UsersHttpClient myUsersHttpClient = new UsersHttpClient(this);
-        myUsersHttpClient.getUsersFromServer();
-
-        ArticlesHttpClient myArticlesHttpClient = new ArticlesHttpClient(this);
-        myArticlesHttpClient.getArticlesFromServer();
-
-        etUser = findViewById(R.id.etUser);
-        etPassword = findViewById(R.id.etPassword);
-        btLogOn = findViewById(R.id.btLogOn);
-
         dbHelper = new DbHelper(this);
 
-        btLogOn.setOnClickListener(v -> {
+        UsersHttpClient usersHttpClient = new UsersHttpClient(this);
+        usersHttpClient.getUsersFromServer();
+
+        EditText etUser = findViewById(R.id.etUser);
+        EditText etPassword = findViewById(R.id.etPassword);
+
+        findViewById(R.id.btLogOn).setOnClickListener(v -> {
             if (etUser.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
                 Toast.makeText(MainActivity.this, "Debe introducir usuario y password", Toast.LENGTH_LONG).show();
                 return;
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Toast.makeText(MainActivity.this, "Usuario encontrado", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra("user", user);
+                intent.putExtra(USER, user);
                 startActivity(intent);
             } catch (Exception ex) {
                 Toast.makeText(MainActivity.this, ex.toString(), Toast.LENGTH_LONG).show();
@@ -71,5 +67,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public static DbHelper getDbHelper() {
+        return MainActivity.dbHelper;
     }
 }
