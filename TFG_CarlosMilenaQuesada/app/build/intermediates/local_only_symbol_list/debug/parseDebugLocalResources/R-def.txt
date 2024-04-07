@@ -10,6 +10,7 @@ id btLogOn
 id btLogOut
 id btNewSale
 id btSalesManagement
+id etCustomerId
 id etPassword
 id etUser
 id main

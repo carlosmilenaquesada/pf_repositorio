@@ -3252,6 +3252,7 @@ int id end 0x7f0800b4
 int id endToStart 0x7f0800b5
 int id enterAlways 0x7f0800b6
 int id enterAlwaysCollapsed 0x7f0800b7
+int id etCustomerId 0x7f0801f9
 int id etPassword 0x7f0800b8
 int id etUser 0x7f0800b9
 int id exitUntilCollapsed 0x7f0800ba

@@ -14,4 +14,13 @@
         android:layout_height="wrap_content"
         android:minHeight="32dp" />
 
+    <EditText
+        android:id="@+id/etCustomerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Introduce CIF/NIF del cliente"
+        android:inputType="text"
+        android:minHeight="48dp" />
+
 </LinearLayout>
