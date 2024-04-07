@@ -15,6 +15,7 @@ id etUser
 id main
 id tvGreetingUser
 layout activity_main
+layout activity_sale
 layout activity_second
 mipmap ic_launcher
 mipmap ic_launcher_round

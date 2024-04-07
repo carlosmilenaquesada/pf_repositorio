@@ -15,7 +15,6 @@ import com.example.tfg_carlosmilenaquesada.models.User;
 
 public class SecondActivity extends AppCompatActivity {
     User user;
-    TextView tvGreetingUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,7 @@ public class SecondActivity extends AppCompatActivity {
             case "super":
                 break;
         }
-        ((TextView) findViewById(R.id.tvGreetingUser)).setText("¡Hola, " + user.getName() + "!");
+        ((TextView) findViewById(R.id.tvGreetingUser)).setText("¡Hola, " + user.getId() + "!");
 
 
     }

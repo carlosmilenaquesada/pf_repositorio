@@ -1,12 +1,14 @@
 package com.example.tfg_carlosmilenaquesada.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Button btLogOn;
     DbHelper dbHelper;
     //he añadido android:usesCleartextTraffic="true" al manifest para eludir la seguridad de http
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

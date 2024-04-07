@@ -21,6 +21,12 @@
         android:text="Nueva venta" />
 
     <Button
+        android:id="@+id/btCustomersManagement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestión de clientes" />
+
+    <Button
         android:id="@+id/btSalesManagement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,12 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Gestión de caja" />
-
-    <Button
-        android:id="@+id/btCustomersManagement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gestión de clientes" />
 
     <Button
         android:id="@+id/btLogOut"

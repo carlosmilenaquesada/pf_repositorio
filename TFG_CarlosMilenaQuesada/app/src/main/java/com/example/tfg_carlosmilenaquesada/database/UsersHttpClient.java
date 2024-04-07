@@ -30,15 +30,16 @@ public class UsersHttpClient {
                 response -> {
                     try {
                         DbHelper dbHelper = new DbHelper(context);
+                        dbHelper.wipeTable(DbHelper.TABLE_USERS);
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject userJson = response.getJSONObject(i);
                             dbHelper.insertUser(new User(userJson.getString("id"), userJson.getString("password"), userJson.getString("privileges")));
                         }
                     } catch (JSONException e) {
-                        Toast.makeText(context,"Error al procesar la respuesta JSON", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Error al procesar la respuesta JSON de usuarios", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> Toast.makeText(context,"Error en la solicitud HTTP", Toast.LENGTH_SHORT).show());
+                error -> Toast.makeText(context,"Error en la solicitud HTTP de usuarios", Toast.LENGTH_SHORT).show());
         queue.add(jsonArrayRequest);
     }
 }

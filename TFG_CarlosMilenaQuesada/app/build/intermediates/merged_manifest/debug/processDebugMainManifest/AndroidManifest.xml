@@ -31,6 +31,9 @@
         android:theme="@style/Theme.TFG_CarlosMilenaQuesada"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.tfg_carlosmilenaquesada.activities.SaleActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.tfg_carlosmilenaquesada.activities.SecondActivity"
             android:exported="false" />
         <activity
