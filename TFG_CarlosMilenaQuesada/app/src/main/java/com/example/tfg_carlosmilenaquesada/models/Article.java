@@ -4,45 +4,25 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Article implements Serializable {
-    private String id;
     private String internalCode;
-    private String barcodeId;
     private String name;
-    private String familyId;
-    private String categoryId;
-    private Double basePrice;
-    private String vatPercentId;
-    private Double stock;
-    private Double sold;
+    private Double saleBasePrice;
+    private String vatFraction;
     private LocalDateTime offerStartDate;
     private LocalDateTime offerEndDate;
-    private Double offerBasePrice;
+    private Double offerSaleBasePrice;
 
     public Article() {
     }
 
-    public Article(String id, String internalCode, String barcodeId, String name, String familyId, String categoryId, Double basePrice, String vatPercentId, Double stock, Double sold, LocalDateTime offerStartDate, LocalDateTime offerEndDate, Double offerBasePrice) {
-        this.id = id;
+    public Article(String internalCode, String name, Double saleBasePrice, String vatFraction, LocalDateTime offerStartDate, LocalDateTime offerEndDate, Double offerSaleBasePrice) {
         this.internalCode = internalCode;
-        this.barcodeId = barcodeId;
         this.name = name;
-        this.familyId = familyId;
-        this.categoryId = categoryId;
-        this.basePrice = basePrice;
-        this.vatPercentId = vatPercentId;
-        this.stock = stock;
-        this.sold = sold;
+        this.saleBasePrice = saleBasePrice;
+        this.vatFraction = vatFraction;
         this.offerStartDate = offerStartDate;
         this.offerEndDate = offerEndDate;
-        this.offerBasePrice = offerBasePrice;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.offerSaleBasePrice = offerSaleBasePrice;
     }
 
     public String getInternalCode() {
@@ -53,14 +33,6 @@ public class Article implements Serializable {
         this.internalCode = internalCode;
     }
 
-    public String getBarcodeId() {
-        return barcodeId;
-    }
-
-    public void setBarcodeId(String barcodeId) {
-        this.barcodeId = barcodeId;
-    }
-
     public String getName() {
         return name;
     }
@@ -69,52 +41,20 @@ public class Article implements Serializable {
         this.name = name;
     }
 
-    public String getFamilyId() {
-        return familyId;
+    public Double getSaleBasePrice() {
+        return saleBasePrice;
     }
 
-    public void setFamilyId(String familyId) {
-        this.familyId = familyId;
+    public void setSaleBasePrice(Double saleBasePrice) {
+        this.saleBasePrice = saleBasePrice;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getVatFraction() {
+        return vatFraction;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public Double getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(Double basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public String getVatPercentId() {
-        return vatPercentId;
-    }
-
-    public void setVatPercentId(String vatPercentId) {
-        this.vatPercentId = vatPercentId;
-    }
-
-    public Double getStock() {
-        return stock;
-    }
-
-    public void setStock(Double stock) {
-        this.stock = stock;
-    }
-
-    public Double getSold() {
-        return sold;
-    }
-
-    public void setSold(Double sold) {
-        this.sold = sold;
+    public void setVatFraction(String vatFraction) {
+        this.vatFraction = vatFraction;
     }
 
     public LocalDateTime getOfferStartDate() {
@@ -133,11 +73,11 @@ public class Article implements Serializable {
         this.offerEndDate = offerEndDate;
     }
 
-    public Double getOfferBasePrice() {
-        return offerBasePrice;
+    public Double getOfferSaleBasePrice() {
+        return offerSaleBasePrice;
     }
 
-    public void setOfferBasePrice(Double offerBasePrice) {
-        this.offerBasePrice = offerBasePrice;
+    public void setOfferSaleBasePrice(Double offerSaleBasePrice) {
+        this.offerSaleBasePrice = offerSaleBasePrice;
     }
 }

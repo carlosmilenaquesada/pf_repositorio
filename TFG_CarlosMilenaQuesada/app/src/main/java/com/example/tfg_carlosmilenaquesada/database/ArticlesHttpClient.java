@@ -8,19 +8,16 @@ import androidx.annotation.RequiresApi;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tfg_carlosmilenaquesada.models.Article;
-import com.example.tfg_carlosmilenaquesada.models.User;
 
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ArticlesHttpClient {
@@ -37,7 +34,6 @@ public class ArticlesHttpClient {
     public void getArticlesFromServer() {
         String url = "http://192.168.0.3:3000/sync/articles";
         RequestQueue queue = Volley.newRequestQueue(context);
-
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
@@ -46,27 +42,21 @@ public class ArticlesHttpClient {
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject userJson = response.getJSONObject(i);
                             Article article = new Article(
-                                    userJson.getString("id"),
                                     userJson.getString("internal_code"),
-                                    userJson.getString("barcode_id"),
                                     userJson.getString("name"),
-                                    userJson.getString("family_id"),
-                                    userJson.getString("category_id"),
-                                    userJson.getDouble("base_price"),
-                                    userJson.getString("vat_percent_id"),
-                                    userJson.getDouble("stock"),
-                                    userJson.getDouble("sold"),
+                                    userJson.getDouble("sale_base_price"),
+                                    userJson.getString("vat_fraction"),
                                     userJson.getString("offer_start_date").equalsIgnoreCase("null") ? null : LocalDateTime.parse(userJson.getString("offer_start_date"), formatter),
                                     userJson.getString("offer_end_date").equalsIgnoreCase("null") ? null : LocalDateTime.parse(userJson.getString("offer_end_date"), formatter),
-                                    userJson.getString("offer_base_price").equalsIgnoreCase("null")? null: Double.parseDouble(userJson.getString("offer_base_price")));
+                                    userJson.getString("offer_sale_base_price").equalsIgnoreCase("null")? null: Double.parseDouble(userJson.getString("offer_sale_base_price")));
                             dbHelper.insertArticle(article);
                         }
                     } catch (Exception e) {
                         System.out.println(e);
-                        Toast.makeText(context, "Error al procesar la respuesta JSON de artículos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Error al procesar la respuesta JSON de artículos", Toast.LENGTH_LONG).show();
                     }
                 },
-                error -> Toast.makeText(context, "Error en la solicitud HTTP de artículos", Toast.LENGTH_SHORT).show());
+                error -> Toast.makeText(context, "Error en la solicitud HTTP de artículos", Toast.LENGTH_LONG).show());
 
         queue.add(jsonArrayRequest);
     }

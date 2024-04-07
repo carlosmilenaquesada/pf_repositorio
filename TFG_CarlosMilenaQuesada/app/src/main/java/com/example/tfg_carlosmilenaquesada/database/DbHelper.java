@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.tfg_carlosmilenaquesada.models.Article;
+import com.example.tfg_carlosmilenaquesada.models.Barcode;
+import com.example.tfg_carlosmilenaquesada.models.CustomerType;
 import com.example.tfg_carlosmilenaquesada.models.User;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -16,6 +18,8 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "tpv.db";
     public static final String TABLE_USERS = "users";
     public static final String TABLE_ARTICLES = "articles";
+    public static final String TABLE_BARCODES = "barcodes";
+    public static final String TABLE_CUSTOMERS_TYPES = "customers_types";
 
 
     public DbHelper(@Nullable Context context) {
@@ -34,19 +38,23 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         db.execSQL("CREATE TABLE " + TABLE_ARTICLES + "(" +
-                "id INTEGER PRIMARY KEY NOT NULL," +
-                "internal_code TEXT NOT NULL, " +
-                "barcode_id TEXT," +
+                "internal_code TEXT PRIMARY KEY NOT NULL, " +
                 "name TEXT  NOT NULL, " +
-                "family_id TEXT, " +
-                "category_id TEXT, " +
-                "base_price REAL NOT NULL," +
-                "vat_percent_id TEXT NOT NULL," +
-                "stock REAL," +
-                "sold REAL," +
+                "sale_base_price REAL NOT NULL," +
+                "vat_fraction TEXT NOT NULL," +
                 "offer_start_date TEXT," +
                 "offer_end_date TEXT," +
-                "offer_base_price REAL" +
+                "offer_sale_base_price REAL" +
+                ")");
+
+        db.execSQL("CREATE TABLE " + TABLE_BARCODES + "(" +
+                "barcode TEXT PRIMARY KEY NOT NULL," +
+                "internal_code TEXT NOT NULL " +
+                ")");
+
+        db.execSQL("CREATE TABLE " + TABLE_CUSTOMERS_TYPES + "(" +
+                "id TEXT PRIMARY KEY NOT NULL," +
+                "description TEXT NOT NULL " +
                 ")");
 
 
@@ -74,23 +82,28 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void insertArticle(Article article) {
         ContentValues contentValues = new ContentValues();
-
-        contentValues.put("id", article.getId());
         contentValues.put("internal_code", article.getInternalCode());
-        contentValues.put("barcode_id", article.getBarcodeId());
         contentValues.put("name", article.getName());
-        contentValues.put("family_id", article.getFamilyId());
-        contentValues.put("category_id", article.getCategoryId());
-        contentValues.put("base_price", article.getBasePrice());
-        contentValues.put("vat_percent_id", article.getVatPercentId());
-        contentValues.put("stock", article.getStock());
-        contentValues.put("sold", article.getSold());
+        contentValues.put("sale_base_price", article.getSaleBasePrice());
+        contentValues.put("vat_fraction", article.getVatFraction());
         contentValues.put("offer_start_date", article.getOfferStartDate() == null ? null : article.getOfferStartDate().toString());
         contentValues.put("offer_end_date", article.getOfferEndDate() == null ? null : article.getOfferEndDate().toString());
-        contentValues.put("offer_base_price", article.getOfferBasePrice());
-
+        contentValues.put("offer_sale_base_price", article.getOfferSaleBasePrice());
         getReadableDatabase().insert(TABLE_ARTICLES, null, contentValues);
+    }
 
+    public void insertBarcode(Barcode barcode) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("internal_code", barcode.getInternalCode());
+        contentValues.put("barcode", barcode.getBarcode());
+        getReadableDatabase().insert(TABLE_BARCODES, null, contentValues);
+    }
+
+    public void insertCustomerType(CustomerType customerType) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("id", customerType.getId());
+        contentValues.put("description", customerType.getDescription());
+        getReadableDatabase().insert(TABLE_CUSTOMERS_TYPES, null, contentValues);
     }
 
     public void wipeTable(String tableName) {

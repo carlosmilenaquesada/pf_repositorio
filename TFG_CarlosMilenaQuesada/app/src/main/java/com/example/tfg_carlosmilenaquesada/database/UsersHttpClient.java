@@ -36,10 +36,10 @@ public class UsersHttpClient {
                             dbHelper.insertUser(new User(userJson.getString("id"), userJson.getString("password"), userJson.getString("privileges")));
                         }
                     } catch (JSONException e) {
-                        Toast.makeText(context,"Error al procesar la respuesta JSON de usuarios", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Error al procesar la respuesta JSON de usuarios", Toast.LENGTH_LONG).show();
                     }
                 },
-                error -> Toast.makeText(context,"Error en la solicitud HTTP de usuarios", Toast.LENGTH_SHORT).show());
+                error -> Toast.makeText(context,"Error en la solicitud HTTP de usuarios", Toast.LENGTH_LONG).show());
         queue.add(jsonArrayRequest);
     }
 }

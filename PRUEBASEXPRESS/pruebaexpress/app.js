@@ -1,15 +1,11 @@
-// Importar los módulos necesarios
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
-// Crear una instancia de la aplicación Express
 const app = express();
 
-// Configurar el middleware para parsear JSON
 app.use(bodyParser.json());
 
-// Configurar la conexión a la base de datos MySQL
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -17,7 +13,6 @@ const connection = mysql.createConnection({
     database: 'tpv'
 });
 
-// Establecer la conexión a la base de datos MySQL
 connection.connect((err) => {
     if (err) {
         console.error('Error al conectar a la base de datos:', err);
@@ -26,38 +21,73 @@ connection.connect((err) => {
     }
 });
 
-// Ruta para obtener la información de usuarios
 app.get('/sync/users', (req, res) => {
-    // Consultar la base de datos MySQL para obtener la información de usuarios
     const sql = 'SELECT * FROM users';
     connection.query(sql, (err, result) => {
         if (err) {
             console.error('Error al ejecutar la consulta:', err);
             res.status(500).json({ error: 'Error al obtener la información de usuarios' });
         } else {
-            // Enviar la información de usuarios al cliente en formato JSON
             res.json(result);
         }
     });
 });
 
-// Ruta para obtener la información de artículos
 app.get('/sync/articles', (req, res) => {
-    // Consultar la base de datos MySQL para obtener la información de usuarios
-    const sql = 'SELECT * FROM articles';
+    const sql = 'SELECT A.internal_code, A.name, A.sale_base_price, V.vat_fraction, A.offer_start_date, A.offer_end_date, A.offer_sale_base_price FROM articles A LEFT OUTER JOIN vats V ON A.vat_id = V.vat_id';
+
     connection.query(sql, (err, result) => {
         if (err) {
             console.error('Error al ejecutar la consulta:', err);
             res.status(500).json({ error: 'Error al obtener la información de artículos' });
         } else {
-            // Enviar la información de usuarios al cliente en formato JSON
             res.json(result);
         }
     });
 });
 
-// Configurar el puerto en el que la aplicación escuchará las solicitudes
+app.get('/sync/barcodes', (req, res) => {
+    const sql = 'SELECT * FROM barcodes';
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            res.status(500).json({ error: 'Error al obtener la información de códigos de barras' });
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+app.get('/sync/customers', (req, res) => {
+    const sql = 'SELECT * FROM customers';
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            res.status(500).json({ error: 'Error al obtener la información de clientes' });
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+app.get('/sync/customers_types', (req, res) => {
+    const sql = 'SELECT * FROM customers_types';
+
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            res.status(500).json({ error: 'Error al obtener la información de clientes' });
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+
+
 const puerto = 3000;
 app.listen(puerto, () => {
-    console.log(`Servidor en ejecución en http://localhost:${puerto}`);
+    console.log(`Servidor en ejecución en http:localhost:${puerto}`);
 });
