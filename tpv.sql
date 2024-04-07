@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-04-2024 a las 17:36:06
+-- Tiempo de generación: 08-04-2024 a las 00:09:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -94,20 +94,20 @@ INSERT INTO `barcodes` (`barcode`, `internal_code`) VALUES
 --
 
 CREATE TABLE `customers` (
-  `legal_taxation_number` varchar(50) NOT NULL,
+  `legal_taxation_id` varchar(50) NOT NULL,
   `legal_company_name` varchar(50) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
-  `legla_company_address` varchar(50) NOT NULL,
-  `country` varchar(50) NOT NULL,
-  `location` varchar(50) NOT NULL,
-  `zip_code` varchar(50) NOT NULL
+  `legal_company_address` varchar(50) NOT NULL,
+  `legal_country` varchar(50) NOT NULL,
+  `legal_location` varchar(50) NOT NULL,
+  `legal_zip_code` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `customers`
 --
 
-INSERT INTO `customers` (`legal_taxation_number`, `legal_company_name`, `name`, `legla_company_address`, `country`, `location`, `zip_code`) VALUES
+INSERT INTO `customers` (`legal_taxation_id`, `legal_company_name`, `name`, `legal_company_address`, `legal_country`, `legal_location`, `legal_zip_code`) VALUES
 ('A12345678', 'Tech Solutions Inc.', 'Tech Solutions', 'Calle Principal, 3', 'España', 'Sevilla', '80088'),
 ('B87654321', 'Consultoría y Servicios SA de CV', 'Consultoría y Servicios', 'Av. Reforma, 555', 'España', 'Ciudad Real', '25522'),
 ('C45678912', 'Soluciones Informáticas SL', 'Soluciones Informáticas', 'Calle Mayor, 22', 'España', 'Madrid', '33255'),
@@ -202,7 +202,7 @@ ALTER TABLE `barcodes`
 -- Indices de la tabla `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`legal_taxation_number`),
+  ADD PRIMARY KEY (`legal_taxation_id`),
   ADD UNIQUE KEY `legal_company_name` (`legal_company_name`);
 
 --
