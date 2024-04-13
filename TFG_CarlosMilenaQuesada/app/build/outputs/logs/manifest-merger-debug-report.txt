@@ -103,24 +103,24 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ad
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:9:9-65
 	android:usesCleartextTraffic
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:16:9-44
-activity#com.example.tfg_carlosmilenaquesada.activities.SaleActivity
+activity#com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-52
-activity#com.example.tfg_carlosmilenaquesada.activities.SecondActivity
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-58
+activity#com.example.tfg_carlosmilenaquesada.views.activities.SecondActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-54
-activity#com.example.tfg_carlosmilenaquesada.activities.MainActivity
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-60
+activity#com.example.tfg_carlosmilenaquesada.views.activities.MainActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:24:9-32:20
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:26:13-36
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-52
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-58
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:27:13-31:29
 action#android.intent.action.MAIN

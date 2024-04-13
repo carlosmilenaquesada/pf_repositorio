@@ -31,13 +31,13 @@
         android:theme="@style/Theme.TFG_CarlosMilenaQuesada"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.tfg_carlosmilenaquesada.activities.SaleActivity"
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tfg_carlosmilenaquesada.activities.SecondActivity"
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.SecondActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tfg_carlosmilenaquesada.activities.MainActivity"
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
