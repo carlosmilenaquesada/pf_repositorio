@@ -12,14 +12,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.tfg_carlosmilenaquesada.views.activities.MainActivity;
-import com.example.tfg_carlosmilenaquesada.models.Article;
+import com.example.tfg_carlosmilenaquesada.views.activities.LoginActiviy;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
 
 
-import org.json.JSONObject;
-
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -41,8 +37,8 @@ public class ArticlesHttpGetter {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        MainActivity.getDbHelper().wipeTable(DbHelper.TABLE_ARTICLES);
-                        for (int i = 0; i < response.length(); i++) {
+                        DbHelper.getInstance(context).wipeTable(DbHelper.TABLE_ARTICLES);
+                        /*for (int i = 0; i < response.length(); i++) {
                             JSONObject userJson = response.getJSONObject(i);
                             Article article = new Article(
                                     userJson.getString("internal_code"),
@@ -53,10 +49,11 @@ public class ArticlesHttpGetter {
                                     userJson.getString("offer_end_date").equalsIgnoreCase("null") ? null : LocalDateTime.parse(userJson.getString("offer_end_date"), formatter),
                                     userJson.getString("offer_sale_base_price").equalsIgnoreCase("null") ? null : Double.parseDouble(userJson.getString("offer_sale_base_price"))
                             );
-                            MainActivity.getDbHelper().insertArticle(article);
-                        }
+                            LoginActiviy.getDbHelper().insertArticle(article);
+                        }*/
+                        DbHelper.getInstance(context).insert(response, DbHelper.TABLE_ARTICLES);
                     } catch (Exception e) {
-                        Toast.makeText(context, "Error al procesar la respuesta JSON de artículos", Toast.LENGTH_LONG).show();
+                        System.out.println(e);
                     }
                 },
                 error -> Toast.makeText(context, "Error en la solicitud HTTP de artículos", Toast.LENGTH_LONG).show());

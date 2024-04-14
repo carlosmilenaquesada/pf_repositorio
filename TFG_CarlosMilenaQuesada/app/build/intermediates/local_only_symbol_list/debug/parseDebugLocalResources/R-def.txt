@@ -14,11 +14,15 @@ id etCustomerId
 id etPassword
 id etUser
 id main
+id pbLoginLoader
+id pbSalesLoader
 id spCustomersTypes
 id tvGreetingUser
-layout activity_main
+layout activity_login_loader
+layout activity_main_menu
 layout activity_sale
-layout activity_second
+layout activity_sales_loader
+layout activiy_login
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

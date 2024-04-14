@@ -20,10 +20,6 @@
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activity_second.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activity_second.xml"
-    },
-    {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\drawable\\ic_launcher_foreground.xml"
     },
@@ -40,8 +36,8 @@
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\layout_activity_second.xml.flat",
-        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\layout\\activity_second.xml"
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\layout_activity_login_loader.xml.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\layout\\activity_login_loader.xml"
     },
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
@@ -64,20 +60,20 @@
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\layout_activiy_login.xml.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\layout\\activiy_login.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\mipmap-hdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\layout\\activity_main.xml"
+        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activity_sales_loader.xml.flat",
+        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activity_sales_loader.xml"
     },
     {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activity_sale.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activity_sale.xml"
-    },
-    {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activity_main.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activity_main.xml"
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\layout_activity_main_menu.xml.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\layout\\activity_main_menu.xml"
     },
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",

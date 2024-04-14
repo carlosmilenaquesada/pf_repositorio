@@ -1,3 +1,0 @@
-com.example.tfg_carlosmilenaquesada.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

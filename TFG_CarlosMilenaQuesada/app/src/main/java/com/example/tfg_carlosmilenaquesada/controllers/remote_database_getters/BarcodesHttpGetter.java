@@ -8,10 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
-import com.example.tfg_carlosmilenaquesada.views.activities.MainActivity;
-import com.example.tfg_carlosmilenaquesada.models.Barcode;
-
-import org.json.JSONObject;
+import com.example.tfg_carlosmilenaquesada.views.activities.LoginActiviy;
 
 public class BarcodesHttpGetter {
 
@@ -27,15 +24,16 @@ public class BarcodesHttpGetter {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        MainActivity.getDbHelper().wipeTable(DbHelper.TABLE_BARCODES);
-                        for (int i = 0; i < response.length(); i++) {
+                        DbHelper.getInstance(context).wipeTable(DbHelper.TABLE_BARCODES);
+                        /*for (int i = 0; i < response.length(); i++) {
                             JSONObject userJson = response.getJSONObject(i);
                             Barcode barcode = new Barcode(
                                     userJson.getString("internal_code"),
                                     userJson.getString("barcode")
                             );
-                            MainActivity.getDbHelper().insertBarcode(barcode);
-                        }
+                            LoginActiviy.getDbHelper().insertBarcode(barcode);
+                        }*/
+                        DbHelper.getInstance(context).insert(response, DbHelper.TABLE_BARCODES);
                     } catch (Exception e) {
                         Toast.makeText(context, "Error al procesar la respuesta JSON de códigos de barras", Toast.LENGTH_LONG).show();
                     }

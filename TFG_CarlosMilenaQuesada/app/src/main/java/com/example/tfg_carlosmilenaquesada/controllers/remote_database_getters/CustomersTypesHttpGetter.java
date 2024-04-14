@@ -9,11 +9,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.tfg_carlosmilenaquesada.views.activities.MainActivity;
-import com.example.tfg_carlosmilenaquesada.models.CustomerType;
+import com.example.tfg_carlosmilenaquesada.views.activities.LoginActiviy;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
-
-import org.json.JSONObject;
 
 public class CustomersTypesHttpGetter {
     private final Context context;
@@ -28,15 +25,16 @@ public class CustomersTypesHttpGetter {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        MainActivity.getDbHelper().wipeTable(DbHelper.TABLE_CUSTOMERS_TYPES);
-                        for (int i = 0; i < response.length(); i++) {
+                        DbHelper.getInstance(context).wipeTable(DbHelper.TABLE_CUSTOMERS_TYPES);
+                        /*for (int i = 0; i < response.length(); i++) {
                             JSONObject userJson = response.getJSONObject(i);
                             CustomerType customerType = new CustomerType(
                                     userJson.getString("id"),
                                     userJson.getString("description")
                             );
-                            MainActivity.getDbHelper().insertCustomerType(customerType);
-                        }
+                            LoginActiviy.getDbHelper().insertCustomerType(customerType);
+                        }*/
+                        DbHelper.getInstance(context).insert(response, DbHelper.TABLE_CUSTOMERS_TYPES);
                     } catch (Exception e) {
                         Toast.makeText(context, "Error al procesar la respuesta JSON de tipos de clientes", Toast.LENGTH_LONG).show();
                     }

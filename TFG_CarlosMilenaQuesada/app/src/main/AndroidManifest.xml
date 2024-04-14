@@ -16,13 +16,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".views.loaders.SalesLoaderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.LoginActiviy"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.MainMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.activities.SaleActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.SecondActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.activities.MainActivity"
+            android:name=".views.loaders.LoginLoaderActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-35:12
-INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-35:12
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:2:1-41:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Administrador\.gradle\caches\transforms-3\192431b807ad4d13084b165e21e09f92\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Administrador\.gradle\caches\transforms-3\4a3ff8ddaf4a4d6ff77bd04807538bf9\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\Administrador\.gradle\caches\transforms-3\8d2c024b4043c46cd93cc5f9eaefaf9f\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
@@ -61,8 +61,8 @@ ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada
 	android:name
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:7:5-33:19
-INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:7:5-33:19
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:7:5-39:19
+INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:7:5-39:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Administrador\.gradle\caches\transforms-3\192431b807ad4d13084b165e21e09f92\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Administrador\.gradle\caches\transforms-3\192431b807ad4d13084b165e21e09f92\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Administrador\.gradle\caches\transforms-3\4a3ff8ddaf4a4d6ff77bd04807538bf9\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -103,34 +103,46 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ad
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:9:9-65
 	android:usesCleartextTraffic
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:16:9-44
-activity#com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity
+activity#com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-58
-activity#com.example.tfg_carlosmilenaquesada.views.activities.SecondActivity
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-62
+activity#com.example.tfg_carlosmilenaquesada.views.activities.LoginActiviy
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-60
-activity#com.example.tfg_carlosmilenaquesada.views.activities.MainActivity
-ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:24:9-32:20
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-58
+activity#com.example.tfg_carlosmilenaquesada.views.activities.MainMenuActivity
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:26:13-36
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-58
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-62
+activity#com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:27:9-29:40
+	android:exported
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:28:13-58
+activity#com.example.tfg_carlosmilenaquesada.views.loaders.LoginLoaderActivity
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:30:9-38:20
+	android:exported
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:32:13-36
+	android:name
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:31:13-62
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:27:13-31:29
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:33:13-37:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:28:17-69
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:34:17-69
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:28:25-66
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:34:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:30:17-77
+ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:36:17-77
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:30:27-74
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:36:27-74
 uses-sdk
 INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml

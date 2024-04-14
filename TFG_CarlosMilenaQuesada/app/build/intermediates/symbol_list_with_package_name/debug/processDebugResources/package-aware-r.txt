@@ -3424,6 +3424,8 @@ id parent_matrix
 id password_toggle
 id path
 id pathRelative
+id pbLoginLoader
+id pbSalesLoader
 id peekHeight
 id percent
 id pin
@@ -3689,9 +3691,11 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_main
+layout activity_login_loader
+layout activity_main_menu
 layout activity_sale
-layout activity_second
+layout activity_sales_loader
+layout activiy_login
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

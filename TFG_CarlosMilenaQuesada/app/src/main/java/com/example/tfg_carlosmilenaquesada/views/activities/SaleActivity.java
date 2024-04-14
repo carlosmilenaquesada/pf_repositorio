@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
+import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
 
 public class SaleActivity extends AppCompatActivity {
     Spinner spCustomersTypes;
@@ -33,7 +34,7 @@ public class SaleActivity extends AppCompatActivity {
         });
 
         spCustomersTypes = findViewById(R.id.spCustomersTypes);
-        Cursor cursorCustomersTypes = MainActivity.getDbHelper().getReadableDatabase().rawQuery("SELECT description as _id FROM " + TABLE_CUSTOMERS_TYPES, null);
+        Cursor cursorCustomersTypes = DbHelper.getInstance(getApplication()).getReadableDatabase().rawQuery("SELECT description as _id FROM " + TABLE_CUSTOMERS_TYPES, null);
         String[] fromColumns = {"_id"};
         int[] toViews = {android.R.id.text1};
         CursorAdapter cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursorCustomersTypes, fromColumns, toViews, 0);
