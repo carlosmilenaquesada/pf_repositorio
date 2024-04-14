@@ -14,13 +14,59 @@
         android:layout_height="wrap_content"
         android:minHeight="32dp" />
 
-    <EditText
-        android:id="@+id/etCustomerId"
+    <AutoCompleteTextView
+        android:id="@+id/actvCustomerId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Introduce CIF/NIF del cliente"
-        android:inputType="text"
-        android:minHeight="48dp" />
+        android:hint="Introduce NIF/CIF del cliente"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etndArticleQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="Introducir cantidad"
+            android:inputType="number|numberDecimal|numberSigned"
+            android:minHeight="48dp"
+            android:textColorHint="#546E7A" />
+
+        <EditText
+            android:id="@+id/etArticleCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="Introducir código"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColorHint="#546E7A" />
+
+
+        <Button
+            android:id="@+id/btOpenScanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Scanner" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvArticleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre artículo" />
+
+    <Button
+        android:id="@+id/btPutArticle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insertar" />
 
 </LinearLayout>

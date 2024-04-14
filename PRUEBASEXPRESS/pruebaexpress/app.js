@@ -21,17 +21,7 @@ connection.connect((err) => {
     }
 });
 
-app.get('/sync/users', (req, res) => {
-    const sql = 'SELECT * FROM users';
-    connection.query(sql, (err, result) => {
-        if (err) {
-            console.error('Error al ejecutar la consulta:', err);
-            res.status(500).json({ error: 'Error al obtener la información de usuarios' });
-        } else {
-            res.json(result);
-        }
-    });
-});
+
 
 app.get('/sync/articles', (req, res) => {
     const sql = 'SELECT A.internal_code, A.name, A.sale_base_price, V.vat_fraction, A.offer_start_date, A.offer_end_date, A.offer_sale_base_price FROM articles A LEFT OUTER JOIN vats V ON A.vat_id = V.vat_id';
@@ -85,6 +75,17 @@ app.get('/sync/customers_types', (req, res) => {
     });
 });
 
+app.get('/sync/users', (req, res) => {
+    const sql = 'SELECT * FROM users';
+    connection.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            res.status(500).json({ error: 'Error al obtener la información de usuarios' });
+        } else {
+            res.json(result);
+        }
+    });
+});
 
 
 const puerto = 3000;

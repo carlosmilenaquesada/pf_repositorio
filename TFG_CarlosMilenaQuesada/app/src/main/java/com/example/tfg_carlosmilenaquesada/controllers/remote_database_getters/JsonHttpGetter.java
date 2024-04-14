@@ -8,8 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
-import com.example.tfg_carlosmilenaquesada.views.activities.LoginActiviy;
+import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 
 import org.json.JSONArray;
 
@@ -35,15 +34,15 @@ public class JsonHttpGetter {
     }
 
     public void getJsonFromHttp() {
-        String url = DbHelper.NODE_SERVER + table;
+        String url = SqliteConnector.NODE_SERVER + table;
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println(table);
-                        DbHelper.getInstance(context).wipeTable(table);
-                        DbHelper.getInstance(context).insert(response, table);
+                        System.out.println("########## " + table + " ##########");
+                        SqliteConnector.getInstance(context).wipeTable(table);
+                        SqliteConnector.getInstance(context).insert(response, table);
                         setDone(true);
                     }
                 }, new Response.ErrorListener() {

@@ -6,3 +6,8 @@ HACIENDO------------------------------------------------------------------
 
 HECHO---------------------------------------------------------------------
 
+
+PROBAR-------------------------------------------------------------------
+--crear dos clientes desde la aplicación con el mismo nombre legal (la pk es el cif, por eso he puesto que el legal_company_name sea unique, 
+ya que la razón social debe ser única al menos en el ámbito de un país (quizás deba poner legal_company_name + legal_country juntos para
+hacer una unique compuesta por esos dos elementos))

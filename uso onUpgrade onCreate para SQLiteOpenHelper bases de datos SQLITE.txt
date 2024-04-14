@@ -1,0 +1,94 @@
+ private static SqliteConnector sqliteConnector;
+    public static final String NODE_SERVER = "http://192.168.0.3:3000/sync/";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "tpv.db";
+    public static final String TABLE_USERS = "users";
+    public static final String TABLE_ARTICLES = "articles";
+    public static final String TABLE_BARCODES = "barcodes";
+    public static final String TABLE_CUSTOMERS_TYPES = "customers_types";
+
+
+    private SqliteConnector(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    //SQLite solo permite tipos INTEGER, REAL, TEXT, BLOB, NUMERIC y NULL,
+    //sin necesidad de especificar ni longuitud ni precisión.
+
+    public static SqliteConnector getInstance(Context context) {
+        if (sqliteConnector == null) {
+            sqliteConnector = new SqliteConnector(context);
+        }
+        return sqliteConnector;
+    }
+
+    /* El método onCreate se llama una sola vez para literalmente crear el archivo *.db y *.db-journal que contiene
+    * la estructura de la base de datos en caso de que este no exista. Una vez se ha creado el
+    * archivo tpv.db, no se vuelve a llamar, con lo que lo que se escriba dentro del método no
+    * afectará a la base de datos las llamadas posteriores del método.
+    *
+    * Para cambiar la estructura de las base de datos, se debe borrar los archivos *.db y *.db-journal y ejecutar
+    * el programa para lanzar de nuevo este método onCreate. O bien, programar correctamente el
+    * método onUpgrade.
+    * */
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + TABLE_USERS + "(" +
+                "id TEXT PRIMARY KEY NOT NULL," +
+                "password TEXT NOT NULL, " +
+                "privileges TEXT NOT NULL" +
+                ")");
+
+        db.execSQL("CREATE TABLE " + TABLE_ARTICLES + "(" +
+                "internal_code TEXT PRIMARY KEY NOT NULL, " +
+                "name TEXT  NOT NULL, " +
+                "sale_base_price REAL NOT NULL," +
+                "vat_fraction TEXT NOT NULL," +
+                "offer_start_date TEXT," +
+                "offer_end_date TEXT," +
+                "offer_sale_base_price REAL" +
+                ")");
+
+        db.execSQL("CREATE TABLE " + TABLE_BARCODES + "(" +
+                "barcode TEXT PRIMARY KEY NOT NULL," +
+                "internal_code TEXT NOT NULL " +
+                ")");
+
+        db.execSQL("CREATE TABLE " + TABLE_CUSTOMERS_TYPES + "(" +
+                "id TEXT PRIMARY KEY NOT NULL," +
+                "description TEXT NOT NULL " +
+                ")");
+
+
+    }
+
+    /*Esta función se llama cuando la versión que hay en la base de datos en los archivo *.db y *.db-journal es
+    * más antigua que la versión que se indica en el código de la aplicación.
+    * Para realizar esta comprobación de vesiones, en la base de datos de los archivos *.db y *.db-journal se
+    * guarda un número pasado por parámetro en el constructor de esta clase (más concretamente por
+    * el super(context, DATABASE_NAME, null, DATABASE_VERSION); siendo DATABASE_VERSION el número
+    * que se guarda de la versión de la base de datos en los archivos *db.
+    * Las llamadas posteriores al constructor, checkean super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    * y comparan el número que ya hubiese con el nuevo número, y si el nuevo número es mayor, se
+    * ejecuta el método onUpgrade.
+    *
+    * El número DATABASE_VERSION lo proporciona el programador, por ejemplo, si inicialmente el
+    * número es 1 y quiero realizar cierta acción (dropeo de tablas por ejemplo), pues programo
+    * la acción en el onUpgrade y cambio el número DATABASE_VERSION a 2)
+    *
+    * Si se hace un downgrade  (se cambia DATABASE_VERSION a un número inferior al actual del
+    * archivo *.db y *.db-journal) el programa crashea (hay un método onDowngrade que se debe investigar, pero no
+    * interesa de momento)
+    *
+    * Lo ideal es:
+    *       1º poner las nuevas modificaciones en el onCreate.
+    *       2º cambiar la versión DATABASE_VERSION a un número mayor.
+    *       3 llamar a la función onCreate dentro del onUpgrade
+    *
+    * Los parámetros , int oldVersion, int newVersion sirven para hacer checkeos que nos ayuden a
+    * implementar nuevos cambios.
+    **/
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        System.out.println(oldVersion +" " +newVersion);
+    }

@@ -14,9 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.ArticlesHttpGetter;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.BarcodesHttpGetter;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.CustomersTypesHttpGetter;
 import com.example.tfg_carlosmilenaquesada.models.User;
 import com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity;
 
@@ -49,7 +46,7 @@ public class MainMenuActivity extends AppCompatActivity {
             case "super":
                 break;
         }
-        ((TextView) findViewById(R.id.tvGreetingUser)).setText("¡Hola, " + user.getId() + "!");
+        ((TextView) findViewById(R.id.tvGreetingUser)).setText("¡Hola, " + user.getUserId() + "!");
 
         findViewById(R.id.btNewSale).setOnClickListener(v -> startActivity(new Intent(MainMenuActivity.this, SalesLoaderActivity.class)));
         //findViewById(R.id.btCustomersManagement).setOnClickListener(v -> startActivity(new Intent(MainMenuActivity.this, null)));

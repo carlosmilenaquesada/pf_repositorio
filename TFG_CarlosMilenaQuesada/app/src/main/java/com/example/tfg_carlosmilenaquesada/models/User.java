@@ -3,25 +3,25 @@ package com.example.tfg_carlosmilenaquesada.models;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String id;
+    private String userId;
     private String password;
     private String privileges;
 
     public User() {
     }
 
-    public User(String id, String password, String privileges) {
-        this.id = id;
+    public User(String userId, String password, String privileges) {
+        this.userId = userId;
         this.password = password;
         this.privileges = privileges;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {

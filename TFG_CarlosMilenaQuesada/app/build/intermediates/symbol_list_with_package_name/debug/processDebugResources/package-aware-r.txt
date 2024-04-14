@@ -3139,6 +3139,7 @@ id action_mode_close_button
 id action_text
 id actions
 id activity_chooser_view_content
+id actvCustomerId
 id add
 id alertTitle
 id aligned
@@ -3172,6 +3173,8 @@ id btCustomersManagement
 id btLogOn
 id btLogOut
 id btNewSale
+id btOpenScanner
+id btPutArticle
 id btSalesManagement
 id buttonPanel
 id cache_measures
@@ -3253,9 +3256,10 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
-id etCustomerId
+id etArticleCode
 id etPassword
-id etUser
+id etUserId
+id etndArticleQuantity
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -3553,6 +3557,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvArticleName
 id tvGreetingUser
 id unchecked
 id uniform

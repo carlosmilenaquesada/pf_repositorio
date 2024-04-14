@@ -11,16 +11,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
-import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.ArticlesHttpGetter;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.BarcodesHttpGetter;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.CustomersTypesHttpGetter;
+import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
-import com.example.tfg_carlosmilenaquesada.views.activities.LoginActiviy;
+import com.example.tfg_carlosmilenaquesada.views.activities.MainMenuActivity;
 import com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity;
 
 public class SalesLoaderActivity extends AppCompatActivity {
     ProgressBar pbSalesLoader;
+
+    boolean dataIsLoaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +34,15 @@ public class SalesLoaderActivity extends AppCompatActivity {
 
         pbSalesLoader = findViewById(R.id.pbSalesLoader);
 
-        DbHelper.getInstance(getApplication());
+        dataIsLoaded = false;
 
-        JsonHttpGetter jsonHttpGetterArticles = new JsonHttpGetter(getApplication(), DbHelper.TABLE_ARTICLES);
+        SqliteConnector.getInstance(getApplication());
+
+        JsonHttpGetter jsonHttpGetterArticles = new JsonHttpGetter(getApplication(), SqliteConnector.TABLE_ARTICLES);
         jsonHttpGetterArticles.getJsonFromHttp();
-        JsonHttpGetter jsonHttpGetterBarcodes = new JsonHttpGetter(getApplication(), DbHelper.TABLE_BARCODES);
+        JsonHttpGetter jsonHttpGetterBarcodes = new JsonHttpGetter(getApplication(), SqliteConnector.TABLE_BARCODES);
         jsonHttpGetterBarcodes.getJsonFromHttp();
-        JsonHttpGetter jsonHttpGetterCustomersTypes = new JsonHttpGetter(getApplication(), DbHelper.TABLE_CUSTOMERS_TYPES);
+        JsonHttpGetter jsonHttpGetterCustomersTypes = new JsonHttpGetter(getApplication(), SqliteConnector.TABLE_CUSTOMERS_TYPES);
         jsonHttpGetterCustomersTypes.getJsonFromHttp();
 
 
@@ -55,13 +56,20 @@ public class SalesLoaderActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(SalesLoaderActivity.this, SaleActivity.class));
-                    }
-                });
+
+                dataIsLoaded = true;
+                startActivity(new Intent(SalesLoaderActivity.this, SaleActivity.class));
+
             }
         }.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (dataIsLoaded) {
+            startActivity(new Intent(SalesLoaderActivity.this, MainMenuActivity.class));
+        }
+
     }
 }

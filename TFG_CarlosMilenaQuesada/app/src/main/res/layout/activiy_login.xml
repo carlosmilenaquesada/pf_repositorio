@@ -10,7 +10,7 @@
     tools:context=".views.activities.LoginActiviy">
 
     <EditText
-        android:id="@+id/etUser"
+        android:id="@+id/etUserId"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"

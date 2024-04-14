@@ -12,13 +12,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
 
-import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
+import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
 import com.example.tfg_carlosmilenaquesada.views.activities.LoginActiviy;
+import com.example.tfg_carlosmilenaquesada.views.activities.MainMenuActivity;
 
 public class LoginLoaderActivity extends AppCompatActivity {
     ProgressBar pbLoginLoader;
-
+    boolean dataIsLoaded;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +31,9 @@ public class LoginLoaderActivity extends AppCompatActivity {
             return insets;
         });
         pbLoginLoader = findViewById(R.id.pbLoginLoader);
-
-        DbHelper.getInstance(getApplication());
-        JsonHttpGetter jsonHttpGetter = new JsonHttpGetter(getApplication(), DbHelper.TABLE_USERS);
+        dataIsLoaded = false;
+        SqliteConnector.getInstance(getApplication());
+        JsonHttpGetter jsonHttpGetter = new JsonHttpGetter(getApplication(), SqliteConnector.TABLE_USERS);
         jsonHttpGetter.getJsonFromHttp();
 
         new Thread() {
@@ -45,15 +46,18 @@ public class LoginLoaderActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(LoginLoaderActivity.this, LoginActiviy.class));
-                    }
-                });
+                dataIsLoaded = true;
+                startActivity(new Intent(LoginLoaderActivity.this, LoginActiviy.class));
             }
         }.start();
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(dataIsLoaded){
+            startActivity(new Intent(LoginLoaderActivity.this, LoginActiviy.class));
+        }
 
+    }
 
 }

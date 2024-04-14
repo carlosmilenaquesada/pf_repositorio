@@ -16,13 +16,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
-import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.DbHelper;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
+import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.models.User;
 
 public class LoginActiviy extends AppCompatActivity {
     public static final String USER = "com.example.tfg_carlosmilenaquesada.mainactivity.user";
-    EditText etUser;
+    EditText etUserId;
     EditText etPassword;
     Button btLogOn;
 
@@ -40,16 +39,16 @@ public class LoginActiviy extends AppCompatActivity {
         });
 
 
-        etUser = findViewById(R.id.etUser);
+        etUserId = findViewById(R.id.etUserId);
         etPassword = findViewById(R.id.etPassword);
         btLogOn = findViewById(R.id.btLogOn);
         btLogOn.setOnClickListener(v -> {
-            if (etUser.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
+            if (etUserId.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
                 Toast.makeText(LoginActiviy.this, "Debe introducir usuario y password", Toast.LENGTH_LONG).show();
                 return;
             }
             try {
-                User user = DbHelper.getInstance(getApplication()).getValidUser(etUser.getText().toString(), etPassword.getText().toString());
+                User user = SqliteConnector.getInstance(getApplication()).getValidUser(etUserId.getText().toString(), etPassword.getText().toString());
                 if (user == null) {
                     Toast.makeText(LoginActiviy.this, "Usuario No encontrado", Toast.LENGTH_LONG).show();
                     return;

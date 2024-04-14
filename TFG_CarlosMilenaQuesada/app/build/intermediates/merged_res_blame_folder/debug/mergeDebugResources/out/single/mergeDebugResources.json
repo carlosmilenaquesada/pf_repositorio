@@ -48,6 +48,10 @@
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\layout_activity_sales_loader.xml.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\layout\\activity_sales_loader.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\drawable_ic_launcher_background.xml.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\drawable\\ic_launcher_background.xml"
     },
@@ -68,8 +72,8 @@
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activity_sales_loader.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activity_sales_loader.xml"
+        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activity_sale.xml.flat",
+        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activity_sale.xml"
     },
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\layout_activity_main_menu.xml.flat",
@@ -82,5 +86,9 @@
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\xml_data_extraction_rules.xml.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activiy_login.xml.flat",
+        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activiy_login.xml"
     }
 ]
