@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2024 a las 00:09:00
+-- Tiempo de generación: 16-04-2024 a las 21:03:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -30,7 +30,7 @@ USE `tpv`;
 --
 
 CREATE TABLE `articles` (
-  `internal_code` varchar(50) NOT NULL,
+  `article_id` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `family_id` varchar(50) DEFAULT NULL,
   `category_id` varchar(50) DEFAULT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `articles` (
 -- Volcado de datos para la tabla `articles`
 --
 
-INSERT INTO `articles` (`internal_code`, `name`, `family_id`, `category_id`, `purchase_base_price`, `sale_base_price`, `vat_id`, `stock`, `sold`, `offer_start_date`, `offer_end_date`, `offer_sale_base_price`) VALUES
+INSERT INTO `articles` (`article_id`, `name`, `family_id`, `category_id`, `purchase_base_price`, `sale_base_price`, `vat_id`, `stock`, `sold`, `offer_start_date`, `offer_end_date`, `offer_sale_base_price`) VALUES
 ('COD000001', 'Producto A', 'FAM000001', 'CAT000001', 0.000000, 15.990000, 'IVA001', 100.000000, 20.000000, '2024-04-01', '2024-04-15', 12.990000),
 ('COD000002', 'Producto B', 'FAM000002', 'CAT000002', 0.000000, 25.490000, 'IVA002', 50.000000, 10.000000, NULL, NULL, NULL),
 ('COD000003', 'Producto C', 'FAM000001', 'CAT000003', 0.000000, 9.990000, 'IVA001', 80.000000, 5.000000, NULL, NULL, NULL),
@@ -68,33 +68,53 @@ INSERT INTO `articles` (`internal_code`, `name`, `family_id`, `category_id`, `pu
 
 CREATE TABLE `barcodes` (
   `barcode` varchar(50) NOT NULL,
-  `internal_code` varchar(50) NOT NULL
+  `article_id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `barcodes`
 --
 
-INSERT INTO `barcodes` (`barcode`, `internal_code`) VALUES
+INSERT INTO `barcodes` (`barcode`, `article_id`) VALUES
 ('8999900000017', 'COD000001'),
-('8999900000024', 'COD000002'),
-('8999900000031', 'COD000003'),
-('8999900000048', 'COD000004'),
-('8999900000055', 'COD000005'),
-('8999900000062', 'COD000006'),
-('8999900000079', 'COD000007'),
-('8999900000086', 'COD000008'),
-('8999900000093', 'COD000009'),
-('8999900000109', 'COD000010');
+('8999900000024', 'COD000001'),
+('8999900000031', 'COD000001'),
+('8999900000048', 'COD000002'),
+('8999900000055', 'COD000002'),
+('8999900000062', 'COD000002'),
+('8999900000079', 'COD000003'),
+('8999900000086', 'COD000003'),
+('8999900000093', 'COD000003'),
+('8999900000109', 'COD000004');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `customers`
+-- Estructura de tabla para la tabla `customers_types`
 --
 
-CREATE TABLE `customers` (
-  `legal_taxation_id` varchar(50) NOT NULL,
+CREATE TABLE `customers_types` (
+  `customer_type_id` varchar(50) NOT NULL,
+  `description` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `customers_types`
+--
+
+INSERT INTO `customers_types` (`customer_type_id`, `description`) VALUES
+('CUST_TYPE001', 'Cliente anónimo'),
+('CUST_TYPE002', 'Cliente VIP'),
+('CUST_TYPE003', 'Cliente fiscal');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `taxable_customers`
+--
+
+CREATE TABLE `taxable_customers` (
+  `customer_tax_id` varchar(50) NOT NULL,
   `legal_company_name` varchar(50) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `legal_company_address` varchar(50) NOT NULL,
@@ -104,35 +124,55 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `customers`
+-- Volcado de datos para la tabla `taxable_customers`
 --
 
-INSERT INTO `customers` (`legal_taxation_id`, `legal_company_name`, `name`, `legal_company_address`, `legal_country`, `legal_location`, `legal_zip_code`) VALUES
+INSERT INTO `taxable_customers` (`customer_tax_id`, `legal_company_name`, `name`, `legal_company_address`, `legal_country`, `legal_location`, `legal_zip_code`) VALUES
+('A11223344', 'company 111', NULL, 'abc', 'cba', 'acb', 'bca'),
 ('A12345678', 'Tech Solutions Inc.', 'Tech Solutions', 'Calle Principal, 3', 'España', 'Sevilla', '80088'),
-('B87654321', 'Consultoría y Servicios SA de CV', 'Consultoría y Servicios', 'Av. Reforma, 555', 'España', 'Ciudad Real', '25522'),
-('C45678912', 'Soluciones Informáticas SL', 'Soluciones Informáticas', 'Calle Mayor, 22', 'España', 'Madrid', '33255'),
+('A13334455', 'Data Innovations', NULL, '852 Maple Avenue', 'Spain', 'Madrid', '28001'),
+('A14432211', 'Global Ventures', NULL, '321 Pine Lane', 'Australia', 'Sydney', '2000'),
+('A15678900', 'Tech Solutions2', NULL, '456 Elm Avenue', 'Canada', 'Toronto', 'M5A 1E1'),
+('A15678901', 'Tech Solutions', NULL, '456 Elm Avenue', 'Canada', 'Toronto', 'M5A 1E1'),
+('a15678912', 'Soluciones Informáticas SL', 'Soluciones Informáticas', 'Calle Mayor, 22', 'España', 'Madrid', '33255'),
+('A17654321', 'Consultoría y Servicios SA de CV', 'Consultoría y Servicios', 'Av. Reforma, 555', 'España', 'Ciudad Real', '25522'),
+('A18887777', 'Digital Creations', NULL, '741 Birch Street', 'France', 'Paris', '75001'),
+('A18889999', 'Future Trends', NULL, '369 Walnut Street', 'Italy', 'Rome', '00184'),
+('A19988776', 'Innovative Designs', NULL, '789 Oak Street', 'UK', 'London', 'SW1A 1AA'),
+('A19998765', 'Innovative Tech', NULL, '987 Cedar Road', 'Germany', 'Berlin', '10115'),
 ('D89123456', 'Consultoría Integral Argentina', 'Consultoría Integral', 'Av. Corrientes, 123', 'España', 'Cáceres', '55664'),
 ('E32165498', 'Services Informatiques SAS', 'Services Informatiques', 'Calle De La Paz, 7', 'España', 'Almería', '22122');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `customers_types`
+-- Estructura de tabla para la tabla `tickets`
 --
 
-CREATE TABLE `customers_types` (
-  `id` varchar(50) NOT NULL,
-  `description` varchar(50) NOT NULL
+CREATE TABLE `tickets` (
+  `ticket_id` varchar(50) NOT NULL,
+  `sale_date` date NOT NULL,
+  `customer_tax_id` varchar(50) DEFAULT NULL,
+  `ticket_status_id` varchar(50) NOT NULL,
+  `payment_method_id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `customers_types`
+-- Estructura de tabla para la tabla `tickets_lines`
 --
 
-INSERT INTO `customers_types` (`id`, `description`) VALUES
-('CUST_TYPE001', 'Cliente anónimo'),
-('CUST_TYPE002', 'Cliente VIP'),
-('CUST_TYPE003', 'Cliente fiscal');
+CREATE TABLE `tickets_lines` (
+  `ticket_line_id` varchar(50) NOT NULL,
+  `ticket_id` varchar(50) NOT NULL,
+  `article_id` varchar(50) NOT NULL,
+  `article_quantity` decimal(20,6) NOT NULL,
+  `purchase_base_price_at_sale_moment` decimal(20,6) NOT NULL,
+  `sale_base_price_at_sale_moment` decimal(20,6) NOT NULL,
+  `vat_id` varchar(50) NOT NULL,
+  `is_in_offer` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -141,7 +181,7 @@ INSERT INTO `customers_types` (`id`, `description`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` varchar(50) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `privileges` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -150,8 +190,8 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `password`, `privileges`) VALUES
-('anonimo', 'anonimo', 'basic'),
+INSERT INTO `users` (`user_id`, `password`, `privileges`) VALUES
+('anonimos', 'anonimos', 'basic'),
 ('basic', 'basic', 'basic'),
 ('carlos', 'carlos', 'admin'),
 ('manager', 'manager', 'manager'),
@@ -189,33 +229,49 @@ INSERT INTO `vats` (`vat_id`, `description`, `vat_fraction`) VALUES
 -- Indices de la tabla `articles`
 --
 ALTER TABLE `articles`
-  ADD PRIMARY KEY (`internal_code`) USING BTREE;
+  ADD PRIMARY KEY (`article_id`) USING BTREE,
+  ADD KEY `vat_id` (`vat_id`);
 
 --
 -- Indices de la tabla `barcodes`
 --
 ALTER TABLE `barcodes`
   ADD PRIMARY KEY (`barcode`),
-  ADD KEY `internal_code` (`internal_code`);
-
---
--- Indices de la tabla `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`legal_taxation_id`),
-  ADD UNIQUE KEY `legal_company_name` (`legal_company_name`);
+  ADD KEY `internal_code` (`article_id`) USING BTREE;
 
 --
 -- Indices de la tabla `customers_types`
 --
 ALTER TABLE `customers_types`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`customer_type_id`) USING BTREE;
+
+--
+-- Indices de la tabla `taxable_customers`
+--
+ALTER TABLE `taxable_customers`
+  ADD PRIMARY KEY (`customer_tax_id`) USING BTREE,
+  ADD UNIQUE KEY `legal_company_name` (`legal_company_name`);
+
+--
+-- Indices de la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`ticket_id`),
+  ADD KEY `customer_tax_id` (`customer_tax_id`);
+
+--
+-- Indices de la tabla `tickets_lines`
+--
+ALTER TABLE `tickets_lines`
+  ADD PRIMARY KEY (`ticket_line_id`),
+  ADD KEY `ticket_id` (`ticket_id`),
+  ADD KEY `vat_id` (`vat_id`);
 
 --
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indices de la tabla `vats`
@@ -228,10 +284,29 @@ ALTER TABLE `vats`
 --
 
 --
+-- Filtros para la tabla `articles`
+--
+ALTER TABLE `articles`
+  ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`vat_id`) REFERENCES `vats` (`vat_id`);
+
+--
 -- Filtros para la tabla `barcodes`
 --
 ALTER TABLE `barcodes`
-  ADD CONSTRAINT `barcodes_ibfk_1` FOREIGN KEY (`internal_code`) REFERENCES `articles` (`internal_code`);
+  ADD CONSTRAINT `barcodes_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `articles` (`article_id`);
+
+--
+-- Filtros para la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`customer_tax_id`) REFERENCES `taxable_customers` (`customer_tax_id`);
+
+--
+-- Filtros para la tabla `tickets_lines`
+--
+ALTER TABLE `tickets_lines`
+  ADD CONSTRAINT `tickets_lines_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`ticket_id`),
+  ADD CONSTRAINT `tickets_lines_ibfk_2` FOREIGN KEY (`vat_id`) REFERENCES `vats` (`vat_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

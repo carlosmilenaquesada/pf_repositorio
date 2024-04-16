@@ -86,9 +86,5 @@
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-31:\\xml_data_extraction_rules.xml.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-33:\\xml\\data_extraction_rules.xml"
-    },
-    {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-31:/layout_activiy_login.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-33:/layout/activiy_login.xml"
     }
 ]

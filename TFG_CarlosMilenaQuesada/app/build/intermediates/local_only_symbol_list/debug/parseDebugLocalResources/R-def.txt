@@ -23,6 +23,7 @@ id pbSalesLoader
 id spCustomersTypes
 id tvArticleName
 id tvGreetingUser
+id tvVISUALIZADOR
 layout activity_login_loader
 layout activity_main_menu
 layout activity_sale

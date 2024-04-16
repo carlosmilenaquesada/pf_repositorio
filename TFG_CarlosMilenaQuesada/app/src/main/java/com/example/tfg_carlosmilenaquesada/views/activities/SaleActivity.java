@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,7 +37,11 @@ import java.util.List;
 public class SaleActivity extends AppCompatActivity {
     Spinner spCustomersTypes;
     AutoCompleteTextView actvCustomerId;
+    TextView tvVISUALIZADOR;
+    EditText etndArticleQuantity;
+    EditText etArticleCode;
 
+    Button btPutArticle;
 
     JsonHttpGetter jsonHttpGetterCustomers;
     @Override
@@ -100,7 +106,46 @@ public class SaleActivity extends AppCompatActivity {
             }
         });
 
+        tvVISUALIZADOR = findViewById(R.id.tvVISUALIZADOR);
+        etndArticleQuantity = findViewById(R.id.etndArticleQuantity);
+        etArticleCode = findViewById(R.id.etArticleCode);
+        btPutArticle = findViewById(R.id.btPutArticle);
 
+        btPutArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float cantidad = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
+                String codigo = String.valueOf(etArticleCode.getText());
+                System.out.println(codigo);
+                String sentencia = "SELECT * FROM " + SqliteConnector.TABLE_ARTICLES +" WHERE article_id = '" + codigo+"'";
+
+                Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(sentencia, null);
+                System.out.println("contador: "+cursor.getCount());
+
+                float precioBase;
+                float fraccionIva;
+                String nombreArticulo;
+                //SELECT A.article_id, A.name, A.sale_base_price, V.vat_fraction, A.offer_start_date, A.offer_end_date, A.offer_sale_base_price FROM articles A LEFT OUTER JOIN vats V ON A.vat_id = V.vat_id';
+                if(cursor.moveToNext()){
+                    nombreArticulo = cursor.getString(1);
+
+                    precioBase = cursor.getFloat(2);
+                    fraccionIva = cursor.getFloat(3);
+                    float precioConIva = (precioBase + (precioBase * fraccionIva));
+                    String resultado = "nombre: " +nombreArticulo + " - " + "precio con iva: " +  precioConIva + " - " +
+                            "cantidad: " + cantidad +" - " + "total: " + precioConIva * cantidad;
+                    tvVISUALIZADOR.setText(resultado);
+                }
+
+
+
+
+
+
+
+
+            }
+        });
 
 
     }

@@ -24,7 +24,7 @@ connection.connect((err) => {
 
 
 app.get('/sync/articles', (req, res) => {
-    const sql = 'SELECT A.internal_code, A.name, A.sale_base_price, V.vat_fraction, A.offer_start_date, A.offer_end_date, A.offer_sale_base_price FROM articles A LEFT OUTER JOIN vats V ON A.vat_id = V.vat_id';
+    const sql = 'SELECT A.article_id, A.name, A.sale_base_price, V.vat_fraction, A.offer_start_date, A.offer_end_date, A.offer_sale_base_price FROM articles A LEFT OUTER JOIN vats V ON A.vat_id = V.vat_id';
 
     connection.query(sql, (err, result) => {
         if (err) {
@@ -49,8 +49,8 @@ app.get('/sync/barcodes', (req, res) => {
     });
 });
 
-app.get('/sync/customers', (req, res) => {
-    const sql = 'SELECT * FROM customers';
+app.get('/sync/taxable_customers', (req, res) => {
+    const sql = 'SELECT * FROM taxable_customers';
 
     connection.query(sql, (err, result) => {
         if (err) {

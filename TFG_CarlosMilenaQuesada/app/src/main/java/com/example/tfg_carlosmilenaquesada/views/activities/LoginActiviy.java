@@ -41,6 +41,8 @@ public class LoginActiviy extends AppCompatActivity {
 
         etUserId = findViewById(R.id.etUserId);
         etPassword = findViewById(R.id.etPassword);
+        etUserId.setText("super");
+        etPassword.setText("super");
         btLogOn = findViewById(R.id.btLogOn);
         btLogOn.setOnClickListener(v -> {
             if (etUserId.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
