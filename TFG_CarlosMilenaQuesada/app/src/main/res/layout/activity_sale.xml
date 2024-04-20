@@ -68,13 +68,39 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvArticlesOnTicket"
         android:layout_width="match_parent"
-        android:layout_height="411dp" />
+        android:layout_height="316dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvTitleTicketTotalAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total" />
+
+        <TextView
+            android:id="@+id/tvTicketTotalAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnPayTicket"
+        android:id="@+id/btPayTicket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pagar" />
+
+    <Button
+        android:id="@+id/btReserveTicket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reservar" />
 
 
 </LinearLayout>

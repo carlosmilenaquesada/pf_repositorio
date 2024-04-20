@@ -20,7 +20,7 @@ import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.Sqli
 import com.example.tfg_carlosmilenaquesada.models.User;
 
 public class LoginActiviy extends AppCompatActivity {
-    public static final String USER = "com.example.tfg_carlosmilenaquesada.mainactivity.user";
+    public static final String USER = "com.example.tfg_carlosmilenaquesada.views.activities.loginactiviy.user";
     EditText etUserId;
     EditText etPassword;
     Button btLogOn;

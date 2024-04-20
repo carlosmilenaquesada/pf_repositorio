@@ -51,6 +51,12 @@
         android:theme="@style/Theme.TFG_CarlosMilenaQuesada"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.ReserveActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:clearTaskOnLaunch="true"
             android:screenOrientation="fullSensor"

@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaleActivity extends AppCompatActivity {
+    public static final String TICKET_AMOUNT = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.ticket_amount";
     Spinner spCustomersTypes;
     AutoCompleteTextView actvCustomerId;
 
@@ -56,7 +57,8 @@ public class SaleActivity extends AppCompatActivity {
     Button btPutArticle;
 
     RecyclerView rvArticlesOnTicket;
-
+    TextView tvTicketTotalAmount;
+    Button btPayTicket;
     JsonHttpGetter jsonHttpGetterCustomers;
 
     @Override
@@ -69,6 +71,11 @@ public class SaleActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        tvTicketTotalAmount = findViewById(R.id.tvTicketTotalAmount);
+        if(tvTicketTotalAmount.getText().toString().isEmpty()){
+            tvTicketTotalAmount.setText("0.00");
+        }
+
         spCustomersTypes = findViewById(R.id.spCustomersTypes);
         actvCustomerId = findViewById(R.id.actvCustomerId);
         Cursor cursorCustomersTypes = SqliteConnector.getInstance(getApplication()).getReadableDatabase().rawQuery("SELECT description as _id FROM " + TABLE_CUSTOMERS_TYPES, null);
@@ -155,19 +162,13 @@ public class SaleActivity extends AppCompatActivity {
 
         etndArticleQuantity = findViewById(R.id.etndArticleQuantity);
         etArticleCode = findViewById(R.id.etArticleCode);
+
+
         btPutArticle = findViewById(R.id.btPutArticle);
-
-        rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
-        rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
-        rvArticlesOnTicket.setAdapter(
-                new ArticleLineAdapter()
-        );
-        new ItemTouchHelper(((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
-
         btPutArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                float cantidad = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
+
                 String codigo = String.valueOf(etArticleCode.getText());
                 String sentencia = "SELECT A.* FROM " + SqliteConnector.TABLE_ARTICLES + " A JOIN " + SqliteConnector.TABLE_BARCODES + " B ON A.article_id = B.article_id" +
                         " AND B.barcode = '" + codigo + "'";
@@ -175,10 +176,14 @@ public class SaleActivity extends AppCompatActivity {
                 Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(sentencia, null);
 
                 if (cursor.moveToNext()) {
-                    ArticleLine articleLine = new ArticleLine(cursor.getString(1), cursor.getFloat(2), cantidad, (cursor.getFloat(2) * cantidad));
+                    float quantity = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
+                    float totalLine = (cursor.getFloat(2) * quantity);
+                    ArticleLine articleLine = new ArticleLine(cursor.getString(1), cursor.getFloat(2), quantity, totalLine);
                     System.out.println(articleLine);
                     ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).addArticleLine(articleLine, rvArticlesOnTicket.getAdapter().getItemCount());
-                    System.out.println(articleLine);
+                    float totalAmount = Float.parseFloat(String.valueOf(tvTicketTotalAmount.getText())) + totalLine;
+                    tvTicketTotalAmount.setText(String.valueOf(totalAmount));
+
                 } else {
                     Toast.makeText(SaleActivity.this, "El código proporcionado no pertenece a ningún artículo", Toast.LENGTH_LONG).show();
                 }
@@ -186,10 +191,32 @@ public class SaleActivity extends AppCompatActivity {
             }
         });
 
+        rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
+        rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
+        rvArticlesOnTicket.setAdapter(
+                new ArticleLineAdapter()
+        );
+        //Se usa para poder borrar líneas de ticket arrastrándolas a la izquierda
+        new ItemTouchHelper(((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
+
+
+
+        btPayTicket = findViewById(R.id.btPayTicket);
+        btPayTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SaleActivity.this, PaymentActivity.class);
+                intent.putExtra(TICKET_AMOUNT, tvTicketTotalAmount.getText());
+                startActivity(intent);
+            }
+        });
 
     }
 
+
+
     @Override
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {
