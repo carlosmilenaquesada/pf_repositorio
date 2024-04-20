@@ -59,21 +59,16 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvArticleName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre artículo" />
-
     <Button
         android:id="@+id/btPutArticle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Insertar" />
 
-    <TextView
-        android:id="@+id/tvVISUALIZADOR"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvArticlesOnTicket"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>

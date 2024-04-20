@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvItemArticleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre artículo"
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/tvItemArticleUnitPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio unidad"
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/tvItemArticleQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad"
+        android:textColorHint="#546E7A" />
+
+    <TextView
+        android:id="@+id/tvItemLineTotalAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Total línea"
+        android:textColorHint="#546E7A" />
+
+</LinearLayout>

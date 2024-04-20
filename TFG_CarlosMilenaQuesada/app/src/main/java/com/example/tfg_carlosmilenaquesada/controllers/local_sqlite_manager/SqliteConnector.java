@@ -21,7 +21,7 @@ public class SqliteConnector extends SQLiteOpenHelper {
     //SQLite solo permite tipos INTEGER, REAL, TEXT, BLOB, NUMERIC y NULL,
     //sin necesidad de especificar ni longuitud ni precisión.
     private static SqliteConnector sqliteConnector;
-    public static final String NODE_SERVER = "http://192.168.0.3:3000/sync/";
+    public static final String NODE_SERVER = "http://192.168.0.4:3000/sync/";
     private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "tpv.db";
     public static final String TABLE_ARTICLES = "articles";

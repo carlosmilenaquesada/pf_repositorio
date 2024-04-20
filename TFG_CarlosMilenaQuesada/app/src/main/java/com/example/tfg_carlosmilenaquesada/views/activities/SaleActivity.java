@@ -21,14 +21,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
+import com.example.tfg_carlosmilenaquesada.models.ArticleLine;
+import com.example.tfg_carlosmilenaquesada.models.ArticleLineAdapter;
 import com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity;
 
 import java.util.ArrayList;
@@ -37,13 +43,16 @@ import java.util.List;
 public class SaleActivity extends AppCompatActivity {
     Spinner spCustomersTypes;
     AutoCompleteTextView actvCustomerId;
-    TextView tvVISUALIZADOR;
+
     EditText etndArticleQuantity;
     EditText etArticleCode;
 
     Button btPutArticle;
 
+    RecyclerView rvArticlesOnTicket;
+
     JsonHttpGetter jsonHttpGetterCustomers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +68,7 @@ public class SaleActivity extends AppCompatActivity {
         Cursor cursorCustomersTypes = SqliteConnector.getInstance(getApplication()).getReadableDatabase().rawQuery("SELECT description as _id FROM " + TABLE_CUSTOMERS_TYPES, null);
         String[] fromColumns = {"_id"};
         int[] toViews = {android.R.id.text1};
-        CursorAdapter cursorAdapterCustomersTypes = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, cursorCustomersTypes, fromColumns, toViews, 0);
+        CursorAdapter cursorAdapterCustomersTypes = new SimpleCursorAdapter(SaleActivity.this, android.R.layout.simple_spinner_item, cursorCustomersTypes, fromColumns, toViews, 0);
         spCustomersTypes.setAdapter(cursorAdapterCustomersTypes);
         spCustomersTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -101,48 +110,38 @@ public class SaleActivity extends AppCompatActivity {
                     }.start();
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        tvVISUALIZADOR = findViewById(R.id.tvVISUALIZADOR);
+
         etndArticleQuantity = findViewById(R.id.etndArticleQuantity);
         etArticleCode = findViewById(R.id.etArticleCode);
         btPutArticle = findViewById(R.id.btPutArticle);
+
+        rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
+        rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
+        rvArticlesOnTicket.setAdapter(
+                new ArticleLineAdapter()
+        );
+        new ItemTouchHelper(((ArticleLineAdapter)rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
 
         btPutArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 float cantidad = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
                 String codigo = String.valueOf(etArticleCode.getText());
-                System.out.println(codigo);
-                String sentencia = "SELECT * FROM " + SqliteConnector.TABLE_ARTICLES +" WHERE article_id = '" + codigo+"'";
-
+                String sentencia = "SELECT * FROM " + SqliteConnector.TABLE_ARTICLES + " WHERE article_id = '" + codigo + "'";
                 Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(sentencia, null);
-                System.out.println("contador: "+cursor.getCount());
 
-                float precioBase;
-                float fraccionIva;
-                String nombreArticulo;
-                //SELECT A.article_id, A.name, A.sale_base_price, V.vat_fraction, A.offer_start_date, A.offer_end_date, A.offer_sale_base_price FROM articles A LEFT OUTER JOIN vats V ON A.vat_id = V.vat_id';
-                if(cursor.moveToNext()){
-                    nombreArticulo = cursor.getString(1);
+                if (cursor.moveToNext()) {
 
-                    precioBase = cursor.getFloat(2);
-                    fraccionIva = cursor.getFloat(3);
-                    float precioConIva = (precioBase + (precioBase * fraccionIva));
-                    String resultado = "nombre: " +nombreArticulo + " - " + "precio con iva: " +  precioConIva + " - " +
-                            "cantidad: " + cantidad +" - " + "total: " + precioConIva * cantidad;
-                    tvVISUALIZADOR.setText(resultado);
+                    ArticleLine articleLine = new ArticleLine(cursor.getString(1), cursor.getFloat(2), cantidad, (cursor.getFloat(2) * cantidad));
+                    System.out.println(articleLine);
+                    ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).addArticleLine(articleLine, rvArticlesOnTicket.getAdapter().getItemCount());
                 }
-
-
-
-
-
-
-
 
             }
         });
