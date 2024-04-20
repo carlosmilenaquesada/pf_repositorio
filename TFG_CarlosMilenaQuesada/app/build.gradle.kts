@@ -36,6 +36,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.volley)
     implementation(libs.recyclerview)
+    //implementación para usar la cámara como lector codigo barras
+    implementation(libs.zxing.android.embedded)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

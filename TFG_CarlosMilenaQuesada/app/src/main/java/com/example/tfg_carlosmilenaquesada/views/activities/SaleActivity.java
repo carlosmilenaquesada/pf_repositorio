@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -36,7 +37,11 @@ import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.J
 import com.example.tfg_carlosmilenaquesada.models.ArticleLine;
 import com.example.tfg_carlosmilenaquesada.models.ArticleLineAdapter;
 import com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +52,7 @@ public class SaleActivity extends AppCompatActivity {
     EditText etndArticleQuantity;
     EditText etArticleCode;
 
+    Button btOpenScanner;
     Button btPutArticle;
 
     RecyclerView rvArticlesOnTicket;
@@ -115,6 +121,36 @@ public class SaleActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        btOpenScanner = findViewById(R.id.btOpenScanner);
+        IntentIntegrator intentIntegrator = new IntentIntegrator(SaleActivity.this);
+        //Define el tipo de código de de barras que se pretenden scanear.
+        //En este caso, voy a elegir códigos de barras PRODUCT_CODE_TYPES(los que
+        // normalmente
+        // usan los productos comerciales UPC_A, UPC_E, EAN_8, EAN_13, RSS_14)
+        intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.PRODUCT_CODE_TYPES);
+        //Promp en la pantalla de lector
+        intentIntegrator.setPrompt("Lector - CDP");
+        //Cámara que va a usarse (delantera, trasera, etc)
+        //0 es trasera
+        intentIntegrator.setCameraId(0);
+        //beep de sonido al escanear
+        intentIntegrator.setBeepEnabled(true);
+        //
+        intentIntegrator.setBarcodeImageEnabled(true);
+        //bloquea/desbloquea la orientación del teléfono (he tenido que agregar lo
+        // siguiente al manifest:)
+				/*  <activity
+					android:name="com.journeyapps.barcodescanner.CaptureActivity"
+					android:screenOrientation="fullSensor"
+					tools:replace="screenOrientation" />* */
+        intentIntegrator.setOrientationLocked(false);
+        btOpenScanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //inicializa el scaneo
+                intentIntegrator.initiateScan();
+            }
+        });
 
 
         etndArticleQuantity = findViewById(R.id.etndArticleQuantity);
@@ -126,27 +162,42 @@ public class SaleActivity extends AppCompatActivity {
         rvArticlesOnTicket.setAdapter(
                 new ArticleLineAdapter()
         );
-        new ItemTouchHelper(((ArticleLineAdapter)rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
+        new ItemTouchHelper(((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
 
         btPutArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 float cantidad = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
                 String codigo = String.valueOf(etArticleCode.getText());
-                String sentencia = "SELECT * FROM " + SqliteConnector.TABLE_ARTICLES + " WHERE article_id = '" + codigo + "'";
+                String sentencia = "SELECT A.* FROM " + SqliteConnector.TABLE_ARTICLES + " A JOIN " + SqliteConnector.TABLE_BARCODES + " B ON A.article_id = B.article_id" +
+                        " AND B.barcode = '" + codigo + "'";
+                System.out.println(sentencia);
                 Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(sentencia, null);
 
                 if (cursor.moveToNext()) {
-
                     ArticleLine articleLine = new ArticleLine(cursor.getString(1), cursor.getFloat(2), cantidad, (cursor.getFloat(2) * cantidad));
                     System.out.println(articleLine);
                     ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).addArticleLine(articleLine, rvArticlesOnTicket.getAdapter().getItemCount());
+                    System.out.println(articleLine);
+                } else {
+                    Toast.makeText(SaleActivity.this, "El código proporcionado no pertenece a ningún artículo", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (intentResult != null) {
+            if (intentResult.getContents() != null) {
+                etArticleCode.setText(intentResult.getContents());
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

@@ -13,6 +13,7 @@ id btNewSale
 id btOpenScanner
 id btPutArticle
 id btSalesManagement
+id btnPayTicket
 id etArticleCode
 id etPassword
 id etUserId
