@@ -1,5 +1,5 @@
-com.example.tfg_carlosmilenaquesada.test.app-core-1.5.0-0 C:\Users\Administrador\.gradle\caches\transforms-3\4a0e837928c9569328ef2aa088cedb88\transformed\core-1.5.0\res
-com.example.tfg_carlosmilenaquesada.test.app-annotation-experimental-1.3.0-1 C:\Users\Administrador\.gradle\caches\transforms-3\501891fdaa7784dbf373cfe082bb6d68\transformed\annotation-experimental-1.3.0\res
+com.example.tfg_carlosmilenaquesada.test.app-annotation-experimental-1.3.0-0 C:\Users\Administrador\.gradle\caches\transforms-3\38966ea7f1cefe02f63331067211c365\transformed\annotation-experimental-1.3.0\res
+com.example.tfg_carlosmilenaquesada.test.app-core-1.5.0-1 C:\Users\Administrador\.gradle\caches\transforms-3\c2803a8477202c551fe1b836afbced56\transformed\core-1.5.0\res
 com.example.tfg_carlosmilenaquesada.test.app-androidTest-2 C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\build\generated\res\resValues\androidTest\debug
 com.example.tfg_carlosmilenaquesada.test.app-mergeDebugAndroidTestResources-3 C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
 com.example.tfg_carlosmilenaquesada.test.app-mergeDebugAndroidTestResources-4 C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir

@@ -38,7 +38,6 @@ public class LoginActiviy extends AppCompatActivity {
             return insets;
         });
 
-
         etUserId = findViewById(R.id.etUserId);
         etPassword = findViewById(R.id.etPassword);
         etUserId.setText("super");

@@ -5,6 +5,7 @@ color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 id actvCustomerId
+id btCalculateChange
 id btCashDeskManagement
 id btCompleteCashPayment
 id btCustomersManagement
@@ -16,8 +17,10 @@ id btOpenScanner
 id btPayTicket
 id btPutArticle
 id btReserveTicket
+id btResetCashPaymentForm
 id btSalesManagement
 id etArticleCode
+id etCash
 id etPassword
 id etUserId
 id etndArticleQuantity
@@ -27,7 +30,6 @@ id pbSalesLoader
 id rvArticlesOnTicket
 id spCustomersTypes
 id tvCardPaymentHeader
-id tvCash
 id tvCashPaymentHeader
 id tvCashTitle
 id tvChange

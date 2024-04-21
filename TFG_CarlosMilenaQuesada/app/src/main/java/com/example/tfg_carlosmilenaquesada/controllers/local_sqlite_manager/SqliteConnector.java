@@ -22,7 +22,7 @@ public class SqliteConnector extends SQLiteOpenHelper {
     //sin necesidad de especificar ni longuitud ni precisión.
     private static SqliteConnector sqliteConnector;
     public static final String NODE_SERVER = "http://192.168.0.4:3000/sync/";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "tpv.db";
     public static final String TABLE_ARTICLES = "articles";
     public static final String TABLE_BARCODES = "barcodes";
@@ -84,14 +84,17 @@ public class SqliteConnector extends SQLiteOpenHelper {
                 "ticket_status_id NOT NULL, " +
                 "payment_method_id NOT NULL" +
                 ")");
+
         db.execSQL("CREATE TABLE " + TABLE_TICKETS_LINES + "(" +
                 "ticket_line_id TEXT PRIMARY KEY NOT NULL," +
                 "ticket_id TEXT NOT NULL, " +
                 "article_id TEXT NOT NULL, " +
                 "article_quantity REAL NOT NULL, " +
-                "sale_base_price_at_sale_moment TEXT NOT NULL, " +
+                "sale_base_price_at_sale_moment REAL NOT NULL, " +
+                "is_in_offer TEXT NOT NULL, " +
                 "vat_fraction REAL NOT NULL " +
                 ")");
+
         db.execSQL("CREATE TABLE " + TABLE_USERS + "(" +
                 "user_id TEXT PRIMARY KEY NOT NULL," +
                 "password TEXT NOT NULL, " +
@@ -106,6 +109,7 @@ public class SqliteConnector extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CUSTOMERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CUSTOMERS_TYPES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TICKETS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TICKETS_LINES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
     }

@@ -46,11 +46,15 @@
             android:layout_weight="1"
             android:text="Entregado" />
 
-        <TextView
-            android:id="@+id/tvCash"
+        <EditText
+            android:id="@+id/etCash"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="Entregado"
+            android:inputType="number|numberDecimal"
+            android:textSize="24sp" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,13 +73,35 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btCompleteCashPayment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Completar pago efectivo" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btCalculateChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Calcular cambio" />
+
+        <Button
+            android:id="@+id/btResetCashPaymentForm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Borrar valores" />
+
+        <Button
+            android:id="@+id/btCompleteCashPayment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Realizar cobro" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

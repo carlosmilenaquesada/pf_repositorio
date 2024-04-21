@@ -47,6 +47,7 @@ import java.util.List;
 
 public class SaleActivity extends AppCompatActivity {
     public static final String TICKET_AMOUNT = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.ticket_amount";
+    public static final String ARTICLE_LINES_LIST = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.article_lines_list";
     Spinner spCustomersTypes;
     AutoCompleteTextView actvCustomerId;
 
@@ -71,13 +72,22 @@ public class SaleActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         tvTicketTotalAmount = findViewById(R.id.tvTicketTotalAmount);
-        if(tvTicketTotalAmount.getText().toString().isEmpty()){
+        spCustomersTypes = findViewById(R.id.spCustomersTypes);
+        actvCustomerId = findViewById(R.id.actvCustomerId);
+        btOpenScanner = findViewById(R.id.btOpenScanner);
+        etndArticleQuantity = findViewById(R.id.etndArticleQuantity);
+        etArticleCode = findViewById(R.id.etArticleCode);
+        btPutArticle = findViewById(R.id.btPutArticle);
+        rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
+        btPayTicket = findViewById(R.id.btPayTicket);
+
+        if (tvTicketTotalAmount.getText().toString().isEmpty()) {
             tvTicketTotalAmount.setText("0.00");
         }
 
-        spCustomersTypes = findViewById(R.id.spCustomersTypes);
-        actvCustomerId = findViewById(R.id.actvCustomerId);
+
         Cursor cursorCustomersTypes = SqliteConnector.getInstance(getApplication()).getReadableDatabase().rawQuery("SELECT description as _id FROM " + TABLE_CUSTOMERS_TYPES, null);
         String[] fromColumns = {"_id"};
         int[] toViews = {android.R.id.text1};
@@ -128,7 +138,7 @@ public class SaleActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        btOpenScanner = findViewById(R.id.btOpenScanner);
+
         IntentIntegrator intentIntegrator = new IntentIntegrator(SaleActivity.this);
         //Define el tipo de código de de barras que se pretenden scanear.
         //En este caso, voy a elegir códigos de barras PRODUCT_CODE_TYPES(los que
@@ -160,30 +170,29 @@ public class SaleActivity extends AppCompatActivity {
         });
 
 
-        etndArticleQuantity = findViewById(R.id.etndArticleQuantity);
-        etArticleCode = findViewById(R.id.etArticleCode);
-
-
-        btPutArticle = findViewById(R.id.btPutArticle);
         btPutArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String barcode = String.valueOf(etArticleCode.getText());
+                String query = "SELECT A.* FROM " + SqliteConnector.TABLE_ARTICLES + " A JOIN " + SqliteConnector.TABLE_BARCODES + " B ON A.article_id = B.article_id" +
+                        " AND B.barcode = '" + barcode + "'";
 
-                String codigo = String.valueOf(etArticleCode.getText());
-                String sentencia = "SELECT A.* FROM " + SqliteConnector.TABLE_ARTICLES + " A JOIN " + SqliteConnector.TABLE_BARCODES + " B ON A.article_id = B.article_id" +
-                        " AND B.barcode = '" + codigo + "'";
-                System.out.println(sentencia);
-                Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(sentencia, null);
+                Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(query, null);
 
                 if (cursor.moveToNext()) {
+                    String articleId = cursor.getString(0);
+                    String name = cursor.getString(1);
+                    float unitPrice = cursor.getFloat(2);///hacer por oferta
                     float quantity = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
+                    float vatFraction;
+                    boolean isInOffer;
                     float totalLine = (cursor.getFloat(2) * quantity);
-                    ArticleLine articleLine = new ArticleLine(cursor.getString(1), cursor.getFloat(2), quantity, totalLine);
-                    System.out.println(articleLine);
+
+                    ArticleLine articleLine = new ArticleLine(name, unitPrice, quantity, totalLine);
+
                     ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).addArticleLine(articleLine, rvArticlesOnTicket.getAdapter().getItemCount());
                     float totalAmount = Float.parseFloat(String.valueOf(tvTicketTotalAmount.getText())) + totalLine;
                     tvTicketTotalAmount.setText(String.valueOf(totalAmount));
-
                 } else {
                     Toast.makeText(SaleActivity.this, "El código proporcionado no pertenece a ningún artículo", Toast.LENGTH_LONG).show();
                 }
@@ -191,7 +200,7 @@ public class SaleActivity extends AppCompatActivity {
             }
         });
 
-        rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
+
         rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
         rvArticlesOnTicket.setAdapter(
                 new ArticleLineAdapter()
@@ -200,19 +209,17 @@ public class SaleActivity extends AppCompatActivity {
         new ItemTouchHelper(((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
 
 
-
-        btPayTicket = findViewById(R.id.btPayTicket);
         btPayTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SaleActivity.this, PaymentActivity.class);
-                intent.putExtra(TICKET_AMOUNT, tvTicketTotalAmount.getText());
+                intent.putExtra(TICKET_AMOUNT, Float.parseFloat(tvTicketTotalAmount.getText().toString()));
+                intent.putExtra(ARTICLE_LINES_LIST, ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getArticleLinesList());
                 startActivity(intent);
             }
         });
 
     }
-
 
 
     @Override

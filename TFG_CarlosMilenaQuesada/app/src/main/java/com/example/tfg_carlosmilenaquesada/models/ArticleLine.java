@@ -1,10 +1,14 @@
 package com.example.tfg_carlosmilenaquesada.models;
 
-public class ArticleLine {
+import java.io.Serializable;
+
+public class ArticleLine implements Serializable{
     String name;
     float unitPrice;
     float quantity;
     float totalLineAmount;
+
+
 
     public ArticleLine() {
     }

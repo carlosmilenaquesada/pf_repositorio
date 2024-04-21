@@ -1,10 +1,12 @@
-POR HACER-----------------------------------------------------------------
---quitar el sujerencia de contraseña o usuario del miniteclado del teléfono (ese que es como un portapapeles)
+COMPROBAR -----------------------------------------------------------------
+-- quitar el sujerencia de contraseña o usuario del miniteclado del teléfono (ese que es como un portapapeles)
+-- acotar todos los input text de dinero de los activities de android  para que admintan 2 decimales máximo y una longitud máxima con respecto a la base de datos. El resto de los input también tiene que estar acotados con respecto a la base de datos
+HACIENDO ------------------------------------------------------------------
+-- guardar tickets en TABLE_TICKETS de sqlite:
+	- pagados
+	- aparcados
 
-HACIENDO------------------------------------------------------------------
-
-
-HECHO---------------------------------------------------------------------
+HECHO ---------------------------------------------------------------------
 
 
 PROBAR-------------------------------------------------------------------

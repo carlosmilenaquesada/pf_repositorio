@@ -3194,6 +3194,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btCalculateChange
 id btCashDeskManagement
 id btCompleteCashPayment
 id btCustomersManagement
@@ -3205,6 +3206,7 @@ id btOpenScanner
 id btPayTicket
 id btPutArticle
 id btReserveTicket
+id btResetCashPaymentForm
 id btSalesManagement
 id buttonPanel
 id cache_measures
@@ -3289,6 +3291,7 @@ id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id etArticleCode
+id etCash
 id etPassword
 id etUserId
 id etndArticleQuantity
@@ -3595,7 +3598,6 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvCardPaymentHeader
-id tvCash
 id tvCashPaymentHeader
 id tvCashTitle
 id tvChange

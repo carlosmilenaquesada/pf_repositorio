@@ -40,6 +40,7 @@ public class ArticleLineAdapter extends RecyclerView.Adapter<ArticleLineAdapter.
 
     }
 
+
     @NonNull
     @Override
     public ArticleLineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,14 +66,13 @@ public class ArticleLineAdapter extends RecyclerView.Adapter<ArticleLineAdapter.
         return articleLinesList.size();
     }
 
-    public ArrayList<ArticleLine> getArticleLinesList() {
-        return this.getArticleLinesList();
-    }
-
     public SimpleCallback getSimpleCallback() {
         return simpleCallback;
     }
 
+public ArrayList<ArticleLine> getArticleLinesList(){
+        return this.articleLinesList;
+}
 
     public void removeArticleLine(int position) {
         articleLinesList.remove(position);
