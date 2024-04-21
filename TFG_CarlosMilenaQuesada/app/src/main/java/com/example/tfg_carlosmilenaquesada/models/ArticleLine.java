@@ -2,22 +2,32 @@ package com.example.tfg_carlosmilenaquesada.models;
 
 import java.io.Serializable;
 
-public class ArticleLine implements Serializable{
-    String name;
-    float unitPrice;
-    float quantity;
-    float totalLineAmount;
-
-
+public class ArticleLine implements Serializable {
+    private String articleId;
+    private String name;
+    private float unitBasePrice;
+    private boolean isInOffer;
+    private float quantity;
+    private float vatFraction;
 
     public ArticleLine() {
     }
 
-    public ArticleLine(String name, float unitPrice, float quantity, float totalLineAmount) {
+    public ArticleLine(String articleId, String name, float unitBasePrice, boolean isInOffer, float quantity, float vatFraction) {
+        this.articleId = articleId;
         this.name = name;
-        this.unitPrice = unitPrice;
+        this.unitBasePrice = unitBasePrice;
+        this.isInOffer = isInOffer;
         this.quantity = quantity;
-        this.totalLineAmount = totalLineAmount;
+        this.vatFraction = vatFraction;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public String getName() {
@@ -28,12 +38,20 @@ public class ArticleLine implements Serializable{
         this.name = name;
     }
 
-    public float getUnitPrice() {
-        return unitPrice;
+    public float getUnitBasePrice() {
+        return unitBasePrice;
     }
 
-    public void setUnitPrice(float unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setUnitBasePrice(float unitBasePrice) {
+        this.unitBasePrice = unitBasePrice;
+    }
+
+    public boolean isInOffer() {
+        return isInOffer;
+    }
+
+    public void setInOffer(boolean inOffer) {
+        isInOffer = inOffer;
     }
 
     public float getQuantity() {
@@ -44,21 +62,24 @@ public class ArticleLine implements Serializable{
         this.quantity = quantity;
     }
 
-    public float getTotalLineAmount() {
-        return totalLineAmount;
+    public float getVatFraction() {
+        return vatFraction;
     }
 
-    public void setTotalLineAmount(float totalLineAmount) {
-        this.totalLineAmount = totalLineAmount;
+    public void setVatFraction(float vatFraction) {
+        this.vatFraction = vatFraction;
     }
+
 
     @Override
     public String toString() {
         return "ArticleLine{" +
-                "name='" + name + '\'' +
-                ", unitPrice=" + unitPrice +
+                "articleId='" + articleId + '\'' +
+                ", name='" + name + '\'' +
+                ", unitBasePrice=" + unitBasePrice +
+                ", isInOffer=" + isInOffer +
                 ", quantity=" + quantity +
-                ", totalLineAmount=" + totalLineAmount +
+                ", vatFraction=" + vatFraction +
                 '}';
     }
 }

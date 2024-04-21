@@ -6,6 +6,7 @@ import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manag
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -42,6 +44,10 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,6 +177,7 @@ public class SaleActivity extends AppCompatActivity {
 
 
         btPutArticle.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
                 String barcode = String.valueOf(etArticleCode.getText());
@@ -180,18 +187,47 @@ public class SaleActivity extends AppCompatActivity {
                 Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(query, null);
 
                 if (cursor.moveToNext()) {
+                    /*"article_id TEXT PRIMARY KEY NOT NULL, " +
+                            "name TEXT  NOT NULL, " +
+                            "sale_base_price REAL NOT NULL," +
+                            "vat_fraction REAL NOT NULL," +
+                            "offer_start_date TEXT," +
+                            "offer_end_date TEXT," +
+                            "offer_sale_base_price REAL" +
+                            ")");*/
+
+
                     String articleId = cursor.getString(0);
                     String name = cursor.getString(1);
-                    float unitPrice = cursor.getFloat(2);///hacer por oferta
-                    float quantity = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
-                    float vatFraction;
-                    boolean isInOffer;
-                    float totalLine = (cursor.getFloat(2) * quantity);
 
-                    ArticleLine articleLine = new ArticleLine(name, unitPrice, quantity, totalLine);
+                    Float unitBasePrice = null;
+                    boolean isInOffer = false;
+                    String offerStartDate = cursor.getString(4);
+                    String offerEndDate = cursor.getString(5);
+                    if (offerStartDate != null && offerEndDate != null) {
+                        Instant startDateTime = Instant.parse(offerStartDate);
+                        Instant endDateTime = Instant.parse(offerEndDate);
+                        LocalDateTime currentDateTime = LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+                        if ((currentDateTime.isEqual(LocalDateTime.ofInstant(startDateTime, ZoneId.systemDefault())) || currentDateTime.isAfter(LocalDateTime.ofInstant(startDateTime, ZoneId.systemDefault())))
+                                && (currentDateTime.isEqual(LocalDateTime.ofInstant(endDateTime, ZoneId.systemDefault())) || currentDateTime.isBefore(LocalDateTime.ofInstant(endDateTime, ZoneId.systemDefault())))) {
+                            unitBasePrice = cursor.getFloat(6);
+                            isInOffer = true;
+                        }
+                    }
+                    if (unitBasePrice == null) {
+                        unitBasePrice = cursor.getFloat(2);
+                    }
+                    float quantity = Float.parseFloat(String.valueOf(etndArticleQuantity.getText()));
+
+                    float vatFraction = cursor.getFloat(3);
+
+
+
+                    ArticleLine articleLine = new ArticleLine(articleId, name, unitBasePrice, isInOffer, quantity, vatFraction);
 
                     ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).addArticleLine(articleLine, rvArticlesOnTicket.getAdapter().getItemCount());
-                    float totalAmount = Float.parseFloat(String.valueOf(tvTicketTotalAmount.getText())) + totalLine;
+                    float totalLineAmount = (unitBasePrice * (1 + vatFraction)) * quantity;
+                    float totalAmount = Float.parseFloat(String.valueOf(tvTicketTotalAmount.getText())) + totalLineAmount;
                     tvTicketTotalAmount.setText(String.valueOf(totalAmount));
                 } else {
                     Toast.makeText(SaleActivity.this, "El código proporcionado no pertenece a ningún artículo", Toast.LENGTH_LONG).show();
@@ -207,8 +243,6 @@ public class SaleActivity extends AppCompatActivity {
         );
         //Se usa para poder borrar líneas de ticket arrastrándolas a la izquierda
         new ItemTouchHelper(((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
-
-
         btPayTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

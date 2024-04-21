@@ -36,9 +36,17 @@ id tvChange
 id tvChangeTitle
 id tvGreetingUser
 id tvItemArticleName
+id tvItemArticleNameTitle
 id tvItemArticleQuantity
+id tvItemArticleQuantityTitle
 id tvItemArticleUnitPrice
+id tvItemArticleUnitPriceTitle
+id tvItemArticleUnitPriceWithVat
+id tvItemArticleUnitPriceWithVatTitle
+id tvItemLineIsInOffer
+id tvItemLineIsInOfferTitle
 id tvItemLineTotalAmount
+id tvItemLineTotalAmountTitle
 id tvTicketTotalAmount
 id tvTitleTicketTotalAmount
 id tvTotal

@@ -1,6 +1,8 @@
 COMPROBAR -----------------------------------------------------------------
 -- quitar el sujerencia de contraseña o usuario del miniteclado del teléfono (ese que es como un portapapeles)
 -- acotar todos los input text de dinero de los activities de android  para que admintan 2 decimales máximo y una longitud máxima con respecto a la base de datos. El resto de los input también tiene que estar acotados con respecto a la base de datos
+
+--encapsular todos los campos de las clases (alugnas están public o no puestas, que eso es public)
 HACIENDO ------------------------------------------------------------------
 -- guardar tickets en TABLE_TICKETS de sqlite:
 	- pagados
@@ -13,3 +15,5 @@ PROBAR-------------------------------------------------------------------
 --crear dos clientes desde la aplicación con el mismo nombre legal (la pk es el cif, por eso he puesto que el legal_company_name sea unique, 
 ya que la razón social debe ser única al menos en el ámbito de un país (quizás deba poner legal_company_name + legal_country juntos para
 hacer una unique compuesta por esos dos elementos))
+
+--poner un cliente con nombre null, creo que da fallo (de hecho, cualquier campo null en la tabal sqlite dará excepción cuando se le haga un get)

@@ -52,10 +52,11 @@ public class ArticleLineAdapter extends RecyclerView.Adapter<ArticleLineAdapter.
     public void onBindViewHolder(@NonNull ArticleLineViewHolder holder, int position) {
         ArticleLine articleLine = articleLinesList.get(position);
         holder.tvItemArticleName.setText(articleLine.getName());
-        holder.tvItemArticleUnitPrice.setText(String.valueOf(articleLine.getUnitPrice()));
+        holder.tvItemArticleUnitPrice.setText(String.valueOf(articleLine.getUnitBasePrice()));
+        holder.tvItemArticleUnitPriceWithVat.setText(String.valueOf((articleLine.getUnitBasePrice() * (1 + articleLine.getVatFraction()))));
         holder.tvItemArticleQuantity.setText(String.valueOf(articleLine.getQuantity()));
-        holder.tvItemLineTotalAmount.setText(String.valueOf(articleLine.getTotalLineAmount()));
-
+        holder.tvItemLineTotalAmount.setText(String.valueOf((articleLine.getUnitBasePrice() * (1 + articleLine.getVatFraction())) * articleLine.getQuantity()));
+        holder.tvItemLineIsInOffer.setText(String.valueOf(articleLine.isInOffer()));
         holder.itemView.setOnClickListener(v -> {
         });
     }
@@ -88,16 +89,20 @@ public ArrayList<ArticleLine> getArticleLinesList(){
     public static class ArticleLineViewHolder extends RecyclerView.ViewHolder {
         public TextView tvItemArticleName;
         public TextView tvItemArticleUnitPrice;
+        public TextView tvItemArticleUnitPriceWithVat;
         public TextView tvItemArticleQuantity;
         public TextView tvItemLineTotalAmount;
+        public TextView tvItemLineIsInOffer;
 
 
         public ArticleLineViewHolder(@NonNull View itemView) {
             super(itemView);
             tvItemArticleName = itemView.findViewById(R.id.tvItemArticleName);
             tvItemArticleUnitPrice = itemView.findViewById(R.id.tvItemArticleUnitPrice);
+            tvItemArticleUnitPriceWithVat = itemView.findViewById(R.id.tvItemArticleUnitPriceWithVat);
             tvItemArticleQuantity = itemView.findViewById(R.id.tvItemArticleQuantity);
             tvItemLineTotalAmount = itemView.findViewById(R.id.tvItemLineTotalAmount);
+            tvItemLineIsInOffer = itemView.findViewById(R.id.tvItemLineIsInOffer);
         }
     }
 

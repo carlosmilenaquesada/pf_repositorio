@@ -1,36 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvItemArticleName"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre artículo"
-        android:textColorHint="#546E7A" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvItemArticleUnitPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Precio unidad"
-        android:textColorHint="#546E7A" />
+        <TextView
+            android:id="@+id/tvItemArticleNameTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nombre artículo" />
 
-    <TextView
-        android:id="@+id/tvItemArticleQuantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Cantidad"
-        android:textColorHint="#546E7A" />
+        <TextView
+            android:id="@+id/tvItemArticleName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Nombre artículo"
+            android:textColorHint="#546E7A" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvItemLineTotalAmount"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Total línea"
-        android:textColorHint="#546E7A" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvItemArticleUnitPriceTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Precio unidad" />
+
+        <TextView
+            android:id="@+id/tvItemArticleUnitPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Precio unidad"
+            android:textColorHint="#546E7A" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvItemArticleUnitPriceWithVatTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Precio unidad más IVA" />
+
+        <TextView
+            android:id="@+id/tvItemArticleUnitPriceWithVat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Precio unidad más IVA"
+            android:textColorHint="#546E7A" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvItemArticleQuantityTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cantidad" />
+
+        <TextView
+            android:id="@+id/tvItemArticleQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Cantidad"
+            android:textColorHint="#546E7A" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvItemLineTotalAmountTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total línea" />
+
+        <TextView
+            android:id="@+id/tvItemLineTotalAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Total línea"
+            android:textColorHint="#546E7A" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvItemLineIsInOfferTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Está en oferta" />
+
+        <TextView
+            android:id="@+id/tvItemLineIsInOffer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Está en oferta"
+            android:textColorHint="#546E7A" />
+    </LinearLayout>
 
 </LinearLayout>

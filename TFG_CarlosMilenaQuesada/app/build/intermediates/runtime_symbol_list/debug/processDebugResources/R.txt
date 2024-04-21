@@ -3603,9 +3603,17 @@ int id tvChange 0x7f0801f8
 int id tvChangeTitle 0x7f0801f9
 int id tvGreetingUser 0x7f0801fa
 int id tvItemArticleName 0x7f0801fb
+int id tvItemArticleNameTitle 0x7f08022a
 int id tvItemArticleQuantity 0x7f0801fc
+int id tvItemArticleQuantityTitle 0x7f08022b
 int id tvItemArticleUnitPrice 0x7f0801fd
+int id tvItemArticleUnitPriceTitle 0x7f08022c
+int id tvItemArticleUnitPriceWithVat 0x7f08022d
+int id tvItemArticleUnitPriceWithVatTitle 0x7f08022e
+int id tvItemLineIsInOffer 0x7f08022f
+int id tvItemLineIsInOfferTitle 0x7f080230
 int id tvItemLineTotalAmount 0x7f0801fe
+int id tvItemLineTotalAmountTitle 0x7f080231
 int id tvTicketTotalAmount 0x7f0801ff
 int id tvTitleTicketTotalAmount 0x7f080200
 int id tvTotal 0x7f080201
