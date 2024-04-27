@@ -1,8 +1,10 @@
 package com.example.tfg_carlosmilenaquesada.views.activities;
 
 import static com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity.ARTICLE_LINES_LIST;
+import static com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity.CUSTOMER_TAX_ID;
 import static com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity.TICKET_AMOUNT;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +20,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
-import com.example.tfg_carlosmilenaquesada.models.ArticleLine;
+import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
+import com.example.tfg_carlosmilenaquesada.models.TicketLine;
+import com.example.tfg_carlosmilenaquesada.models.TicketLineItem;
+import com.example.tfg_carlosmilenaquesada.models.TicketLineItemAdapter;
 
 import java.util.ArrayList;
 
@@ -30,7 +35,7 @@ public class PaymentActivity extends AppCompatActivity {
     TextView tvChange;
 
     Button btCompleteCashPayment;
-
+    Button btInitializeCardPayment;
     Button btResetCashPaymentForm;
     Button btCalculateChange;
 
@@ -46,8 +51,9 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        ArrayList<ArticleLine> articleLinesList = (ArrayList<ArticleLine>) intent.getSerializableExtra(ARTICLE_LINES_LIST);
+        ArrayList<TicketLine> ticketLinesList = (ArrayList<TicketLine>) intent.getSerializableExtra(ARTICLE_LINES_LIST);
         final Float ticketAmount = (Float) intent.getSerializableExtra(TICKET_AMOUNT);
+        String customerTaxId = (String) intent.getSerializableExtra(CUSTOMER_TAX_ID);
 
         tvTotal = findViewById(R.id.tvTotal);
         etCash = findViewById(R.id.etCash);
@@ -55,6 +61,7 @@ public class PaymentActivity extends AppCompatActivity {
         btCalculateChange = findViewById(R.id.btCalculateChange);
         btResetCashPaymentForm = findViewById(R.id.btResetCashPaymentForm);
         btCompleteCashPayment = findViewById(R.id.btCompleteCashPayment);
+        btInitializeCardPayment = findViewById(R.id.btInitializeCardPayment);
 
         resetCashPaymentForm(ticketAmount);
         btCalculateChange.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +71,7 @@ public class PaymentActivity extends AppCompatActivity {
                     etCash.setError("Debe introducir el importe entregado por el cliente");
                     return;
                 }
-                if(Float.parseFloat(etCash.getText().toString()) < Float.parseFloat(tvTotal.getText().toString())){
+                if (Float.parseFloat(etCash.getText().toString()) < Float.parseFloat(tvTotal.getText().toString())) {
                     etCash.setError("El importe entregado no puede ser menor que el importe total");
                     return;
                 }
@@ -73,10 +80,9 @@ public class PaymentActivity extends AppCompatActivity {
                 btCalculateChange.setEnabled(false);
                 btCompleteCashPayment.setEnabled(true);
                 tvChange.setEnabled(false);
-
             }
         });
-        btResetCashPaymentForm.setOnClickListener(new View.OnClickListener(){
+        btResetCashPaymentForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resetCashPaymentForm(ticketAmount);
@@ -86,16 +92,36 @@ public class PaymentActivity extends AppCompatActivity {
         btCompleteCashPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PaymentActivity.this, "Pago en efectivo realizado", Toast.LENGTH_SHORT).show();
-                //guardar en la base de datos
-
+                Toast.makeText(PaymentActivity.this, "Pago en efectivo realizado correctamente", Toast.LENGTH_LONG).show();
+                //Inserto las líneas de ticket en la base de datos de SQLITE
+                SqliteConnector.getInstance(PaymentActivity.this).insertManyElementsToSqlite(ticketLinesList, SqliteConnector.TABLE_TICKETS_LINES);//modificar campos adecuados
+                //Actualizo el ticket a su nuevo estado.
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("customer_tax_id", customerTaxId);
+                contentValues.put("payment_method_id", "cash");
+                contentValues.put("ticket_status_id", "paid");
+                SqliteConnector.getInstance(PaymentActivity.this).getReadableDatabase().update(
+                        SqliteConnector.TABLE_TICKETS,
+                        contentValues,
+                        "ticket_id = ?",
+                        new String[]{ticketLinesList.get(0).getTicket_id()}
+                );
                 startActivity(new Intent(PaymentActivity.this, SaleActivity.class));
+            }
+        });
+
+        btInitializeCardPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PaymentActivity.this, "Pago con tarjeta realizado correctamente", Toast.LENGTH_LONG).show();
+
             }
         });
 
 
     }
-    private void resetCashPaymentForm(Float ticketAmount){
+
+    private void resetCashPaymentForm(Float ticketAmount) {
         tvTotal.setText(ticketAmount.toString());
         etCash.setText("");
         tvChange.setText("");

@@ -2,15 +2,13 @@ package com.example.tfg_carlosmilenaquesada.views.activities;
 
 import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector.TABLE_CUSTOMERS;
 import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector.TABLE_CUSTOMERS_TYPES;
+import static com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity.NEW_SALE_TICKET;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -23,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -36,24 +33,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
-import com.example.tfg_carlosmilenaquesada.models.ArticleLine;
-import com.example.tfg_carlosmilenaquesada.models.ArticleLineAdapter;
-import com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity;
+import com.example.tfg_carlosmilenaquesada.models.Ticket;
+import com.example.tfg_carlosmilenaquesada.models.TicketLine;
+import com.example.tfg_carlosmilenaquesada.models.TicketLineItem;
+import com.example.tfg_carlosmilenaquesada.models.TicketLineItemAdapter;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SaleActivity extends AppCompatActivity {
     public static final String TICKET_AMOUNT = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.ticket_amount";
     public static final String ARTICLE_LINES_LIST = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.article_lines_list";
+    public static final String CUSTOMER_TAX_ID = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.customer_tax_id";
     Spinner spCustomersTypes;
     AutoCompleteTextView actvCustomerId;
 
@@ -67,6 +62,8 @@ public class SaleActivity extends AppCompatActivity {
     TextView tvTicketTotalAmount;
     Button btPayTicket;
     JsonHttpGetter jsonHttpGetterCustomers;
+    private Ticket ticket;
+    ArrayList<String> customersTaxIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +75,9 @@ public class SaleActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        Intent intent = getIntent();
+        ticket = (Ticket) intent.getSerializableExtra(NEW_SALE_TICKET);
+        customersTaxIds = new ArrayList<>();
         tvTicketTotalAmount = findViewById(R.id.tvTicketTotalAmount);
         spCustomersTypes = findViewById(R.id.spCustomersTypes);
         actvCustomerId = findViewById(R.id.actvCustomerId);
@@ -104,6 +103,7 @@ public class SaleActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (!((Cursor) spCustomersTypes.getAdapter().getItem(position)).getString(0).equals("Cliente fiscal")) {
                     actvCustomerId.setVisibility(View.GONE);
+                    actvCustomerId.setEnabled(false);
                 } else {
                     if (jsonHttpGetterCustomers == null) {
                         jsonHttpGetterCustomers = new JsonHttpGetter(getApplication(), SqliteConnector.TABLE_CUSTOMERS);
@@ -124,7 +124,7 @@ public class SaleActivity extends AppCompatActivity {
                                 }
                             }
                             Cursor cursorCustomers = SqliteConnector.getInstance(getApplication()).getReadableDatabase().rawQuery("SELECT customer_tax_id FROM " + TABLE_CUSTOMERS, null);
-                            ArrayList<String> customersTaxIds = new ArrayList<>();
+
                             while (cursorCustomers.moveToNext()) {
                                 customersTaxIds.add(cursorCustomers.getString(0));
                             }
@@ -133,6 +133,7 @@ public class SaleActivity extends AppCompatActivity {
                                 public void run() {
                                     actvCustomerId.setAdapter(adapter);
                                     actvCustomerId.setVisibility(View.VISIBLE);
+                                    actvCustomerId.setEnabled(true);
                                 }
                             });
                         }
@@ -175,7 +176,6 @@ public class SaleActivity extends AppCompatActivity {
             }
         });
 
-
         btPutArticle.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -187,31 +187,22 @@ public class SaleActivity extends AppCompatActivity {
                 Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(query, null);
 
                 if (cursor.moveToNext()) {
-                    /*"article_id TEXT PRIMARY KEY NOT NULL, " +
-                            "name TEXT  NOT NULL, " +
-                            "sale_base_price REAL NOT NULL," +
-                            "vat_fraction REAL NOT NULL," +
-                            "offer_start_date TEXT," +
-                            "offer_end_date TEXT," +
-                            "offer_sale_base_price REAL" +
-                            ")");*/
-
-
+                    String ticketId = ticket.getTicket_id();
+                    String ticketLineId = ticketId + "LIN" + (rvArticlesOnTicket.getAdapter().getItemCount() + 1);
                     String articleId = cursor.getString(0);
                     String name = cursor.getString(1);
-
                     Float unitBasePrice = null;
-                    boolean isInOffer = false;
+                    String isInOffer = "no";
                     String offerStartDate = cursor.getString(4);
                     String offerEndDate = cursor.getString(5);
                     if (offerStartDate != null && offerEndDate != null) {
-                        Instant startDateTime = Instant.parse(offerStartDate);
-                        Instant endDateTime = Instant.parse(offerEndDate);
+                        LocalDateTime startDateTime = LocalDateTime.ofInstant(Instant.parse(offerStartDate), ZoneId.systemDefault());
+                        LocalDateTime endDateTime = LocalDateTime.ofInstant(Instant.parse(offerEndDate), ZoneId.systemDefault());
                         LocalDateTime currentDateTime = LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
-                        if ((currentDateTime.isEqual(LocalDateTime.ofInstant(startDateTime, ZoneId.systemDefault())) || currentDateTime.isAfter(LocalDateTime.ofInstant(startDateTime, ZoneId.systemDefault())))
-                                && (currentDateTime.isEqual(LocalDateTime.ofInstant(endDateTime, ZoneId.systemDefault())) || currentDateTime.isBefore(LocalDateTime.ofInstant(endDateTime, ZoneId.systemDefault())))) {
+                        if ((currentDateTime.isEqual(startDateTime) || currentDateTime.isAfter(startDateTime))
+                                && (currentDateTime.isEqual(endDateTime) || currentDateTime.isBefore(endDateTime))) {
                             unitBasePrice = cursor.getFloat(6);
-                            isInOffer = true;
+                            isInOffer = "sí";
                         }
                     }
                     if (unitBasePrice == null) {
@@ -221,11 +212,10 @@ public class SaleActivity extends AppCompatActivity {
 
                     float vatFraction = cursor.getFloat(3);
 
+                    TicketLineItem ticketLineItem = new TicketLineItem(ticketLineId, ticketId, articleId, name, quantity, unitBasePrice, isInOffer, vatFraction);
 
 
-                    ArticleLine articleLine = new ArticleLine(articleId, name, unitBasePrice, isInOffer, quantity, vatFraction);
-
-                    ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).addArticleLine(articleLine, rvArticlesOnTicket.getAdapter().getItemCount());
+                    ((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).addTicketLineItem(ticketLineItem, rvArticlesOnTicket.getAdapter().getItemCount());
                     float totalLineAmount = (unitBasePrice * (1 + vatFraction)) * quantity;
                     float totalAmount = Float.parseFloat(String.valueOf(tvTicketTotalAmount.getText())) + totalLineAmount;
                     tvTicketTotalAmount.setText(String.valueOf(totalAmount));
@@ -239,16 +229,25 @@ public class SaleActivity extends AppCompatActivity {
 
         rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
         rvArticlesOnTicket.setAdapter(
-                new ArticleLineAdapter()
+                new TicketLineItemAdapter()
         );
         //Se usa para poder borrar líneas de ticket arrastrándolas a la izquierda
-        new ItemTouchHelper(((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
+        new ItemTouchHelper(((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
         btPayTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (rvArticlesOnTicket.getAdapter().getItemCount() == 0) {
+                    Toast.makeText(SaleActivity.this, "No hay artículos para pagar", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent(SaleActivity.this, PaymentActivity.class);
                 intent.putExtra(TICKET_AMOUNT, Float.parseFloat(tvTicketTotalAmount.getText().toString()));
-                intent.putExtra(ARTICLE_LINES_LIST, ((ArticleLineAdapter) rvArticlesOnTicket.getAdapter()).getArticleLinesList());
+                ArrayList<TicketLine> ticketLines = new ArrayList<>();
+                for(TicketLineItem ticketLineItem: ((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList()){
+                    ticketLines.add(new TicketLine(ticketLineItem.getTicket_line_id(), ticketLineItem.getTicket_id(), ticketLineItem.getArticle_id(), ticketLineItem.getArticle_quantity()));
+                }
+                intent.putExtra(ARTICLE_LINES_LIST, ticketLines);
+                intent.putExtra(CUSTOMER_TAX_ID, actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText())? actvCustomerId.getText() : null);
                 startActivity(intent);
             }
         });
@@ -257,7 +256,6 @@ public class SaleActivity extends AppCompatActivity {
 
 
     @Override
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (intentResult != null) {

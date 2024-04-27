@@ -38,7 +38,35 @@ dependencies {
     implementation(libs.recyclerview)
     //implementación para usar la cámara como lector codigo barras
     implementation(libs.zxing.android.embedded)
+    //Conversor gson
+    implementation(libs.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

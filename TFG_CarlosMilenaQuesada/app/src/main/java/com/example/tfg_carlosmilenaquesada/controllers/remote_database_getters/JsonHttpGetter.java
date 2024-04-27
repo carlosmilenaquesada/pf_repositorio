@@ -40,9 +40,8 @@ public class JsonHttpGetter {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        System.out.println("########## " + table + " ##########");
                         SqliteConnector.getInstance(context).wipeTable(table);
-                        SqliteConnector.getInstance(context).insert(response, table);
+                        SqliteConnector.getInstance(context).insertFromJsonArrayToSqliteTable(response, table);
                         setDone(true);
                     }
                 }, new Response.ErrorListener() {
