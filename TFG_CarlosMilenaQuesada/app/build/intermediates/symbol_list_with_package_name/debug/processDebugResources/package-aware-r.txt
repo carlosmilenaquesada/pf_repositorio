@@ -3488,6 +3488,7 @@ id right_side
 id rounded
 id row_index_key
 id rvArticlesOnTicket
+id rvTicketsInReserve
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3611,10 +3612,20 @@ id tvItemArticleUnitPrice
 id tvItemArticleUnitPriceTitle
 id tvItemArticleUnitPriceWithVat
 id tvItemArticleUnitPriceWithVatTitle
+id tvItemCustomerTaxId
+id tvItemCustomerTaxIdTitle
 id tvItemLineIsInOffer
 id tvItemLineIsInOfferTitle
 id tvItemLineTotalAmount
 id tvItemLineTotalAmountTitle
+id tvItemTicketId
+id tvItemTicketIdTitle
+id tvItemTicketPaymentMethod
+id tvItemTicketPaymentMethodTitle
+id tvItemTicketSaleDate
+id tvItemTicketSaleDateTitle
+id tvItemTicketStatusId
+id tvItemTicketStatusIdTitle
 id tvTicketTotalAmount
 id tvTitleTicketTotalAmount
 id tvTotal
@@ -3776,7 +3787,6 @@ layout activity_reserve
 layout activity_sale
 layout activity_sales_loader
 layout activiy_login
-layout article_item_layout
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3863,6 +3873,8 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+layout ticket_item_layout
+layout ticket_line_item_layout
 layout zxing_barcode_scanner
 layout zxing_capture
 mipmap ic_launcher

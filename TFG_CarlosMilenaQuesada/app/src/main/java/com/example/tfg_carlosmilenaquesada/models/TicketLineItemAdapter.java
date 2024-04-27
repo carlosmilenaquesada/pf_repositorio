@@ -46,7 +46,7 @@ public class TicketLineItemAdapter extends RecyclerView.Adapter<TicketLineItemAd
     @NonNull
     @Override
     public TicketLineItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.article_item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_line_item_layout, parent, false);
         return new TicketLineItemViewHolder(view);
     }
 

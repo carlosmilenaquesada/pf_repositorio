@@ -100,12 +100,12 @@ public class PaymentActivity extends AppCompatActivity {
                 contentValues.put("customer_tax_id", customerTaxId);
                 contentValues.put("payment_method_id", "cash");
                 contentValues.put("ticket_status_id", "paid");
-                SqliteConnector.getInstance(PaymentActivity.this).getReadableDatabase().update(
+                System.out.println("update resultado: "+ SqliteConnector.getInstance(PaymentActivity.this).getReadableDatabase().update(
                         SqliteConnector.TABLE_TICKETS,
                         contentValues,
                         "ticket_id = ?",
                         new String[]{ticketLinesList.get(0).getTicket_id()}
-                );
+                ));
                 startActivity(new Intent(PaymentActivity.this, SaleActivity.class));
             }
         });

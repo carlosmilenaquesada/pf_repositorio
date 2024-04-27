@@ -2,7 +2,7 @@ package com.example.tfg_carlosmilenaquesada.views.activities;
 
 import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector.TABLE_CUSTOMERS;
 import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector.TABLE_CUSTOMERS_TYPES;
-import static com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity.NEW_SALE_TICKET;
+
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,6 +37,7 @@ import com.example.tfg_carlosmilenaquesada.models.Ticket;
 import com.example.tfg_carlosmilenaquesada.models.TicketLine;
 import com.example.tfg_carlosmilenaquesada.models.TicketLineItem;
 import com.example.tfg_carlosmilenaquesada.models.TicketLineItemAdapter;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -61,10 +62,12 @@ public class SaleActivity extends AppCompatActivity {
     RecyclerView rvArticlesOnTicket;
     TextView tvTicketTotalAmount;
     Button btPayTicket;
+    Button btReserveTicket;
     JsonHttpGetter jsonHttpGetterCustomers;
     private Ticket ticket;
     ArrayList<String> customersTaxIds;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +78,9 @@ public class SaleActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Intent intent = getIntent();
-        ticket = (Ticket) intent.getSerializableExtra(NEW_SALE_TICKET);
+
+        ticket = new Ticket(null, "processing", "undefined");
+        SqliteConnector.getInstance(this).insertOneElementToSqlite(ticket, SqliteConnector.TABLE_TICKETS);
         customersTaxIds = new ArrayList<>();
         tvTicketTotalAmount = findViewById(R.id.tvTicketTotalAmount);
         spCustomersTypes = findViewById(R.id.spCustomersTypes);
@@ -86,8 +90,12 @@ public class SaleActivity extends AppCompatActivity {
         etArticleCode = findViewById(R.id.etArticleCode);
         btPutArticle = findViewById(R.id.btPutArticle);
         rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
+        rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
+        rvArticlesOnTicket.setAdapter(new TicketLineItemAdapter());
+        //Se usa para poder borrar líneas de ticket arrastrándolas a la izquierda
+        new ItemTouchHelper(((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
         btPayTicket = findViewById(R.id.btPayTicket);
-
+        btReserveTicket = findViewById(R.id.btReserveTicket);
         if (tvTicketTotalAmount.getText().toString().isEmpty()) {
             tvTicketTotalAmount.setText("0.00");
         }
@@ -227,12 +235,8 @@ public class SaleActivity extends AppCompatActivity {
         });
 
 
-        rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
-        rvArticlesOnTicket.setAdapter(
-                new TicketLineItemAdapter()
-        );
-        //Se usa para poder borrar líneas de ticket arrastrándolas a la izquierda
-        new ItemTouchHelper(((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
+
+
         btPayTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,8 +251,14 @@ public class SaleActivity extends AppCompatActivity {
                     ticketLines.add(new TicketLine(ticketLineItem.getTicket_line_id(), ticketLineItem.getTicket_id(), ticketLineItem.getArticle_id(), ticketLineItem.getArticle_quantity()));
                 }
                 intent.putExtra(ARTICLE_LINES_LIST, ticketLines);
-                intent.putExtra(CUSTOMER_TAX_ID, actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText())? actvCustomerId.getText() : null);
+                intent.putExtra(CUSTOMER_TAX_ID, actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText().toString())? actvCustomerId.getText().toString() : null);
                 startActivity(intent);
+            }
+        });
+        btReserveTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //falta programar aquí para reservar el current ticket, y programar el botón que habra el menú de reservas
             }
         });
 

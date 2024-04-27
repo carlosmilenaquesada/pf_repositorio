@@ -3487,6 +3487,7 @@ int id right_side 0x7f080186
 int id rounded 0x7f080187
 int id row_index_key 0x7f080188
 int id rvArticlesOnTicket 0x7f080189
+int id rvTicketsInReserve 0x7f080231
 int id save_non_transition_alpha 0x7f08018a
 int id save_overlay_view 0x7f08018b
 int id sawtooth 0x7f08018c
@@ -3610,10 +3611,20 @@ int id tvItemArticleUnitPrice 0x7f080201
 int id tvItemArticleUnitPriceTitle 0x7f080202
 int id tvItemArticleUnitPriceWithVat 0x7f080203
 int id tvItemArticleUnitPriceWithVatTitle 0x7f080204
+int id tvItemCustomerTaxId 0x7f080232
+int id tvItemCustomerTaxIdTitle 0x7f080233
 int id tvItemLineIsInOffer 0x7f080205
 int id tvItemLineIsInOfferTitle 0x7f080206
 int id tvItemLineTotalAmount 0x7f080207
 int id tvItemLineTotalAmountTitle 0x7f080208
+int id tvItemTicketId 0x7f080234
+int id tvItemTicketIdTitle 0x7f080235
+int id tvItemTicketPaymentMethod 0x7f080236
+int id tvItemTicketPaymentMethodTitle 0x7f080237
+int id tvItemTicketSaleDate 0x7f080238
+int id tvItemTicketSaleDateTitle 0x7f080239
+int id tvItemTicketStatusId 0x7f08023a
+int id tvItemTicketStatusIdTitle 0x7f08023b
 int id tvTicketTotalAmount 0x7f080209
 int id tvTitleTicketTotalAmount 0x7f08020a
 int id tvTotal 0x7f08020b
@@ -3775,7 +3786,6 @@ int layout activity_reserve 0x7f0b001f
 int layout activity_sale 0x7f0b0020
 int layout activity_sales_loader 0x7f0b0021
 int layout activiy_login 0x7f0b0022
-int layout article_item_layout 0x7f0b0023
 int layout custom_dialog 0x7f0b0024
 int layout design_bottom_navigation_item 0x7f0b0025
 int layout design_bottom_sheet_dialog 0x7f0b0026
@@ -3862,6 +3872,8 @@ int layout select_dialog_item_material 0x7f0b0076
 int layout select_dialog_multichoice_material 0x7f0b0077
 int layout select_dialog_singlechoice_material 0x7f0b0078
 int layout support_simple_spinner_dropdown_item 0x7f0b0079
+int layout ticket_item_layout 0x7f0b007c
+int layout ticket_line_item_layout 0x7f0b007d
 int layout zxing_barcode_scanner 0x7f0b007a
 int layout zxing_capture 0x7f0b007b
 int mipmap ic_launcher 0x7f0d0000

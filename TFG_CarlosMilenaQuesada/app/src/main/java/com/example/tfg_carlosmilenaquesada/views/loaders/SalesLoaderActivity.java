@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class SalesLoaderActivity extends AppCompatActivity {
-    public static final String NEW_SALE_TICKET = "com.example.tfg_carlosmilenaquesada.views.loaders.salesloaderactivity.new_sale_ticket";
+
     ProgressBar pbSalesLoader;
 
     boolean dataIsLoaded;
@@ -70,18 +70,8 @@ public class SalesLoaderActivity extends AppCompatActivity {
                     }
                 }
 
-                //AQUÍ SE CREA EL NUEVO TICKET DE VENTA (VACÍO DE LÍNEAS). Y SE METE EN LA TABLA DE TICKETS DE SQLITE. LUEGO SERÁ USADO
-                //EN SALEACTIVITY (DE HECHO, LE PASO A SALEACTIVITY EL OBJETO DEL TICKET). SE INSERTEN LÍNEAS O NO, ESTE TICKET SE VA
-                //A CREAR SIEMPRE, AUNQUE SE QUEDE VACÍO O NO SE TERMINE LA VENTA.
-                long currentTimeInMillis = System.currentTimeMillis();
-                String ticketId = String.valueOf(currentTimeInMillis);
-                String saleDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(currentTimeInMillis), ZoneId.systemDefault()).toString();
-                Ticket ticket = new Ticket(ticketId, saleDate, null, "processing", "undefined");
-                SqliteConnector.getInstance(SalesLoaderActivity.this).insertOneElementToSqlite(ticket, SqliteConnector.TABLE_TICKETS);
-
                 dataIsLoaded = true;
                 Intent intent = new Intent(SalesLoaderActivity.this, SaleActivity.class);
-                intent.putExtra(NEW_SALE_TICKET, ticket);
                 startActivity(intent);
             }
         }.start();
