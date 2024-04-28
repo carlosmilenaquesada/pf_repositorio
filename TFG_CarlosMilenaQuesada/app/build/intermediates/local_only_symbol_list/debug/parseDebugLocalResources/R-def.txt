@@ -5,6 +5,10 @@ color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 id actvCustomerId
+id btBackFromPaymentActivity
+id btBackFromReserveActivity
+id btBackFromSaleActivity
+id btBackFromSaleManagementMenuActivity
 id btCalculateChange
 id btCashDeskManagement
 id btCompleteCashPayment
@@ -19,6 +23,7 @@ id btPutArticle
 id btReserveTicket
 id btResetCashPaymentForm
 id btSalesManagement
+id btShowReservedTicket
 id etArticleCode
 id etCash
 id etPassword
@@ -58,6 +63,8 @@ id tvItemTicketSaleDate
 id tvItemTicketSaleDateTitle
 id tvItemTicketStatusId
 id tvItemTicketStatusIdTitle
+id tvTicketIdInSale
+id tvTicketIdInSaleTitle
 id tvTicketTotalAmount
 id tvTitleTicketTotalAmount
 id tvTotal
@@ -68,6 +75,7 @@ layout activity_payment
 layout activity_reserve
 layout activity_sale
 layout activity_sales_loader
+layout activity_sales_management_menu
 layout activiy_login
 layout ticket_item_layout
 layout ticket_line_item_layout

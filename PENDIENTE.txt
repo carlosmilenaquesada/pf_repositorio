@@ -17,3 +17,8 @@ ya que la razón social debe ser única al menos en el ámbito de un país (quiz
 hacer una unique compuesta por esos dos elementos))
 
 --poner un cliente con nombre null, creo que da fallo (de hecho, cualquier campo null en la tabal sqlite dará excepción cuando se le haga un get)
+
+HACER----------------------------------------------------------------------
+--Cerrar todos los cursores
+
+--Hacer los sharepreferences para la autenticación en todos los activities

@@ -3194,6 +3194,10 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btBackFromPaymentActivity
+id btBackFromReserveActivity
+id btBackFromSaleActivity
+id btBackFromSaleManagementMenuActivity
 id btCalculateChange
 id btCashDeskManagement
 id btCompleteCashPayment
@@ -3208,6 +3212,7 @@ id btPutArticle
 id btReserveTicket
 id btResetCashPaymentForm
 id btSalesManagement
+id btShowReservedTicket
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3626,6 +3631,8 @@ id tvItemTicketSaleDate
 id tvItemTicketSaleDateTitle
 id tvItemTicketStatusId
 id tvItemTicketStatusIdTitle
+id tvTicketIdInSale
+id tvTicketIdInSaleTitle
 id tvTicketTotalAmount
 id tvTitleTicketTotalAmount
 id tvTotal
@@ -3786,6 +3793,7 @@ layout activity_payment
 layout activity_reserve
 layout activity_sale
 layout activity_sales_loader
+layout activity_sales_management_menu
 layout activiy_login
 layout custom_dialog
 layout design_bottom_navigation_item

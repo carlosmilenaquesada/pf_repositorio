@@ -32,16 +32,19 @@ public class ReserveActivity extends AppCompatActivity {
         });
         rvTicketsInReserve = findViewById(R.id.rvTicketsInReserve);
         rvTicketsInReserve.setLayoutManager(new LinearLayoutManager(this));
-        rvTicketsInReserve.setAdapter(new TicketAdapter());
+        rvTicketsInReserve.setAdapter(new TicketAdapter(ReserveActivity.this));
         new ItemTouchHelper(((TicketAdapter) rvTicketsInReserve.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvTicketsInReserve);
         Cursor cursor = SqliteConnector.getInstance(this).getReadableDatabase().rawQuery(
-                /*"SELECT * FROM " + SqliteConnector.TABLE_TICKETS + " WHERE ticket_status_id = ?",
-                new String[]{"reserved"}*/
-                "SELECT * FROM " + SqliteConnector.TABLE_TICKETS, null
+                "SELECT * FROM " + SqliteConnector.TABLE_TICKETS + " WHERE ticket_status_id = ?",
+                new String[]{"reserved"}
         );
         while (cursor.moveToNext()) {
-            Ticket ticket = new Ticket(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
-            ((TicketAdapter) rvTicketsInReserve.getAdapter()).addTicket(ticket, rvTicketsInReserve.getAdapter().getItemCount());
+            ((TicketAdapter) rvTicketsInReserve.getAdapter()).addTicket(
+                    new Ticket(
+                            cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)
+                    ),
+                    rvTicketsInReserve.getAdapter().getItemCount()
+            );
         }
     }
 }

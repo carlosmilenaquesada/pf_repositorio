@@ -4,6 +4,7 @@ import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manag
 import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector.TABLE_CUSTOMERS_TYPES;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.IntentSanitizer;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -50,6 +52,7 @@ public class SaleActivity extends AppCompatActivity {
     public static final String TICKET_AMOUNT = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.ticket_amount";
     public static final String ARTICLE_LINES_LIST = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.article_lines_list";
     public static final String CUSTOMER_TAX_ID = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.customer_tax_id";
+    TextView tvTicketIdInSale;
     Spinner spCustomersTypes;
     AutoCompleteTextView actvCustomerId;
 
@@ -63,6 +66,7 @@ public class SaleActivity extends AppCompatActivity {
     TextView tvTicketTotalAmount;
     Button btPayTicket;
     Button btReserveTicket;
+    Button btBackFromSaleActivity;
     JsonHttpGetter jsonHttpGetterCustomers;
     private Ticket ticket;
     ArrayList<String> customersTaxIds;
@@ -81,6 +85,8 @@ public class SaleActivity extends AppCompatActivity {
 
         ticket = new Ticket(null, "processing", "undefined");
         SqliteConnector.getInstance(this).insertOneElementToSqlite(ticket, SqliteConnector.TABLE_TICKETS);
+        tvTicketIdInSale = findViewById(R.id.tvTicketIdInSale);
+        tvTicketIdInSale.setText(ticket.getTicket_id());
         customersTaxIds = new ArrayList<>();
         tvTicketTotalAmount = findViewById(R.id.tvTicketTotalAmount);
         spCustomersTypes = findViewById(R.id.spCustomersTypes);
@@ -96,6 +102,7 @@ public class SaleActivity extends AppCompatActivity {
         new ItemTouchHelper(((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
         btPayTicket = findViewById(R.id.btPayTicket);
         btReserveTicket = findViewById(R.id.btReserveTicket);
+        btBackFromSaleActivity = findViewById(R.id.btBackFromSaleActivity);
         if (tvTicketTotalAmount.getText().toString().isEmpty()) {
             tvTicketTotalAmount.setText("0.00");
         }
@@ -235,8 +242,6 @@ public class SaleActivity extends AppCompatActivity {
         });
 
 
-
-
         btPayTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -247,18 +252,42 @@ public class SaleActivity extends AppCompatActivity {
                 Intent intent = new Intent(SaleActivity.this, PaymentActivity.class);
                 intent.putExtra(TICKET_AMOUNT, Float.parseFloat(tvTicketTotalAmount.getText().toString()));
                 ArrayList<TicketLine> ticketLines = new ArrayList<>();
-                for(TicketLineItem ticketLineItem: ((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList()){
+                for (TicketLineItem ticketLineItem : ((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList()) {
                     ticketLines.add(new TicketLine(ticketLineItem.getTicket_line_id(), ticketLineItem.getTicket_id(), ticketLineItem.getArticle_id(), ticketLineItem.getArticle_quantity()));
                 }
                 intent.putExtra(ARTICLE_LINES_LIST, ticketLines);
-                intent.putExtra(CUSTOMER_TAX_ID, actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText().toString())? actvCustomerId.getText().toString() : null);
+                intent.putExtra(CUSTOMER_TAX_ID, actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText().toString()) ? actvCustomerId.getText().toString() : null);
                 startActivity(intent);
             }
         });
         btReserveTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //falta programar aquí para reservar el current ticket, y programar el botón que habra el menú de reservas
+                if (((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getItemCount() == 0) {
+                    return;
+                }
+                //insertar las líneas de ticket
+                SqliteConnector.getInstance(SaleActivity.this).insertManyElementsToSqlite(((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList(), SqliteConnector.TABLE_TICKETS_LINES);
+                //Actualizo el ticket a su nuevo estado.
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("customer_tax_id", actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText().toString()) ? actvCustomerId.getText().toString() : null);
+                contentValues.put("payment_method_id", "undefined");
+                contentValues.put("ticket_status_id", "reserved");
+                SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().update(
+                        SqliteConnector.TABLE_TICKETS,
+                        contentValues,
+                        "ticket_id = ?",
+                        new String[]{ticket.getTicket_id()}
+                );
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        btBackFromSaleActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SaleActivity.this, MainMenuActivity.class));
             }
         });
 
@@ -273,6 +302,7 @@ public class SaleActivity extends AppCompatActivity {
                 etArticleCode.setText(intentResult.getContents());
             }
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 

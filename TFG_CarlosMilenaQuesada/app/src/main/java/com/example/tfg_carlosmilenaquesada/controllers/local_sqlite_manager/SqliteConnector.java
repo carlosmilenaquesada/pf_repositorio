@@ -185,12 +185,12 @@ public class SqliteConnector extends SQLiteOpenHelper {
 
     }
 
-    public User getValidUser(String userId, String password) {
+    public String getUserPrivileges(String userId, String password) {
         String[] selectionArgs = {userId, password};
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_USERS + " where user_id = ? AND password = ?", selectionArgs);
-        User user = cursor.moveToNext() ? new User(cursor.getString(0), cursor.getString(1), cursor.getString(2)) : null;
+        String privileges = cursor.moveToNext() ? cursor.getString(2) : null;
         cursor.close();
-        return user;
+        return privileges;
     }
 
     public void wipeTable(String tableName) {

@@ -122,4 +122,10 @@
         android:layout_height="wrap_content"
         android:text="Inicializar pago tarjeta" />
 
+    <Button
+        android:id="@+id/btBackFromPaymentActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver" />
+
 </LinearLayout>

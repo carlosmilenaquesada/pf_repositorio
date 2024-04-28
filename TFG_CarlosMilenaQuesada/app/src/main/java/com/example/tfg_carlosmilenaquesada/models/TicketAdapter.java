@@ -1,6 +1,7 @@
 package com.example.tfg_carlosmilenaquesada.models;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +12,17 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg_carlosmilenaquesada.R;
+import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 
 import java.util.ArrayList;
 
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketViewHolder> {
-
+    private Context context;
     private ArrayList<Ticket> ticketList;
-
-
     private ItemTouchHelper.SimpleCallback simpleCallback;
 
-    public TicketAdapter() {
+    public TicketAdapter(Context context) {
+        this.context = context;
         this.ticketList = new ArrayList<>();
         simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
@@ -35,10 +36,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
                 removeTicket(position);
             }
         };
-
-
     }
-
 
     @NonNull
     @Override
@@ -46,7 +44,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_item_layout, parent, false);
         return new TicketViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
@@ -67,6 +64,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     }
 
     public ItemTouchHelper.SimpleCallback getSimpleCallback() {
+
         return simpleCallback;
     }
 
@@ -76,6 +74,12 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
 
     public void removeTicket(int position) {
         ticketList.remove(position);
+        SqliteConnector.getInstance(context).getReadableDatabase().delete(
+                SqliteConnector.TABLE_TICKETS,
+                "ticket_id=?",
+                new String[]{ticketList.get(position).getTicket_id()
+                }
+        );
         notifyItemRemoved(position);
     }
 

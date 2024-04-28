@@ -22,8 +22,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.models.TicketLine;
-import com.example.tfg_carlosmilenaquesada.models.TicketLineItem;
-import com.example.tfg_carlosmilenaquesada.models.TicketLineItemAdapter;
 
 import java.util.ArrayList;
 
@@ -38,6 +36,7 @@ public class PaymentActivity extends AppCompatActivity {
     Button btInitializeCardPayment;
     Button btResetCashPaymentForm;
     Button btCalculateChange;
+    Button btBackFromPaymentActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class PaymentActivity extends AppCompatActivity {
         btResetCashPaymentForm = findViewById(R.id.btResetCashPaymentForm);
         btCompleteCashPayment = findViewById(R.id.btCompleteCashPayment);
         btInitializeCardPayment = findViewById(R.id.btInitializeCardPayment);
-
+        btBackFromPaymentActivity = findViewById(R.id.btBackFromPaymentActivity);
         resetCashPaymentForm(ticketAmount);
         btCalculateChange.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +114,15 @@ public class PaymentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(PaymentActivity.this, "Pago con tarjeta realizado correctamente", Toast.LENGTH_LONG).show();
 
+            }
+        });
+
+        btBackFromPaymentActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(new Intent(PaymentActivity.this, SaleActivity.class));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 

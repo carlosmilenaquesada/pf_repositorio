@@ -1,7 +1,9 @@
 package com.example.tfg_carlosmilenaquesada.views.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -20,7 +22,11 @@ import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.Sqli
 import com.example.tfg_carlosmilenaquesada.models.User;
 
 public class LoginActiviy extends AppCompatActivity {
-    public static final String USER = "com.example.tfg_carlosmilenaquesada.views.activities.loginactiviy.user";
+    SharedPreferences sharedpreferences;
+    public static final String USER_ID = "com.example.tfg_carlosmilenaquesada.views.activities.loginactiviy.user_id";
+    public static final String USER_PASSWORD = "com.example.tfg_carlosmilenaquesada.views.activities.loginactiviy.user_password";
+    public static final String USER_PRIVILEGES = "com.example.tfg_carlosmilenaquesada.views.activities.loginactiviy.user_privileges";
+    public static final String SHARED_PREFS = "com.example.tfg_carlosmilenaquesada.views.activities.loginactiviy.shared_prefs";
     EditText etUserId;
     EditText etPassword;
     Button btLogOn;
@@ -37,6 +43,7 @@ public class LoginActiviy extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
         etUserId = findViewById(R.id.etUserId);
         etPassword = findViewById(R.id.etPassword);
@@ -49,15 +56,18 @@ public class LoginActiviy extends AppCompatActivity {
                 return;
             }
             try {
-                User user = SqliteConnector.getInstance(getApplication()).getValidUser(etUserId.getText().toString(), etPassword.getText().toString());
-                if (user == null) {
+                String userId = etUserId.getText().toString();
+                String userPassword = etPassword.getText().toString();
+                String userPrivileges = SqliteConnector.getInstance(getApplication()).getUserPrivileges(userId, userPassword);
+                if (userPrivileges == null) {
                     Toast.makeText(LoginActiviy.this, "Usuario No encontrado", Toast.LENGTH_LONG).show();
                     return;
                 }
                 Toast.makeText(LoginActiviy.this, "Usuario encontrado", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(LoginActiviy.this, MainMenuActivity.class);
-                intent.putExtra(USER, user);
-                startActivity(intent);
+                sharedpreferences.edit().putString(USER_ID, userId).apply();
+                sharedpreferences.edit().putString(USER_PASSWORD, userPassword).apply();
+                sharedpreferences.edit().putString(USER_PRIVILEGES, userPrivileges).apply();
+                startActivity(new Intent(LoginActiviy.this, MainMenuActivity.class));
             } catch (Exception ex) {
                 Toast.makeText(LoginActiviy.this, ex.toString(), Toast.LENGTH_LONG).show();
             }

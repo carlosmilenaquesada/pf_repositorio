@@ -1,15 +1,19 @@
 [
     {
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_ticket_line_item_layout.xml.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\layout\\ticket_line_item_layout.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_activity_login_loader.xml.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\layout\\activity_login_loader.xml"
     },
     {
-        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\mipmap-hdpi\\ic_launcher_round.webp"
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_ticket_item_layout.xml.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\layout\\ticket_item_layout.xml"
     },
     {
-        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_article_item_layout.xml.flat",
-        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\layout\\article_item_layout.xml"
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\xml_data_extraction_rules.xml.flat",
@@ -28,6 +32,10 @@
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_activity_sales_management_menu.xml.flat",
+        "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\layout\\activity_sales_management_menu.xml"
+    },
+    {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
@@ -40,8 +48,8 @@
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\layout\\activity_reserve.xml"
     },
     {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-34:/layout_ticket_line_item_layout.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-36:/layout/ticket_line_item_layout.xml"
+        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-34:/layout_activity_payment.xml.flat",
+        "source": "com.example.tfg_carlosmilenaquesada.app-main-36:/layout/activity_payment.xml"
     },
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_activity_sale.xml.flat",
@@ -50,14 +58,6 @@
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_activity_main_menu.xml.flat",
         "source": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-main-36:\\layout\\activity_main_menu.xml"
-    },
-    {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-34:/layout_ticket_item_layout.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-36:/layout/ticket_item_layout.xml"
-    },
-    {
-        "merged": "com.example.tfg_carlosmilenaquesada.app-debug-34:/layout_activity_reserve.xml.flat",
-        "source": "com.example.tfg_carlosmilenaquesada.app-main-36:/layout/activity_reserve.xml"
     },
     {
         "merged": "C:\\Users\\Administrador\\.gradle\\daemon\\8.4\\com.example.tfg_carlosmilenaquesada.app-debug-34:\\layout_activity_sales_loader.xml.flat",
