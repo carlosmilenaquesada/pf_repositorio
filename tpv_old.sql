@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-04-2024 a las 15:32:47
+-- Tiempo de generación: 16-04-2024 a las 21:03:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -49,7 +49,7 @@ CREATE TABLE `articles` (
 --
 
 INSERT INTO `articles` (`article_id`, `name`, `family_id`, `category_id`, `purchase_base_price`, `sale_base_price`, `vat_id`, `stock`, `sold`, `offer_start_date`, `offer_end_date`, `offer_sale_base_price`) VALUES
-('COD000001', 'Producto A', 'FAM000001', 'CAT000001', 0.000000, 15.990000, 'IVA001', 100.000000, 20.000000, '2024-04-01', '2025-04-15', 12.990000),
+('COD000001', 'Producto A', 'FAM000001', 'CAT000001', 0.000000, 15.990000, 'IVA001', 100.000000, 20.000000, '2024-04-01', '2024-04-15', 12.990000),
 ('COD000002', 'Producto B', 'FAM000002', 'CAT000002', 0.000000, 25.490000, 'IVA002', 50.000000, 10.000000, NULL, NULL, NULL),
 ('COD000003', 'Producto C', 'FAM000001', 'CAT000003', 0.000000, 9.990000, 'IVA001', 80.000000, 5.000000, NULL, NULL, NULL),
 ('COD000004', 'Producto D', 'FAM000003', 'CAT000002', 0.000000, 39.990000, 'IVA002', 30.000000, 8.000000, '2024-03-15', '2024-03-30', 34.990000),
@@ -79,17 +79,13 @@ INSERT INTO `barcodes` (`barcode`, `article_id`) VALUES
 ('8999900000017', 'COD000001'),
 ('8999900000024', 'COD000001'),
 ('8999900000031', 'COD000001'),
-('COD000001', 'COD000001'),
 ('8999900000048', 'COD000002'),
 ('8999900000055', 'COD000002'),
 ('8999900000062', 'COD000002'),
-('COD000002', 'COD000002'),
 ('8999900000079', 'COD000003'),
 ('8999900000086', 'COD000003'),
 ('8999900000093', 'COD000003'),
-('COD000003', 'COD000003'),
-('8999900000109', 'COD000004'),
-('COD000004', 'COD000004');
+('8999900000109', 'COD000004');
 
 -- --------------------------------------------------------
 
@@ -110,26 +106,6 @@ INSERT INTO `customers_types` (`customer_type_id`, `description`) VALUES
 ('CUST_TYPE001', 'Cliente anónimo'),
 ('CUST_TYPE002', 'Cliente VIP'),
 ('CUST_TYPE003', 'Cliente fiscal');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `payment_methods`
---
-
-CREATE TABLE `payment_methods` (
-  `payment_method_id` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `payment_methods`
---
-
-INSERT INTO `payment_methods` (`payment_method_id`, `name`) VALUES
-('PAYMET001', 'undefined'),
-('PAYMET002', 'cash'),
-('PAYMET003', 'bankcard');
 
 -- --------------------------------------------------------
 
@@ -197,28 +173,6 @@ CREATE TABLE `tickets_lines` (
   `vat_id` varchar(50) NOT NULL,
   `is_in_offer` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tickets_status`
---
-
-CREATE TABLE `tickets_status` (
-  `ticket_status_id` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `tickets_status`
---
-
-INSERT INTO `tickets_status` (`ticket_status_id`, `name`) VALUES
-('STAT001', 'processing'),
-('STAT002', 'paid'),
-('STAT003', 'reserved'),
-('STAT004', 'due'),
-('STAT005', 'cancelled');
 
 -- --------------------------------------------------------
 
@@ -292,12 +246,6 @@ ALTER TABLE `customers_types`
   ADD PRIMARY KEY (`customer_type_id`) USING BTREE;
 
 --
--- Indices de la tabla `payment_methods`
---
-ALTER TABLE `payment_methods`
-  ADD PRIMARY KEY (`payment_method_id`);
-
---
 -- Indices de la tabla `taxable_customers`
 --
 ALTER TABLE `taxable_customers`
@@ -315,15 +263,9 @@ ALTER TABLE `tickets`
 -- Indices de la tabla `tickets_lines`
 --
 ALTER TABLE `tickets_lines`
-  ADD PRIMARY KEY (`ticket_line_id`,`ticket_id`) USING BTREE,
+  ADD PRIMARY KEY (`ticket_line_id`),
   ADD KEY `ticket_id` (`ticket_id`),
   ADD KEY `vat_id` (`vat_id`);
-
---
--- Indices de la tabla `tickets_status`
---
-ALTER TABLE `tickets_status`
-  ADD PRIMARY KEY (`ticket_status_id`);
 
 --
 -- Indices de la tabla `users`
