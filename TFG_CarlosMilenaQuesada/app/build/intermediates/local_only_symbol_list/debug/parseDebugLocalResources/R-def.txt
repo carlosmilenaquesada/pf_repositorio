@@ -36,6 +36,7 @@ id pbLoginLoader
 id pbSalesLoader
 id rvAllTickets
 id rvArticlesOnTicket
+id rvTicketDetailLines
 id rvTicketsInReserve
 id spCustomersTypes
 id tvCardPaymentHeader
@@ -66,6 +67,8 @@ id tvItemTicketSaleDate
 id tvItemTicketSaleDateTitle
 id tvItemTicketStatusId
 id tvItemTicketStatusIdTitle
+id tvTicketDetails
+id tvTicketDetailsTitle
 id tvTicketIdInSale
 id tvTicketIdInSaleTitle
 id tvTicketTotalAmount
@@ -80,6 +83,7 @@ layout activity_reserved_tickets
 layout activity_sale
 layout activity_sales_loader
 layout activity_sales_management_menu
+layout activity_ticket_detail
 layout activiy_login
 layout ticket_item_layout
 layout ticket_line_item_layout

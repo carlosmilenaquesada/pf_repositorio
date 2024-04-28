@@ -17,7 +17,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
-import com.example.tfg_carlosmilenaquesada.models.User;
 import com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity;
 
 public class MainMenuActivity extends AppCompatActivity {

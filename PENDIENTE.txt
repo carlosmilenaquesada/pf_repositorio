@@ -22,3 +22,5 @@ HACER----------------------------------------------------------------------
 --Cerrar todos los cursores
 
 --Hacer los sharepreferences para la autenticación en todos los activities
+
+--En SaleActivity, cuando se borra una linea de ticket, no se modifica el importe total.

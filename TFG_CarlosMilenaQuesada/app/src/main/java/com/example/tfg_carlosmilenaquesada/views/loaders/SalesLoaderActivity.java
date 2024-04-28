@@ -15,14 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
-import com.example.tfg_carlosmilenaquesada.models.Ticket;
 import com.example.tfg_carlosmilenaquesada.views.activities.MainMenuActivity;
-import com.example.tfg_carlosmilenaquesada.views.activities.PaymentActivity;
 import com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 public class SalesLoaderActivity extends AppCompatActivity {
 

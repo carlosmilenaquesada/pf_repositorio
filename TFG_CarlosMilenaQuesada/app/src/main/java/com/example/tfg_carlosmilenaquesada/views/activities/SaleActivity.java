@@ -24,7 +24,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.IntentSanitizer;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -35,10 +34,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
-import com.example.tfg_carlosmilenaquesada.models.Ticket;
-import com.example.tfg_carlosmilenaquesada.models.TicketLine;
-import com.example.tfg_carlosmilenaquesada.models.TicketLineItem;
-import com.example.tfg_carlosmilenaquesada.models.TicketLineItemAdapter;
+import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
+import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLine;
+import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLineAdapter;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -50,7 +48,7 @@ import java.util.ArrayList;
 
 public class SaleActivity extends AppCompatActivity {
     public static final String TICKET_AMOUNT = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.ticket_amount";
-    public static final String ARTICLE_LINES_LIST = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.article_lines_list";
+    public static final String TICKET_LINES_LIST = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.ticket_lines_list";
     public static final String CUSTOMER_TAX_ID = "com.example.tfg_carlosmilenaquesada.views.activities.saleactivity.customer_tax_id";
     TextView tvTicketIdInSale;
     Spinner spCustomersTypes;
@@ -97,9 +95,9 @@ public class SaleActivity extends AppCompatActivity {
         btPutArticle = findViewById(R.id.btPutArticle);
         rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
         rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
-        rvArticlesOnTicket.setAdapter(new TicketLineItemAdapter());
+        rvArticlesOnTicket.setAdapter(new TicketLineAdapter());
         //Se usa para poder borrar líneas de ticket arrastrándolas a la izquierda
-        new ItemTouchHelper(((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
+        new ItemTouchHelper(((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
         btPayTicket = findViewById(R.id.btPayTicket);
         btReserveTicket = findViewById(R.id.btReserveTicket);
         btBackFromSaleActivity = findViewById(R.id.btBackFromSaleActivity);
@@ -227,10 +225,10 @@ public class SaleActivity extends AppCompatActivity {
 
                     float vatFraction = cursor.getFloat(3);
 
-                    TicketLineItem ticketLineItem = new TicketLineItem(ticketLineId, ticketId, articleId, name, quantity, unitBasePrice, isInOffer, vatFraction);
+                    TicketLine ticketLine = new TicketLine(ticketLineId, ticketId, articleId, name, quantity, unitBasePrice, isInOffer, vatFraction);
 
 
-                    ((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).addTicketLineItem(ticketLineItem, rvArticlesOnTicket.getAdapter().getItemCount());
+                    ((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).addTicketLineItem(ticketLine, rvArticlesOnTicket.getAdapter().getItemCount());
                     float totalLineAmount = (unitBasePrice * (1 + vatFraction)) * quantity;
                     float totalAmount = Float.parseFloat(String.valueOf(tvTicketTotalAmount.getText())) + totalLineAmount;
                     tvTicketTotalAmount.setText(String.valueOf(totalAmount));
@@ -251,11 +249,8 @@ public class SaleActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(SaleActivity.this, PaymentActivity.class);
                 intent.putExtra(TICKET_AMOUNT, Float.parseFloat(tvTicketTotalAmount.getText().toString()));
-                ArrayList<TicketLine> ticketLines = new ArrayList<>();
-                for (TicketLineItem ticketLineItem : ((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList()) {
-                    ticketLines.add(new TicketLine(ticketLineItem.getTicket_line_id(), ticketLineItem.getTicket_id(), ticketLineItem.getArticle_id(), ticketLineItem.getArticle_quantity()));
-                }
-                intent.putExtra(ARTICLE_LINES_LIST, ticketLines);
+                ArrayList<TicketLine> ticketLines = ((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList();
+                intent.putExtra(TICKET_LINES_LIST, ticketLines);
                 intent.putExtra(CUSTOMER_TAX_ID, actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText().toString()) ? actvCustomerId.getText().toString() : null);
                 startActivity(intent);
             }
@@ -263,11 +258,11 @@ public class SaleActivity extends AppCompatActivity {
         btReserveTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getItemCount() == 0) {
+                if (((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).getItemCount() == 0) {
                     return;
                 }
                 //insertar las líneas de ticket
-                SqliteConnector.getInstance(SaleActivity.this).insertManyElementsToSqlite(((TicketLineItemAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList(), SqliteConnector.TABLE_TICKETS_LINES);
+                SqliteConnector.getInstance(SaleActivity.this).insertManyElementsToSqlite(((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).getTicketLinesList(), SqliteConnector.TABLE_TICKETS_LINES);
                 //Actualizo el ticket a su nuevo estado.
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("customer_tax_id", actvCustomerId.isEnabled() && customersTaxIds.contains(actvCustomerId.getText().toString()) ? actvCustomerId.getText().toString() : null);

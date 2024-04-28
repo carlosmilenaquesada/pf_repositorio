@@ -1,8 +1,8 @@
 package com.example.tfg_carlosmilenaquesada.views.activities;
 
-import static com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity.ARTICLE_LINES_LIST;
 import static com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity.CUSTOMER_TAX_ID;
 import static com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity.TICKET_AMOUNT;
+import static com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity.TICKET_LINES_LIST;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -21,9 +21,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
-import com.example.tfg_carlosmilenaquesada.models.TicketLine;
+import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLine;
 
 import java.util.ArrayList;
+
 
 public class PaymentActivity extends AppCompatActivity {
     TextView tvTotal;
@@ -50,7 +51,7 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        ArrayList<TicketLine> ticketLinesList = (ArrayList<TicketLine>) intent.getSerializableExtra(ARTICLE_LINES_LIST);
+        ArrayList<TicketLine> ticketLinesList = (ArrayList<TicketLine>) intent.getSerializableExtra(TICKET_LINES_LIST);
         final Float ticketAmount = (Float) intent.getSerializableExtra(TICKET_AMOUNT);
         String customerTaxId = (String) intent.getSerializableExtra(CUSTOMER_TAX_ID);
 

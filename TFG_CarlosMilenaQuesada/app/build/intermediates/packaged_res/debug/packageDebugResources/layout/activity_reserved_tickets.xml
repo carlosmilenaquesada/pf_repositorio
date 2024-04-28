@@ -11,7 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTicketsInReserve"
         android:layout_width="match_parent"
-        android:layout_height="610dp" />
+        android:layout_height="258dp" />
 
     <Button
         android:id="@+id/btBackFromReservedTicketsActivity"

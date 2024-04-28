@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
-import com.example.tfg_carlosmilenaquesada.models.Ticket;
-import com.example.tfg_carlosmilenaquesada.models.TicketAdapter;
+import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
+import com.example.tfg_carlosmilenaquesada.models.ticket.TicketAdapter;
 
 public class AllTicketsActivity extends AppCompatActivity {
 

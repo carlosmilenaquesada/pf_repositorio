@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.tfg_carlosmilenaquesada.models.User;
+
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -25,7 +25,7 @@ public class SqliteConnector extends SQLiteOpenHelper {
     //sin necesidad de especificar ni longuitud ni precisión.
     private static SqliteConnector sqliteConnector;
     public static final String NODE_SERVER = "http://192.168.0.5:3000/sync/";
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 14;
     private static final String DATABASE_NAME = "tpv.db";
     public static final String TABLE_ARTICLES = "articles";
     public static final String TABLE_BARCODES = "barcodes";
@@ -92,7 +92,11 @@ public class SqliteConnector extends SQLiteOpenHelper {
                 "ticket_line_id TEXT PRIMARY KEY NOT NULL," +
                 "ticket_id TEXT NOT NULL, " +
                 "article_id TEXT NOT NULL, " +
-                "article_quantity REAL NOT NULL " +
+                "article_name TEXT NOT NULL, " +
+                "article_quantity REAL NOT NULL, " +
+                "unit_sale_base_price REAL NOT NULL, " +
+                "is_in_offer TEXT NOT NULL, " +
+                "vat_fraction float NOT NULL " +
                 ")");
 
         db.execSQL("CREATE TABLE " + TABLE_USERS + "(" +

@@ -3496,6 +3496,7 @@ id rounded
 id row_index_key
 id rvAllTickets
 id rvArticlesOnTicket
+id rvTicketDetailLines
 id rvTicketsInReserve
 id save_non_transition_alpha
 id save_overlay_view
@@ -3634,6 +3635,8 @@ id tvItemTicketSaleDate
 id tvItemTicketSaleDateTitle
 id tvItemTicketStatusId
 id tvItemTicketStatusIdTitle
+id tvTicketDetails
+id tvTicketDetailsTitle
 id tvTicketIdInSale
 id tvTicketIdInSaleTitle
 id tvTicketTotalAmount
@@ -3798,6 +3801,7 @@ layout activity_reserved_tickets
 layout activity_sale
 layout activity_sales_loader
 layout activity_sales_management_menu
+layout activity_ticket_detail
 layout activiy_login
 layout custom_dialog
 layout design_bottom_navigation_item
