@@ -14,7 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tfg_carlosmilenaquesada.R;
 
 public class SalesManagementMenuActivity extends AppCompatActivity {
-    Button btShowReservedTicket;
+    Button btShowReservedTickets;
+    Button btShowAllTickets;
     Button btBackFromSaleManagementMenuActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,19 @@ public class SalesManagementMenuActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btShowReservedTicket = findViewById(R.id.btShowReservedTicket);
+        btShowReservedTickets = findViewById(R.id.btShowReservedTickets);
+        btShowAllTickets = findViewById(R.id.btShowAllTickets);
         btBackFromSaleManagementMenuActivity = findViewById(R.id.btBackFromSaleManagementMenuActivity);
-        btShowReservedTicket.setOnClickListener(new View.OnClickListener(){
+        btShowReservedTickets.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SalesManagementMenuActivity.this, ReserveActivity.class));
+                startActivity(new Intent(SalesManagementMenuActivity.this, ReservedTicketsActivity.class));
+            }
+        });
+        btShowAllTickets.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SalesManagementMenuActivity.this, AllTicketsActivity.class));
             }
         });
         btBackFromSaleManagementMenuActivity.setOnClickListener(new View.OnClickListener(){

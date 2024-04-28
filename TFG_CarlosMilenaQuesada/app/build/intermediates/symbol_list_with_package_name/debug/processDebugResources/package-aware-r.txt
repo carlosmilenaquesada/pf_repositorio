@@ -3194,8 +3194,9 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btBackFromAllTicketsActivity
 id btBackFromPaymentActivity
-id btBackFromReserveActivity
+id btBackFromReservedTicketsActivity
 id btBackFromSaleActivity
 id btBackFromSaleManagementMenuActivity
 id btCalculateChange
@@ -3212,7 +3213,8 @@ id btPutArticle
 id btReserveTicket
 id btResetCashPaymentForm
 id btSalesManagement
-id btShowReservedTicket
+id btShowAllTickets
+id btShowReservedTickets
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3492,6 +3494,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id rvAllTickets
 id rvArticlesOnTicket
 id rvTicketsInReserve
 id save_non_transition_alpha
@@ -3787,10 +3790,11 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_all_tickets
 layout activity_login_loader
 layout activity_main_menu
 layout activity_payment
-layout activity_reserve
+layout activity_reserved_tickets
 layout activity_sale
 layout activity_sales_loader
 layout activity_sales_management_menu

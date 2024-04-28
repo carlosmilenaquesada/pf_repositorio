@@ -9,11 +9,15 @@
     tools:context=".views.activities.SalesManagementMenuActivity">
 
     <Button
-        android:id="@+id/btShowReservedTicket"
+        android:id="@+id/btShowReservedTickets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mostrar tickets en reserva" />
-
+    <Button
+        android:id="@+id/btShowAllTickets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mostrar todos los tickets" />
     <Button
         android:id="@+id/btBackFromSaleManagementMenuActivity"
         android:layout_width="match_parent"

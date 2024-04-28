@@ -51,10 +51,13 @@
         android:theme="@style/Theme.TFG_CarlosMilenaQuesada"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.AllTicketsActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.tfg_carlosmilenaquesada.views.activities.SalesManagementMenuActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tfg_carlosmilenaquesada.views.activities.ReserveActivity"
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.ReservedTicketsActivity"
             android:exported="false" />
         <activity
             android:name="com.example.tfg_carlosmilenaquesada.views.activities.PaymentActivity"
