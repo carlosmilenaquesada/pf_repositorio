@@ -2,11 +2,11 @@ package com.example.tfg_carlosmilenaquesada.models.ticket;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -14,13 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
-import com.example.tfg_carlosmilenaquesada.views.activities.TicketDetailActivity;
+import com.example.tfg_carlosmilenaquesada.views.activities.tickets.TicketDetailInterface;
 
 import java.util.ArrayList;
 
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketViewHolder> {
     private Context context;
-    public static final String TICKET = "com.example.tfg_carlosmilenaquesada.models.ticket.ticket_adapter.ticket";
     private ArrayList<Ticket> ticketList;
     private ItemTouchHelper.SimpleCallback simpleCallback;
 
@@ -37,6 +36,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getBindingAdapterPosition();
                 removeTicket(position);
+                ((TicketDetailInterface) context).wipeTicketDetails();
             }
         };
     }
@@ -57,12 +57,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         holder.tvItemTicketStatusId.setText(ticket.getTicket_status_id());
         holder.tvItemTicketPaymentMethod.setText(ticket.getPayment_method_id());
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, TicketDetailActivity.class);
-            intent.putExtra(TICKET, ticket);
-            context.startActivity(intent);
+            ((TicketDetailInterface) context).showTicketDetails(ticket.getTicket_id());
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -70,7 +67,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     }
 
     public ItemTouchHelper.SimpleCallback getSimpleCallback() {
-
         return simpleCallback;
     }
 
@@ -79,14 +75,18 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
     }
 
     public void removeTicket(int position) {
-        ticketList.remove(position);
-        SqliteConnector.getInstance(context).getReadableDatabase().delete(
+        int deleteResultCount = SqliteConnector.getInstance(context).getReadableDatabase().delete(
                 SqliteConnector.TABLE_TICKETS,
                 "ticket_id=?",
                 new String[]{ticketList.get(position).getTicket_id()
                 }
         );
-        notifyItemRemoved(position);
+        if (deleteResultCount == 1) {
+            ticketList.remove(position);
+            notifyItemRemoved(position);
+        }else {
+            Toast.makeText(context, "Error al borrar el ticket", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void addTicket(Ticket ticket, int position) {

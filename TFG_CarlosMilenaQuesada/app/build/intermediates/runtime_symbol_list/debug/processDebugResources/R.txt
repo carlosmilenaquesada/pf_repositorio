@@ -3634,8 +3634,6 @@ int id tvItemTicketSaleDate 0x7f080218
 int id tvItemTicketSaleDateTitle 0x7f080219
 int id tvItemTicketStatusId 0x7f08021a
 int id tvItemTicketStatusIdTitle 0x7f08021b
-int id tvTicketDetails 0x7f080247
-int id tvTicketDetailsTitle 0x7f080248
 int id tvTicketIdInSale 0x7f08021c
 int id tvTicketIdInSaleTitle 0x7f08021d
 int id tvTicketTotalAmount 0x7f08021e
@@ -3800,7 +3798,6 @@ int layout activity_reserved_tickets 0x7f0b0020
 int layout activity_sale 0x7f0b0021
 int layout activity_sales_loader 0x7f0b0022
 int layout activity_sales_management_menu 0x7f0b0023
-int layout activity_ticket_detail 0x7f0b007f
 int layout activiy_login 0x7f0b0024
 int layout custom_dialog 0x7f0b0025
 int layout design_bottom_navigation_item 0x7f0b0026

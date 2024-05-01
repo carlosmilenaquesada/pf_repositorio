@@ -113,30 +113,30 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ad
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:9:9-65
 	android:usesCleartextTraffic
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:16:9-44
-activity#com.example.tfg_carlosmilenaquesada.views.activities.TicketDetailActivity
+activity#com.example.tfg_carlosmilenaquesada.views.activities.tickets.TicketDetailActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-66
-activity#com.example.tfg_carlosmilenaquesada.views.activities.AllTicketsActivity
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-74
+activity#com.example.tfg_carlosmilenaquesada.views.activities.tickets.AllTicketsActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-64
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-72
 activity#com.example.tfg_carlosmilenaquesada.views.activities.SalesManagementMenuActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-73
-activity#com.example.tfg_carlosmilenaquesada.views.activities.ReservedTicketsActivity
+activity#com.example.tfg_carlosmilenaquesada.views.activities.tickets.ReservedTicketsActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:27:9-29:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:28:13-69
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:28:13-77
 activity#com.example.tfg_carlosmilenaquesada.views.activities.PaymentActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:30:9-32:40
 	android:exported

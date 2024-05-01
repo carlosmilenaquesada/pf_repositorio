@@ -12,6 +12,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
+import com.example.tfg_carlosmilenaquesada.views.activities.tickets.AllTicketsActivity;
+import com.example.tfg_carlosmilenaquesada.views.activities.tickets.ReservedTicketsActivity;
 
 public class SalesManagementMenuActivity extends AppCompatActivity {
     Button btShowReservedTickets;

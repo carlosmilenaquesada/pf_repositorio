@@ -1,4 +1,4 @@
-package com.example.tfg_carlosmilenaquesada.views.activities;
+package com.example.tfg_carlosmilenaquesada.views.activities.tickets;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,10 +19,14 @@ import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
 import com.example.tfg_carlosmilenaquesada.models.ticket.TicketAdapter;
+import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLine;
+import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLineAdapter;
+import com.example.tfg_carlosmilenaquesada.views.activities.SalesManagementMenuActivity;
 
-public class AllTicketsActivity extends AppCompatActivity {
+public class AllTicketsActivity extends AppCompatActivity implements TicketDetailInterface {
 
     RecyclerView rvAllTickets;
+    RecyclerView rvTicketDetailLines;
     Button btBackFromAllTicketsActivity;
 
     @Override
@@ -36,9 +40,15 @@ public class AllTicketsActivity extends AppCompatActivity {
             return insets;
         });
         rvAllTickets = findViewById(R.id.rvAllTickets);
+        rvTicketDetailLines = findViewById(R.id.rvTicketDetailLines);
         btBackFromAllTicketsActivity = findViewById(R.id.btBackFromAllTicketsActivity);
         rvAllTickets.setLayoutManager(new LinearLayoutManager(this));
-        rvAllTickets.setAdapter(new TicketAdapter(AllTicketsActivity.this));
+        rvAllTickets.setAdapter(new TicketAdapter(this));
+        rvTicketDetailLines.setLayoutManager(new LinearLayoutManager(this));
+        rvTicketDetailLines.setAdapter(new TicketLineAdapter());
+
+
+
         new ItemTouchHelper(((TicketAdapter) rvAllTickets.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvAllTickets);
         Cursor cursor = SqliteConnector.getInstance(this).getReadableDatabase().rawQuery(
                 "SELECT * FROM " + SqliteConnector.TABLE_TICKETS, null
@@ -58,6 +68,29 @@ public class AllTicketsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public void showTicketDetails(String ticketId) {
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).notifyItemRangeRemoved(0, ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getItemCount());
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getTicketLinesList().clear();
+        String query = "SELECT * FROM " + SqliteConnector.TABLE_TICKETS_LINES + " WHERE ticket_id = ?";
+        Cursor cursor = SqliteConnector.getInstance(AllTicketsActivity.this).getReadableDatabase().rawQuery(query, new String[]{ticketId});
+        while (cursor.moveToNext()){
+            ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).addTicketLineItem(
+                    new TicketLine(
+                            cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getFloat(4), cursor.getFloat(5), cursor.getString(6),cursor.getFloat(7)
+                    ),
+                    rvTicketDetailLines.getAdapter().getItemCount()
+            );
+        }
+    }
+
+    @Override
+    public void wipeTicketDetails() {
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).notifyItemRangeRemoved(0, ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getItemCount());
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getTicketLinesList().clear();
     }
 
 

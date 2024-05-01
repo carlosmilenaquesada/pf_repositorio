@@ -24,3 +24,4 @@ HACER----------------------------------------------------------------------
 --Hacer los sharepreferences para la autenticación en todos los activities
 
 --En SaleActivity, cuando se borra una linea de ticket, no se modifica el importe total.
+--implementar un remove item de calidad en todos los recicler view (tal y como he hecho en TicketAdapter)

@@ -6,16 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.activities.AllTicketsActivity">
+    tools:context=".views.activities.tickets.AllTicketsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAllTickets"
         android:layout_width="match_parent"
-        android:layout_height="629dp" />
+        android:layout_height="250dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTicketDetailLines"
+        android:layout_width="match_parent"
+        android:layout_height="398dp" />
 
     <Button
         android:id="@+id/btBackFromAllTicketsActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver" />
+
 </LinearLayout>

@@ -37,10 +37,7 @@ public class TicketLineAdapter extends RecyclerView.Adapter<TicketLineAdapter.Ti
         };
 
 
-
     }
-
-
 
 
     @NonNull
@@ -74,9 +71,9 @@ public class TicketLineAdapter extends RecyclerView.Adapter<TicketLineAdapter.Ti
         return simpleCallback;
     }
 
-public ArrayList<TicketLine> getTicketLinesList(){
+    public ArrayList<TicketLine> getTicketLinesList() {
         return this.ticketLineItemsList;
-}
+    }
 
     public void removeTicketLineItem(int position) {
         ticketLineItemsList.remove(position);

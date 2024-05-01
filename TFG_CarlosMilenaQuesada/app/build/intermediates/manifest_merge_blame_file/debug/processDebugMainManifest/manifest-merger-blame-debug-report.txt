@@ -90,14 +90,14 @@
 52-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:16:9-44
 53        <activity
 53-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:18:9-20:40
-54            android:name="com.example.tfg_carlosmilenaquesada.views.activities.TicketDetailActivity"
-54-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-66
+54            android:name="com.example.tfg_carlosmilenaquesada.views.activities.tickets.TicketDetailActivity"
+54-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:19:13-74
 55            android:exported="false" />
 55-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:20:13-37
 56        <activity
 56-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:21:9-23:40
-57            android:name="com.example.tfg_carlosmilenaquesada.views.activities.AllTicketsActivity"
-57-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-64
+57            android:name="com.example.tfg_carlosmilenaquesada.views.activities.tickets.AllTicketsActivity"
+57-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-72
 58            android:exported="false" />
 58-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:23:13-37
 59        <activity
@@ -108,8 +108,8 @@
 61-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:26:13-37
 62        <activity
 62-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:27:9-29:40
-63            android:name="com.example.tfg_carlosmilenaquesada.views.activities.ReservedTicketsActivity"
-63-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:28:13-69
+63            android:name="com.example.tfg_carlosmilenaquesada.views.activities.tickets.ReservedTicketsActivity"
+63-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:28:13-77
 64            android:exported="false" />
 64-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:29:13-37
 65        <activity

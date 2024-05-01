@@ -6,12 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.activities.ReservedTicketsActivity">
+    tools:context=".views.activities.tickets.ReservedTicketsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTicketsInReserve"
         android:layout_width="match_parent"
         android:layout_height="258dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTicketDetailLines"
+        android:layout_width="match_parent"
+        android:layout_height="398dp" />
+
 
     <Button
         android:id="@+id/btBackFromReservedTicketsActivity"

@@ -16,16 +16,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".views.activities.TicketDetailActivity"
+            android:name=".views.activities.tickets.TicketDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.AllTicketsActivity"
+            android:name=".views.activities.tickets.AllTicketsActivity"
             android:exported="false" />
         <activity
             android:name=".views.activities.SalesManagementMenuActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.ReservedTicketsActivity"
+            android:name=".views.activities.tickets.ReservedTicketsActivity"
             android:exported="false" />
         <activity
             android:name=".views.activities.PaymentActivity"

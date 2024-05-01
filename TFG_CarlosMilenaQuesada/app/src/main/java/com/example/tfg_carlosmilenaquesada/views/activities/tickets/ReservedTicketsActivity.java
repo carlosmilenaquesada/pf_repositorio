@@ -1,4 +1,4 @@
-package com.example.tfg_carlosmilenaquesada.views.activities;
+package com.example.tfg_carlosmilenaquesada.views.activities.tickets;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,9 +19,13 @@ import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
 import com.example.tfg_carlosmilenaquesada.models.ticket.TicketAdapter;
+import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLine;
+import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLineAdapter;
+import com.example.tfg_carlosmilenaquesada.views.activities.SalesManagementMenuActivity;
 
-public class ReservedTicketsActivity extends AppCompatActivity {
+public class ReservedTicketsActivity extends AppCompatActivity implements TicketDetailInterface {
     RecyclerView rvTicketsInReserve;
+    RecyclerView rvTicketDetailLines;
     Button btBackFromReservedTicketsActivity;
 
     @Override
@@ -35,9 +39,13 @@ public class ReservedTicketsActivity extends AppCompatActivity {
             return insets;
         });
         rvTicketsInReserve = findViewById(R.id.rvTicketsInReserve);
+        rvTicketDetailLines = findViewById(R.id.rvTicketDetailLines);
         btBackFromReservedTicketsActivity =findViewById(R.id.btBackFromReservedTicketsActivity);
         rvTicketsInReserve.setLayoutManager(new LinearLayoutManager(this));
-        rvTicketsInReserve.setAdapter(new TicketAdapter(ReservedTicketsActivity.this));
+        rvTicketsInReserve.setAdapter(new TicketAdapter(this));
+        rvTicketDetailLines.setLayoutManager(new LinearLayoutManager(this));
+        rvTicketDetailLines.setAdapter(new TicketLineAdapter());
+
         new ItemTouchHelper(((TicketAdapter) rvTicketsInReserve.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvTicketsInReserve);
         Cursor cursor = SqliteConnector.getInstance(this).getReadableDatabase().rawQuery(
                 "SELECT * FROM " + SqliteConnector.TABLE_TICKETS + " WHERE ticket_status_id = ?",
@@ -59,4 +67,27 @@ public class ReservedTicketsActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void showTicketDetails(String ticketId) {
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).notifyItemRangeRemoved(0, ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getItemCount());
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getTicketLinesList().clear();
+        String query = "SELECT * FROM " + SqliteConnector.TABLE_TICKETS_LINES + " WHERE ticket_id = ?";
+        Cursor cursor = SqliteConnector.getInstance(ReservedTicketsActivity.this).getReadableDatabase().rawQuery(query, new String[]{ticketId});
+        while (cursor.moveToNext()){
+            ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).addTicketLineItem(
+                    new TicketLine(
+                            cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getFloat(4), cursor.getFloat(5), cursor.getString(6),cursor.getFloat(7)
+                    ),
+                    rvTicketDetailLines.getAdapter().getItemCount()
+            );
+        }
+    }
+
+    @Override
+    public void wipeTicketDetails() {
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).notifyItemRangeRemoved(0, ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getItemCount());
+        ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getTicketLinesList().clear();
+    }
+
 }
