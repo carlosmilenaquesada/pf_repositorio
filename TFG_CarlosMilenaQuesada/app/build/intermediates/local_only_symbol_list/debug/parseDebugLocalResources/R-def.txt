@@ -23,6 +23,7 @@ id btPayTicket
 id btPutArticle
 id btReserveTicket
 id btResetCashPaymentForm
+id btRestoreTicket
 id btSalesManagement
 id btShowAllTickets
 id btShowReservedTickets

@@ -25,3 +25,5 @@ HACER----------------------------------------------------------------------
 
 --En SaleActivity, cuando se borra una linea de ticket, no se modifica el importe total.
 --implementar un remove item de calidad en todos los recicler view (tal y como he hecho en TicketAdapter)
+
+--COmprobar que los nombres de rutas de los string static final estén correctos

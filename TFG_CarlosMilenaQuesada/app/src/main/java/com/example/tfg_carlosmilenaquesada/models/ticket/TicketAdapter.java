@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.views.activities.tickets.TicketDetailInterface;
+import com.example.tfg_carlosmilenaquesada.views.activities.tickets.TicketRescueInterface;
 
 import java.util.ArrayList;
 
@@ -58,6 +59,9 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.TicketView
         holder.tvItemTicketPaymentMethod.setText(ticket.getPayment_method_id());
         holder.itemView.setOnClickListener(v -> {
             ((TicketDetailInterface) context).showTicketDetails(ticket.getTicket_id());
+            if(context instanceof TicketRescueInterface){
+                ((TicketRescueInterface) context).rescueTicket(ticket);
+            }
         });
     }
 

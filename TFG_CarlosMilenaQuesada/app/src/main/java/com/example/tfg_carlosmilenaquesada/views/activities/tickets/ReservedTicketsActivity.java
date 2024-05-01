@@ -21,12 +21,18 @@ import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
 import com.example.tfg_carlosmilenaquesada.models.ticket.TicketAdapter;
 import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLine;
 import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLineAdapter;
+import com.example.tfg_carlosmilenaquesada.views.activities.SaleActivity;
 import com.example.tfg_carlosmilenaquesada.views.activities.SalesManagementMenuActivity;
 
-public class ReservedTicketsActivity extends AppCompatActivity implements TicketDetailInterface {
+public class ReservedTicketsActivity extends AppCompatActivity implements TicketDetailInterface, TicketRescueInterface {
+    public static final String RESTORED_TICKET = "com.example.tfg_carlosmilenaquesada.views.activities.tickets.reservedticketsactivity.restored_ticket";
     RecyclerView rvTicketsInReserve;
     RecyclerView rvTicketDetailLines;
     Button btBackFromReservedTicketsActivity;
+    Button btRestoreTicket;
+
+    Ticket rescuedTicket;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public class ReservedTicketsActivity extends AppCompatActivity implements Ticket
         rvTicketsInReserve = findViewById(R.id.rvTicketsInReserve);
         rvTicketDetailLines = findViewById(R.id.rvTicketDetailLines);
         btBackFromReservedTicketsActivity =findViewById(R.id.btBackFromReservedTicketsActivity);
+        btRestoreTicket = findViewById(R.id.btRestoreTicket);
         rvTicketsInReserve.setLayoutManager(new LinearLayoutManager(this));
         rvTicketsInReserve.setAdapter(new TicketAdapter(this));
         rvTicketDetailLines.setLayoutManager(new LinearLayoutManager(this));
@@ -63,6 +70,17 @@ public class ReservedTicketsActivity extends AppCompatActivity implements Ticket
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ReservedTicketsActivity.this, SalesManagementMenuActivity.class));
+            }
+        });
+        btRestoreTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rescuedTicket == null){
+                    return;
+                }
+                Intent intent = new Intent(ReservedTicketsActivity.this, SaleActivity.class);
+                intent.putExtra(RESTORED_TICKET, rescuedTicket);
+                startActivity(intent);
             }
         });
 
@@ -88,6 +106,11 @@ public class ReservedTicketsActivity extends AppCompatActivity implements Ticket
     public void wipeTicketDetails() {
         ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).notifyItemRangeRemoved(0, ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getItemCount());
         ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).getTicketLinesList().clear();
+    }
+
+    @Override
+    public void rescueTicket(Ticket ticket) {
+        this.rescuedTicket = ticket;
     }
 
 }

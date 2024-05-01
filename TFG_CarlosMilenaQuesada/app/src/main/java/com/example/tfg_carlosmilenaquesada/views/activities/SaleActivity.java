@@ -2,6 +2,7 @@ package com.example.tfg_carlosmilenaquesada.views.activities;
 
 import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector.TABLE_CUSTOMERS;
 import static com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector.TABLE_CUSTOMERS_TYPES;
+import static com.example.tfg_carlosmilenaquesada.views.activities.tickets.ReservedTicketsActivity.RESTORED_TICKET;
 
 
 import android.content.ContentValues;
@@ -38,6 +39,7 @@ import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
 import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLine;
 import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLineAdapter;
 
+import com.example.tfg_carlosmilenaquesada.views.activities.tickets.ReservedTicketsActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -80,8 +82,36 @@ public class SaleActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Intent intent = getIntent();
+        rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
+        rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
+        rvArticlesOnTicket.setAdapter(new TicketLineAdapter());
 
-        ticket = new Ticket(null, "processing", "undefined");
+        if ((ticket = (Ticket) intent.getSerializableExtra(RESTORED_TICKET)) == null) {
+            ticket = new Ticket(null, "processing", "undefined");
+        }else{
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("ticket_status_id", "processing");
+            SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().update(
+                    SqliteConnector.TABLE_TICKETS,
+                    contentValues,
+                    "ticket_id = ?",
+                    new String[]{ticket.getTicket_id()}
+            );
+            String selectTicketLinesQuery = "SELECT * FROM " + SqliteConnector.TABLE_TICKETS_LINES + " WHERE ticket_id = ?";
+            Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(selectTicketLinesQuery, new String[]{ticket.getTicket_id()});
+            while (cursor.moveToNext()){
+                ((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).addTicketLineItem(
+                        new TicketLine(
+                                cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getFloat(4), cursor.getFloat(5), cursor.getString(6),cursor.getFloat(7)
+                        ),
+                        rvArticlesOnTicket.getAdapter().getItemCount()
+                );
+            }
+        }
+
+
+
         SqliteConnector.getInstance(this).insertOneElementToSqlite(ticket, SqliteConnector.TABLE_TICKETS);
         tvTicketIdInSale = findViewById(R.id.tvTicketIdInSale);
         tvTicketIdInSale.setText(ticket.getTicket_id());
@@ -93,9 +123,8 @@ public class SaleActivity extends AppCompatActivity {
         etndArticleQuantity = findViewById(R.id.etndArticleQuantity);
         etArticleCode = findViewById(R.id.etArticleCode);
         btPutArticle = findViewById(R.id.btPutArticle);
-        rvArticlesOnTicket = findViewById(R.id.rvArticlesOnTicket);
-        rvArticlesOnTicket.setLayoutManager(new LinearLayoutManager(this));
-        rvArticlesOnTicket.setAdapter(new TicketLineAdapter());
+
+
         //Se usa para poder borrar líneas de ticket arrastrándolas a la izquierda
         new ItemTouchHelper(((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvArticlesOnTicket);
         btPayTicket = findViewById(R.id.btPayTicket);
