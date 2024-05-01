@@ -52,6 +52,7 @@ public class SalesLoaderActivity extends AppCompatActivity {
         JsonHttpGetter jsonHttpGetterCustomersTypes = new JsonHttpGetter(getApplication(), SqliteConnector.TABLE_CUSTOMERS_TYPES);
         jsonHttpGetterCustomersTypes.getJsonFromHttp();
 
+
         new Thread() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override

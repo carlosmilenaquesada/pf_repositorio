@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".views.activities.customers.CreateNewCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.customers.AllCustomersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.activities.customers.CustomersManagementMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.activities.tickets.TicketDetailActivity"
             android:exported="false" />
         <activity
