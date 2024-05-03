@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".views.loaders.CustomersLoaderActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.activities.customers.CreateNewCustomerActivity"
             android:exported="false" />
         <activity

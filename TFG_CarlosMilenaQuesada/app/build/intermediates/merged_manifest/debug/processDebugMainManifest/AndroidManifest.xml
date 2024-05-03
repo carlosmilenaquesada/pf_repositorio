@@ -51,6 +51,18 @@
         android:theme="@style/Theme.TFG_CarlosMilenaQuesada"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.tfg_carlosmilenaquesada.views.loaders.CustomersLoaderActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.CreateNewCustomerActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.AllCustomersActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.CustomersManagementMenuActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.tfg_carlosmilenaquesada.views.activities.tickets.TicketDetailActivity"
             android:exported="false" />
         <activity

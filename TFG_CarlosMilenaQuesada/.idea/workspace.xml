@@ -20,6 +20,11 @@
           <theme>@style/Theme.TFG_CarlosMilenaQuesada</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_customers_loader.xml">
+        <config>
+          <theme>@style/Theme.TFG_CarlosMilenaQuesada</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_customers_management_menu.xml">
         <config>
           <theme>@style/Theme.TFG_CarlosMilenaQuesada</theme>
@@ -65,12 +70,17 @@
           <theme>@style/Theme.TFG_CarlosMilenaQuesada</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/ticket_item_layout.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_layout_customer.xml">
         <config>
           <theme>@style/Theme.TFG_CarlosMilenaQuesada</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/ticket_line_item_layout.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_layout_ticket.xml">
+        <config>
+          <theme>@style/Theme.TFG_CarlosMilenaQuesada</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_layout_ticket_line.xml">
         <config>
           <theme>@style/Theme.TFG_CarlosMilenaQuesada</theme>
         </config>
@@ -82,19 +92,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cee5eece-fbba-4027-a2ff-8c4292d03941" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/customers/AllCustomersActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/customers/CreateNewCustomerActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/customers/CustomersManagementMenuActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_all_customers.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_new_customer.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_customers_management_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/models/customer/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/models/customer/CustomerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_layout_customer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PENDIENTE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../PENDIENTE.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/processDebugResources/R.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/processDebugResources/R.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/controllers/local_sqlite_manager/SqliteConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/controllers/local_sqlite_manager/SqliteConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/models/ticket/TicketAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/models/ticket/TicketAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/models/ticket_line/TicketLineAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/models/ticket_line/TicketLineAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/MainMenuActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/loaders/SalesLoaderActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/loaders/SalesLoaderActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/SaleActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/SaleActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/customers/AllCustomersActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/customers/AllCustomersActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/tickets/AllTicketsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/tickets/AllTicketsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/tickets/ReservedTicketsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/tfg_carlosmilenaquesada/views/activities/tickets/ReservedTicketsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_all_customers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_all_customers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/ticket_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_layout_ticket.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/ticket_line_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_layout_ticket_line.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,6 +192,9 @@
     </key>
     <key name="android.template.-781157902">
       <recent name="com.example.tfg_carlosmilenaquesada.views.activities" />
+    </key>
+    <key name="android.template.1766780825">
+      <recent name="com.example.tfg_carlosmilenaquesada.views.loaders" />
     </key>
     <key name="android.template.1049965978">
       <recent name="com.example.tfg_carlosmilenaquesada.activities" />

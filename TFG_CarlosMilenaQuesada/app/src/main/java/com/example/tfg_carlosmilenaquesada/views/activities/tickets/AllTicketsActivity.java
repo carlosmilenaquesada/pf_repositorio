@@ -78,7 +78,7 @@ public class AllTicketsActivity extends AppCompatActivity implements TicketDetai
         String query = "SELECT * FROM " + SqliteConnector.TABLE_TICKETS_LINES + " WHERE ticket_id = ?";
         Cursor cursor = SqliteConnector.getInstance(AllTicketsActivity.this).getReadableDatabase().rawQuery(query, new String[]{ticketId});
         while (cursor.moveToNext()){
-            ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).addTicketLineItem(
+            ((TicketLineAdapter) rvTicketDetailLines.getAdapter()).addTicketLine(
                     new TicketLine(
                             cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getFloat(4), cursor.getFloat(5), cursor.getString(6),cursor.getFloat(7)
                     ),

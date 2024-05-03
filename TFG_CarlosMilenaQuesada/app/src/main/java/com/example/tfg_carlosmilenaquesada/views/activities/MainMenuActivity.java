@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.views.activities.customers.CustomersManagementMenuActivity;
+import com.example.tfg_carlosmilenaquesada.views.loaders.CustomersLoaderActivity;
 import com.example.tfg_carlosmilenaquesada.views.loaders.SalesLoaderActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -58,7 +59,7 @@ public class MainMenuActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.tvGreetingUser)).setText("¡Hola, " + userId + "!");
 
         findViewById(R.id.btNewSale).setOnClickListener(v -> startActivity(new Intent(MainMenuActivity.this, SalesLoaderActivity.class)));
-        findViewById(R.id.btCustomersManagement).setOnClickListener(v -> startActivity(new Intent(MainMenuActivity.this, CustomersManagementMenuActivity.class)));
+        findViewById(R.id.btCustomersManagement).setOnClickListener(v -> startActivity(new Intent(MainMenuActivity.this, CustomersLoaderActivity.class)));
         findViewById(R.id.btSalesManagement).setOnClickListener(v -> startActivity(new Intent(MainMenuActivity.this, SalesManagementMenuActivity.class)));
         //findViewById(R.id.btCashDeskManagement).setOnClickListener(v -> startActivity(new Intent(MainMenuActivity.this, null)));
         findViewById(R.id.btLogOut).setOnClickListener(new View.OnClickListener() {

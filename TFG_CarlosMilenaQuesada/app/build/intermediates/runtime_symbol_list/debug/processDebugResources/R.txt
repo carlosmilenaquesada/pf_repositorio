@@ -3193,7 +3193,9 @@ int id bounce 0x7f080060
 int id bounceBoth 0x7f080061
 int id bounceEnd 0x7f080062
 int id bounceStart 0x7f080063
+int id btBackFromAllCustomersActivity 0x7f08024b
 int id btBackFromAllTicketsActivity 0x7f080064
+int id btBackFromCustomersManagementMenuActivity 0x7f08024c
 int id btBackFromPaymentActivity 0x7f080065
 int id btBackFromReservedTicketsActivity 0x7f080066
 int id btBackFromSaleActivity 0x7f080067
@@ -3201,6 +3203,7 @@ int id btBackFromSaleManagementMenuActivity 0x7f080068
 int id btCalculateChange 0x7f080069
 int id btCashDeskManagement 0x7f08006a
 int id btCompleteCashPayment 0x7f08006b
+int id btCreateNewCustomer 0x7f08024d
 int id btCustomersManagement 0x7f08006c
 int id btInitializeCardPayment 0x7f08006d
 int id btLogOn 0x7f08006e
@@ -3213,6 +3216,7 @@ int id btReserveTicket 0x7f080074
 int id btResetCashPaymentForm 0x7f080075
 int id btRestoreTicket 0x7f08024a
 int id btSalesManagement 0x7f080076
+int id btShowAllCustomers 0x7f08024e
 int id btShowAllTickets 0x7f080077
 int id btShowReservedTickets 0x7f080078
 int id buttonPanel 0x7f080079
@@ -3472,6 +3476,7 @@ int id parent_matrix 0x7f080176
 int id password_toggle 0x7f080177
 int id path 0x7f080178
 int id pathRelative 0x7f080179
+int id pbCustomersLoader 0x7f08024f
 int id pbLoginLoader 0x7f08017a
 int id pbSalesLoader 0x7f08017b
 int id peekHeight 0x7f08017c
@@ -3494,6 +3499,7 @@ int id right_icon 0x7f08018c
 int id right_side 0x7f08018d
 int id rounded 0x7f08018e
 int id row_index_key 0x7f08018f
+int id rvAllCustomers 0x7f080250
 int id rvAllTickets 0x7f080190
 int id rvArticlesOnTicket 0x7f080191
 int id rvTicketDetailLines 0x7f080246
@@ -3623,10 +3629,22 @@ int id tvItemArticleUnitPriceWithVat 0x7f08020c
 int id tvItemArticleUnitPriceWithVatTitle 0x7f08020d
 int id tvItemCustomerTaxId 0x7f08020e
 int id tvItemCustomerTaxIdTitle 0x7f08020f
+int id tvItemLegalCompanyAddress 0x7f080251
+int id tvItemLegalCompanyAddressTitle 0x7f080252
+int id tvItemLegalCompanyName 0x7f080253
+int id tvItemLegalCompanyNameTitle 0x7f080254
+int id tvItemLegalCountry 0x7f080255
+int id tvItemLegalCountryTitle 0x7f080256
+int id tvItemLegalLocation 0x7f080257
+int id tvItemLegalLocationTitle 0x7f080258
+int id tvItemLegalZipCode 0x7f080259
+int id tvItemLegalZipCodeTitle 0x7f08025a
 int id tvItemLineIsInOffer 0x7f080210
 int id tvItemLineIsInOfferTitle 0x7f080211
 int id tvItemLineTotalAmount 0x7f080212
 int id tvItemLineTotalAmountTitle 0x7f080213
+int id tvItemName 0x7f08025b
+int id tvItemNameTitle 0x7f08025c
 int id tvItemTicketId 0x7f080214
 int id tvItemTicketIdTitle 0x7f080215
 int id tvItemTicketPaymentMethod 0x7f080216
@@ -3791,7 +3809,11 @@ int layout abc_search_dropdown_item_icons_2line 0x7f0b0018
 int layout abc_search_view 0x7f0b0019
 int layout abc_select_dialog_material 0x7f0b001a
 int layout abc_tooltip 0x7f0b001b
+int layout activity_all_customers 0x7f0b0080
 int layout activity_all_tickets 0x7f0b001c
+int layout activity_create_new_customer 0x7f0b0081
+int layout activity_customers_loader 0x7f0b0082
+int layout activity_customers_management_menu 0x7f0b0083
 int layout activity_login_loader 0x7f0b001d
 int layout activity_main_menu 0x7f0b001e
 int layout activity_payment 0x7f0b001f
@@ -3816,6 +3838,9 @@ int layout design_navigation_menu 0x7f0b0031
 int layout design_navigation_menu_item 0x7f0b0032
 int layout design_text_input_end_icon 0x7f0b0033
 int layout design_text_input_start_icon 0x7f0b0034
+int layout item_layout_customer 0x7f0b0084
+int layout item_layout_ticket 0x7f0b0085
+int layout item_layout_ticket_line 0x7f0b0086
 int layout m3_alert_dialog 0x7f0b0035
 int layout m3_alert_dialog_actions 0x7f0b0036
 int layout m3_alert_dialog_title 0x7f0b0037
@@ -3886,8 +3911,6 @@ int layout select_dialog_item_material 0x7f0b0077
 int layout select_dialog_multichoice_material 0x7f0b0078
 int layout select_dialog_singlechoice_material 0x7f0b0079
 int layout support_simple_spinner_dropdown_item 0x7f0b007a
-int layout ticket_item_layout 0x7f0b007b
-int layout ticket_line_item_layout 0x7f0b007c
 int layout zxing_barcode_scanner 0x7f0b007d
 int layout zxing_capture 0x7f0b007e
 int mipmap ic_launcher 0x7f0d0000

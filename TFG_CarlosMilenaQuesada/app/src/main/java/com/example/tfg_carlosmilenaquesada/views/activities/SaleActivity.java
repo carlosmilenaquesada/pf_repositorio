@@ -39,7 +39,6 @@ import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
 import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLine;
 import com.example.tfg_carlosmilenaquesada.models.ticket_line.TicketLineAdapter;
 
-import com.example.tfg_carlosmilenaquesada.views.activities.tickets.ReservedTicketsActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -101,7 +100,7 @@ public class SaleActivity extends AppCompatActivity {
             String selectTicketLinesQuery = "SELECT * FROM " + SqliteConnector.TABLE_TICKETS_LINES + " WHERE ticket_id = ?";
             Cursor cursor = SqliteConnector.getInstance(SaleActivity.this).getReadableDatabase().rawQuery(selectTicketLinesQuery, new String[]{ticket.getTicket_id()});
             while (cursor.moveToNext()){
-                ((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).addTicketLineItem(
+                ((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).addTicketLine(
                         new TicketLine(
                                 cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getFloat(4), cursor.getFloat(5), cursor.getString(6),cursor.getFloat(7)
                         ),
@@ -257,7 +256,7 @@ public class SaleActivity extends AppCompatActivity {
                     TicketLine ticketLine = new TicketLine(ticketLineId, ticketId, articleId, name, quantity, unitBasePrice, isInOffer, vatFraction);
 
 
-                    ((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).addTicketLineItem(ticketLine, rvArticlesOnTicket.getAdapter().getItemCount());
+                    ((TicketLineAdapter) rvArticlesOnTicket.getAdapter()).addTicketLine(ticketLine, rvArticlesOnTicket.getAdapter().getItemCount());
                     float totalLineAmount = (unitBasePrice * (1 + vatFraction)) * quantity;
                     float totalAmount = Float.parseFloat(String.valueOf(tvTicketTotalAmount.getText())) + totalLineAmount;
                     tvTicketTotalAmount.setText(String.valueOf(totalAmount));

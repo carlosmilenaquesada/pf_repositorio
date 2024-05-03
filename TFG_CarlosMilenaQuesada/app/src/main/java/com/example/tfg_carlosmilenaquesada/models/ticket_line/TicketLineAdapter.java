@@ -43,7 +43,7 @@ public class TicketLineAdapter extends RecyclerView.Adapter<TicketLineAdapter.Ti
     @NonNull
     @Override
     public TicketLineItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_line_item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_ticket_line, parent, false);
         return new TicketLineItemViewHolder(view);
     }
 
@@ -80,7 +80,7 @@ public class TicketLineAdapter extends RecyclerView.Adapter<TicketLineAdapter.Ti
         notifyItemRemoved(position);
     }
 
-    public void addTicketLineItem(TicketLine ticketLine, int position) {
+    public void addTicketLine(TicketLine ticketLine, int position) {
         ticketLineItemsList.add(ticketLine);
         notifyItemInserted(position);
     }

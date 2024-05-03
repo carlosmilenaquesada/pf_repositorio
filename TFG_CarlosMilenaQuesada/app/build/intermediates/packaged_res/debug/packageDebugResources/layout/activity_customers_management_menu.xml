@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.activities.customers.CustomersManagementMenuActivity">
+
+    <Button
+        android:id="@+id/btShowAllCustomers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mostrar todos los clientes" />
+
+    <Button
+        android:id="@+id/btCreateNewCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear un nuevo cliente" />
+
+    <Button
+        android:id="@+id/btBackFromCustomersManagementMenuActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver" />
+</LinearLayout>
