@@ -95,6 +95,7 @@ public class TicketLineAdapter extends RecyclerView.Adapter<TicketLineAdapter.Ti
         public TextView tvItemLineIsInOffer;
 
 
+
         public TicketLineItemViewHolder(@NonNull View itemView) {
             super(itemView);
             tvItemArticleName = itemView.findViewById(R.id.tvItemArticleName);

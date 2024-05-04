@@ -19,9 +19,10 @@ import com.example.tfg_carlosmilenaquesada.R;
 import com.example.tfg_carlosmilenaquesada.controllers.local_sqlite_manager.SqliteConnector;
 import com.example.tfg_carlosmilenaquesada.models.customer.Customer;
 import com.example.tfg_carlosmilenaquesada.models.customer.CustomerAdapter;
-import com.example.tfg_carlosmilenaquesada.models.ticket.Ticket;
-import com.example.tfg_carlosmilenaquesada.views.activities.SalesManagementMenuActivity;
-import com.example.tfg_carlosmilenaquesada.views.activities.tickets.AllTicketsActivity;
+
+
+
+
 
 public class AllCustomersActivity extends AppCompatActivity {
 
@@ -41,6 +42,9 @@ public class AllCustomersActivity extends AppCompatActivity {
         rvAllCustomers = findViewById(R.id.rvAllCustomers);
         rvAllCustomers.setLayoutManager(new LinearLayoutManager(this));
         rvAllCustomers.setAdapter(new CustomerAdapter());
+
+        btBackFromAllCustomersActivity = findViewById(R.id.btBackFromAllCustomersActivity);
+
         new ItemTouchHelper(((CustomerAdapter) rvAllCustomers.getAdapter()).getSimpleCallback()).attachToRecyclerView(rvAllCustomers);
         Cursor cursor = SqliteConnector.getInstance(this).getReadableDatabase().rawQuery(
                 "SELECT * FROM " + SqliteConnector.TABLE_CUSTOMERS, null

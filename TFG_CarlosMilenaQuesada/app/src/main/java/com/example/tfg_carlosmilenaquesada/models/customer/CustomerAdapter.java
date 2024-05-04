@@ -3,6 +3,7 @@ package com.example.tfg_carlosmilenaquesada.models.customer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg_carlosmilenaquesada.R;
-
 
 
 import java.util.ArrayList;
@@ -58,7 +58,13 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         holder.tvItemLegalCountry.setText(customer.getLegal_country());
         holder.tvItemLegalLocation.setText(customer.getLegal_location());
         holder.tvItemLegalZipCode.setText(customer.getLegal_zip_code());
+
+
+
+
+
         holder.itemView.setOnClickListener(v -> {
+
         });
     }
 
@@ -106,6 +112,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
             tvItemLegalCountry = itemView.findViewById(R.id.tvItemLegalCountry);
             tvItemLegalLocation = itemView.findViewById(R.id.tvItemLegalLocation);
             tvItemLegalZipCode = itemView.findViewById(R.id.tvItemLegalZipCode);
+
+
+
         }
     }
 }
