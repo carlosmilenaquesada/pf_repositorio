@@ -28,4 +28,7 @@ HACER----------------------------------------------------------------------
 
 --COmprobar que los nombres de rutas de los string static final estén correctos
 
---Avisar y mostrar opción de aceptar/cancelar cuando se vaya a borrar un elemento haciendo swipe en un recicler view
+--Avisar y mostrar opción de aceptar/cancelar cuando se vaya a borrar un elemento haciendo swipe en un recicler view. Por otro lado, si se borra con swipe
+
+--Cuando se aplica un cambio en SQLite en una tabla llenada inicialmente de la base de datos MySql, si se cierra el programa, se pierde, ya que se vuelve a cargar la info de MySql y se machaca lo que hubiese en SQLite (por ejemplo, cuando se modifica un cliente)
+

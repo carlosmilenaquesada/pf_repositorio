@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -32,7 +32,7 @@
                 android:text="Id fiscal cliente" />
 
             <EditText
-                android:id="@+id/tvCustomerTaxIdUpdate"
+                android:id="@+id/etCustomerTaxIdUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -42,7 +42,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -53,7 +53,7 @@
                 android:text="Razón social" />
 
             <EditText
-                android:id="@+id/tvLegalCompanyNameUpdate"
+                android:id="@+id/etLegalCompanyNameUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -63,7 +63,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -74,7 +74,7 @@
                 android:text="Nombre" />
 
             <EditText
-                android:id="@+id/tvNameUpdate"
+                android:id="@+id/etNameUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -84,7 +84,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -95,7 +95,7 @@
                 android:text="Dirección fiscal" />
 
             <EditText
-                android:id="@+id/tvLegalCompanyAddressUpdate"
+                android:id="@+id/etLegalCompanyAddressUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -105,7 +105,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -116,7 +116,7 @@
                 android:text="País fiscal" />
 
             <EditText
-                android:id="@+id/tvLegalCountryUpdate"
+                android:id="@+id/etLegalCountryUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -127,8 +127,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -139,7 +138,7 @@
                 android:text="Provincia fiscal" />
 
             <EditText
-                android:id="@+id/tvLegalLocationUpdate"
+                android:id="@+id/etLegalLocationUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -149,8 +148,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -161,13 +159,35 @@
                 android:text="Código postal fiscal" />
 
             <EditText
-                android:id="@+id/tvLegalZipCodeUpdate"
+                android:id="@+id/etLegalZipCodeUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="48dp"
                 android:hint="Código postal fiscal" />
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btApplyCustomerUpdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Aplicar cambios" />
+
+            <Button
+                android:id="@+id/btCancelCustomerUpdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancelar cambios" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button
