@@ -22,7 +22,7 @@
             android:name=".views.activities.customers.CreateNewCustomerActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.customers.AllCustomersActivity"
+            android:name=".views.activities.customers.ShowAndModifyCustomersActivity"
             android:exported="false" />
         <activity
             android:name=".views.activities.customers.CustomersManagementMenuActivity"

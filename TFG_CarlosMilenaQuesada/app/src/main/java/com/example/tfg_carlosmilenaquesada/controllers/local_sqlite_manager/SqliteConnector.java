@@ -25,7 +25,7 @@ public class SqliteConnector extends SQLiteOpenHelper {
     //sin necesidad de especificar ni longuitud ni precisión.
     private static SqliteConnector sqliteConnector;
     public static final String NODE_SERVER = "http://192.168.0.3:3000/sync/";
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 15;
     private static final String DATABASE_NAME = "tpv.db";
     public static final String TABLE_ARTICLES = "articles";
     public static final String TABLE_BARCODES = "barcodes";
@@ -67,7 +67,7 @@ public class SqliteConnector extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE_CUSTOMERS + "(" +
                 "customer_tax_id TEXT PRIMARY KEY NOT NULL," +
-                "legal_company_name TEXT UNIQUE NOT NULL, " +
+                "legal_company_name TEXT NOT NULL, " +
                 "name TEXT, " +
                 "legal_company_address TEXT NOT NULL, " +
                 "legal_country TEXT NOT NULL, " +

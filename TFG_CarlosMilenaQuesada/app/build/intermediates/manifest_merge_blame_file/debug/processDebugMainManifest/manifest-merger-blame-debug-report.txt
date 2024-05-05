@@ -102,8 +102,8 @@
 58-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:23:13-37
 59        <activity
 59-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:24:9-26:40
-60            android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.AllCustomersActivity"
-60-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-76
+60            android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.ShowAndModifyCustomersActivity"
+60-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-86
 61            android:exported="false" />
 61-->C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:26:13-37
 62        <activity

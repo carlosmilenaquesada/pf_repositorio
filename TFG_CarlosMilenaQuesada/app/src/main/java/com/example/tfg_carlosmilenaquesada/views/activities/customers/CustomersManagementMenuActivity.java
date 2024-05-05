@@ -12,14 +12,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tfg_carlosmilenaquesada.R;
-import com.example.tfg_carlosmilenaquesada.controllers.remote_database_getters.JsonHttpGetter;
 import com.example.tfg_carlosmilenaquesada.views.activities.MainMenuActivity;
-import com.example.tfg_carlosmilenaquesada.views.activities.SalesManagementMenuActivity;
-import com.example.tfg_carlosmilenaquesada.views.activities.tickets.AllTicketsActivity;
-import com.example.tfg_carlosmilenaquesada.views.activities.tickets.ReservedTicketsActivity;
 
 public class CustomersManagementMenuActivity extends AppCompatActivity {
-    Button btShowAllCustomers;
+    Button btShowAndModifyCustomers;
     Button btCreateNewCustomer;
     Button btBackFromCustomersManagementMenuActivity;
     @Override
@@ -32,13 +28,13 @@ public class CustomersManagementMenuActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btShowAllCustomers = findViewById(R.id.btShowAllCustomers);
+        btShowAndModifyCustomers = findViewById(R.id.btShowAndModifyCustomers);
         btCreateNewCustomer = findViewById(R.id.btCreateNewCustomer);
         btBackFromCustomersManagementMenuActivity = findViewById(R.id.btBackFromCustomersManagementMenuActivity);
-        btShowAllCustomers.setOnClickListener(new View.OnClickListener(){
+        btShowAndModifyCustomers.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CustomersManagementMenuActivity.this, AllCustomersActivity.class));
+                startActivity(new Intent(CustomersManagementMenuActivity.this, ShowAndModifyCustomersActivity.class));
             }
         });
         btCreateNewCustomer.setOnClickListener(new View.OnClickListener(){

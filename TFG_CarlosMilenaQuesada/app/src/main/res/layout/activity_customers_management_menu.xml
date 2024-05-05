@@ -9,10 +9,10 @@
     tools:context=".views.activities.customers.CustomersManagementMenuActivity">
 
     <Button
-        android:id="@+id/btShowAllCustomers"
+        android:id="@+id/btShowAndModifyCustomers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mostrar todos los clientes" />
+        android:text="Mostrar/modificar clientes" />
 
     <Button
         android:id="@+id/btCreateNewCustomer"

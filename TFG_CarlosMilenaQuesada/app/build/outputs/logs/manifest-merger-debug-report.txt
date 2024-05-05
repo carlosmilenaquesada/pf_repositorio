@@ -125,12 +125,12 @@ ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:22:13-81
-activity#com.example.tfg_carlosmilenaquesada.views.activities.customers.AllCustomersActivity
+activity#com.example.tfg_carlosmilenaquesada.views.activities.customers.ShowAndModifyCustomersActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
 		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-76
+		ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:25:13-86
 activity#com.example.tfg_carlosmilenaquesada.views.activities.customers.CustomersManagementMenuActivity
 ADDED from C:\Users\Administrador\Desktop\pf_repositorio\TFG_CarlosMilenaQuesada\app\src\main\AndroidManifest.xml:27:9-29:40
 	android:exported

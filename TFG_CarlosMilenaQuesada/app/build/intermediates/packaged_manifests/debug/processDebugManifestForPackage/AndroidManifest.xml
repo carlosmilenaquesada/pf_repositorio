@@ -57,7 +57,7 @@
             android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.CreateNewCustomerActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.AllCustomersActivity"
+            android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.ShowAndModifyCustomersActivity"
             android:exported="false" />
         <activity
             android:name="com.example.tfg_carlosmilenaquesada.views.activities.customers.CustomersManagementMenuActivity"
